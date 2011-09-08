@@ -23,7 +23,7 @@ class MyFormatter extends sfWidgetFormSchemaFormatter
   {
     return parent::unnestErrors($errors, $prefix);
   }
-  
+
   static public function dropTranslationCallable()
   {
     self::$translationCallable = null;
@@ -152,7 +152,7 @@ $t->is($f->generateLabel('last_name'), '<label for="last_name">[Your Last Name]<
 // ->setTranslationCatalogue() ->getTranslationCatalogue()
 class MyFormatter2 extends sfWidgetFormSchemaFormatter
 {
-  
+
 }
 
 $f = new MyFormatter2(new sfWidgetFormSchema(array()));
