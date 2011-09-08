@@ -235,7 +235,7 @@ class sfFormField
 
   /**
    * Returns the name attribute of the widget.
-   * 
+   *
    * @return string The name attribute of the widget
    */
   public function renderName()

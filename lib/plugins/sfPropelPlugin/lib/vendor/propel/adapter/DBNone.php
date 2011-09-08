@@ -95,12 +95,12 @@ class DBNone extends DBAdapter {
 	{
 		return strlen($s);
 	}
-	
+
 	/**
 	 * Modifies the passed-in SQL to add LIMIT and/or OFFSET.
 	 */
 	public function applyLimit(&$sql, $offset, $limit)
-	{		
+	{
 	}
 
 	/**
@@ -111,5 +111,5 @@ class DBNone extends DBAdapter {
 	public function random($seed = null)
 	{
 	}
-	
+
 }

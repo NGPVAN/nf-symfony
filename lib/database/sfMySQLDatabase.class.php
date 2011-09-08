@@ -86,7 +86,7 @@ class sfMySQLDatabase extends sfDatabase
 
   /**
    * Returns the appropriate connect method.
-   * 
+   *
    * @param bool $persistent wether persistent connections are use or not
    * @return string name of connect method.
    */
@@ -94,10 +94,10 @@ class sfMySQLDatabase extends sfDatabase
   {
     return $persistent ? 'mysql_pconnect' : 'mysql_connect';
   }
-  
+
   /**
    * Selects the database to be used in this connection
-   * 
+   *
    * @param string $database Name of database to be connected
    *
    * @return bool true if this was successful

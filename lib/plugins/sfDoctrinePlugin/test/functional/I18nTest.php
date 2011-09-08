@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -73,19 +73,19 @@ $data = $articleForm->getValues();
 
 $values = array(
   'is_on_homepage' => true,
-  'Author' => 
+  'Author' =>
   array(
     'name' => 'i18n author test',
     'type' => null
   ),
-  'en' => 
+  'en' =>
   array(
     'title' => 'english title',
     'body' => 'english body',
     'test_column' => '',
     'slug' => '',
   ),
-  'fr' => 
+  'fr' =>
   array(
     'title' => 'french title',
     'body' => 'french body',
@@ -111,9 +111,9 @@ $expected = array(
   'views' => null,
   'created_at' => $article->created_at,
   'updated_at' => $article->updated_at,
-  'Translation' => 
+  'Translation' =>
   array(
-    'en' => 
+    'en' =>
     array(
       'id' => $article->id,
       'title' => 'english title',
@@ -122,7 +122,7 @@ $expected = array(
       'lang' => 'en',
       'slug' => 'english-title',
     ),
-    'fr' => 
+    'fr' =>
     array(
       'id' => $article->id,
       'title' => 'french title',
@@ -132,7 +132,7 @@ $expected = array(
       'slug' => 'french-title',
     ),
   ),
-  'Author' => 
+  'Author' =>
   array(
     'id' => $article->Author->id,
     'name' => 'i18n author test',
@@ -152,7 +152,7 @@ $expected = array(
   'views' => null,
   'created_at' => $article->created_at,
   'updated_at' => $article->updated_at,
-  'en' => 
+  'en' =>
   array(
     'id' => $article->id,
     'title' => 'english title',
@@ -161,7 +161,7 @@ $expected = array(
     'lang' => 'en',
     'slug' => 'english-title',
   ),
-  'fr' => 
+  'fr' =>
   array(
     'id' => $article->id,
     'title' => 'french title',
@@ -170,7 +170,7 @@ $expected = array(
     'lang' => 'fr',
     'slug' => 'french-title',
   ),
-  'Author' => 
+  'Author' =>
   array(
     'id' => $article->Author->id,
     'name' => 'i18n author test',

@@ -1,5 +1,5 @@
 <?php
-class aTask extends sfPropelBaseTask 
+class aTask extends sfPropelBaseTask
 {
   public function configure()
   {

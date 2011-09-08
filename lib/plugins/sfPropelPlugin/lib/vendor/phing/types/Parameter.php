@@ -34,20 +34,20 @@ class Parameter extends DataType {
 
     /** Parameter name */
     protected $name;
-    
+
     /** Paramter type */
     protected $type;
-    
+
     /** Parameter value */
     protected $value;
-    
+
     /** Nested parameters */
     protected $parameters = array();
 
     function setName($name) {
         $this->name = (string) $name;
     }
-    
+
     function setType($type) {
         $this->type = (string) $type;
     }
@@ -59,7 +59,7 @@ class Parameter extends DataType {
     public function setListeningValue(RegisterSlot $value) {
         $this->value = $value;
     }
-	
+
     function setValue($value) {
         $this->value = (string) $value;
     }
@@ -79,7 +79,7 @@ class Parameter extends DataType {
             return $this->value;
         }
     }
-    
+
     /**
      * @return Parameter
      */
@@ -95,5 +95,3 @@ class Parameter extends DataType {
         return $this->parameters;
     }
 }
-
-

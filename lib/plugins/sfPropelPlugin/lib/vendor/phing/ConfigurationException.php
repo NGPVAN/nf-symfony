@@ -70,7 +70,7 @@ class ConfigurationException extends Exception {
     		$this->message .= " [wrapped: " . $cause->getMessage() ."]";
     	}
     }
-	
+
     /**
      * Gets the cause exception.
      *
@@ -79,5 +79,5 @@ class ConfigurationException extends Exception {
     public function getCause() {
     	return $this->cause;
     }
-     
+
 }

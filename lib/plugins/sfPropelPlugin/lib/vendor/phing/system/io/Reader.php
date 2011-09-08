@@ -21,7 +21,7 @@
 
 /**
  * Abstract class for reading character streams.
- * 
+ *
  * @author Hans Lellelid <hans@xmpl.org>
  * @author Yannick Lecaillez <yl@seasonfive.com>
  * @version $Revision: 1.5 $
@@ -31,20 +31,20 @@ abstract class Reader {
 
     /**
      * Read data from source.
-     * 
+     *
      * If length is specified, then only that number of chars is read,
      * otherwise stream is read until EOF.
-     * 
+     *
      * @param int $len
      */
     abstract public function read($len = null);
-            
+
     /**
      * Close stream.
      * @throws IOException if there is an error closing stream
      */
     abstract public function close();
-    
+
     /**
      * Returns the filename, url, etc. that is being read from.
      * This is critical for, e.g., ExpatParser's ability to know
@@ -58,17 +58,17 @@ abstract class Reader {
      * @param int $n
      */
     public function skip($n) {}
-    
+
     /**
      * Reset the current position in stream to beginning or last mark (if supported).
-     */    
+     */
     public function reset() {}
-        
+
     /**
      * If supported, places a "marker" (like a bookmark) at current stream position.
      * A subsequent call to reset() will move stream position back
      * to last marker (if supported).
-     */    
+     */
     public function mark() {}
 
     /**
@@ -78,7 +78,7 @@ abstract class Reader {
     public function markSupported() {
     	return false;
     }
-    
+
     /**
      * Is stream ready for reading.
      * @return boolean
@@ -88,4 +88,3 @@ abstract class Reader {
     }
 
 }
-

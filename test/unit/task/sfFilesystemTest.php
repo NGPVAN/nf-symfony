@@ -62,4 +62,3 @@ $t->is($filesystem->calculateRelativeDir($source, $target), 'motherplugin'.DS.'s
 $source = $common.'..'.DS.'web'.DS.'myplugin';
 $target = $common.'lib'.DS.'vendor'.DS.'symfony'.DS.'plugins'.DS.'myplugin'.DS.'web';
 $t->is($filesystem->calculateRelativeDir($source, $target), '..'.DS.'sfproject'.DS.'lib'.DS.'vendor'.DS.'symfony'.DS.'plugins'.DS.'myplugin'.DS.'web', '->calculateRelativeDir() correctly calculates the relative path for dirs that share chars');
-

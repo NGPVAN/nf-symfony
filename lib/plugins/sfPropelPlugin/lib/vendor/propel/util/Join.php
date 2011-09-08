@@ -40,7 +40,7 @@ class Join
 {
   // default comparison type
 	const EQUAL = "=";
-	
+
 	// the left parts of the join condition
 	protected $left = array();
 
@@ -49,10 +49,10 @@ class Join
 
 	// the comparison operators for each pair of columns in the join condition
 	protected $operator = array();
-	
+
 	// the type of the join (LEFT JOIN, ...), or null for an implicit join
 	protected $joinType = null;
-	
+
 	// the number of conditions in the join
 	protected $count = 0;
 
@@ -87,7 +87,7 @@ class Join
 		  $this->setJoinType($joinType);
 		}
 	}
-	
+
 	/**
 	 * Join condition definition
 	 *
@@ -105,7 +105,7 @@ class Join
 		$this->operator[] = $operator;
 		$this->count++;
 	}
-	
+
 	/**
 	 * Retrieve the number of conditions in the join
 	 *
@@ -115,7 +115,7 @@ class Join
 	{
 	  return $this->count;
 	}
-	
+
 	/**
 	 * Return an array of the join conditions
 	 *
@@ -124,9 +124,9 @@ class Join
 	public function getConditions()
 	{
 	  $conditions = array();
-	  for ($i=0; $i < $this->count; $i++) { 
+	  for ($i=0; $i < $this->count; $i++) {
 	    $conditions[] = array(
-	      'left'     => $this->getLeftColumn($i), 
+	      'left'     => $this->getLeftColumn($i),
 	      'operator' => $this->getOperator($i),
 	      'right'    => $this->getRightColumn($i)
 	    );
@@ -141,12 +141,12 @@ class Join
   {
     return $this->operator[$index];
   }
-	
+
 	public function getOperators()
 	{
 	  return $this->operator;
 	}
-  
+
 	/**
 	 * Set the join type
 	 *
@@ -158,7 +158,7 @@ class Join
 	{
 	  $this->joinType = $joinType;
 	}
-	
+
 	/**
 	 * Get the join type
 	 *
@@ -177,11 +177,11 @@ class Join
 	{
 		return $this->left[$index];
 	}
-	
+
 	/**
 	 * @return     all right columns of the join condition
 	 */
-	public function getLeftColumns() 
+	public function getLeftColumns()
 	{
 		return $this->left;
 	}
@@ -204,11 +204,11 @@ class Join
 	{
 		return $this->right[$index];
 	}
-	
+
 	/**
 	 * @return     all right columns of the join condition
 	 */
-	public function getRightColumns() 
+	public function getRightColumns()
 	{
 		return $this->right;
 	}
@@ -244,8 +244,7 @@ class Join
 			}
 		}
     $result .= '(ignoreCase not considered)';
-    
+
 		return $result;
 	}
 }
- 

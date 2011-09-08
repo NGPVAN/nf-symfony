@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -80,11 +80,11 @@ EOF;
 
   /**
    * Chmod and capture any failures.
-   * 
+   *
    * @param string  $file
    * @param integer $mode
    * @param integer $umask
-   * 
+   *
    * @see sfFilesystem
    */
   protected function chmod($file, $mode, $umask = 0000)
@@ -110,7 +110,7 @@ EOF;
 
   /**
    * Captures those chmod commands that fail.
-   * 
+   *
    * @see http://www.php.net/set_error_handler
    */
   public function handleError($no, $string, $file, $line, $context)

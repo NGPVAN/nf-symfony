@@ -51,7 +51,7 @@ abstract class sfWebController extends sfController
       {
         return $parameters;
       }
-  
+
       // strip fragment
       if (false !== ($pos = strpos($parameters, '#')))
       {
@@ -177,7 +177,7 @@ abstract class sfWebController extends sfController
   {
     if (empty($url))
     {
-      throw new InvalidArgumentException('Cannot redirect to an empty URL.'); 
+      throw new InvalidArgumentException('Cannot redirect to an empty URL.');
     }
 
     $url = $this->genUrl($url, true);

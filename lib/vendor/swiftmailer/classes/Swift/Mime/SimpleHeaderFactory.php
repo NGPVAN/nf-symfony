@@ -29,13 +29,13 @@ class Swift_Mime_SimpleHeaderFactory implements Swift_Mime_HeaderFactory
 
   /** The HeaderEncoder used by these headers */
   private $_encoder;
-  
+
   /** The Encoder used by parameters */
   private $_paramEncoder;
-  
+
   /** The charset of created Headers */
   private $_charset;
-  
+
   /**
    * Creates a new SimpleHeaderFactory using $encoder and $paramEncoder.
    * @param Swift_Mime_HeaderEncoder $encoder
@@ -49,7 +49,7 @@ class Swift_Mime_SimpleHeaderFactory implements Swift_Mime_HeaderFactory
     $this->_paramEncoder = $paramEncoder;
     $this->_charset = $charset;
   }
-  
+
   /**
    * Create a new Mailbox Header with a list of $addresses.
    * @param string $name
@@ -66,7 +66,7 @@ class Swift_Mime_SimpleHeaderFactory implements Swift_Mime_HeaderFactory
     $this->_setHeaderCharset($header);
     return $header;
   }
-  
+
   /**
    * Create a new Date header using $timestamp (UNIX time).
    * @param string $name
@@ -83,7 +83,7 @@ class Swift_Mime_SimpleHeaderFactory implements Swift_Mime_HeaderFactory
     $this->_setHeaderCharset($header);
     return $header;
   }
-  
+
   /**
    * Create a new basic text header with $name and $value.
    * @param string $name
@@ -100,7 +100,7 @@ class Swift_Mime_SimpleHeaderFactory implements Swift_Mime_HeaderFactory
     $this->_setHeaderCharset($header);
     return $header;
   }
-  
+
   /**
    * Create a new ParameterizedHeader with $name, $value and $params.
    * @param string $name
@@ -127,7 +127,7 @@ class Swift_Mime_SimpleHeaderFactory implements Swift_Mime_HeaderFactory
     $this->_setHeaderCharset($header);
     return $header;
   }
-  
+
   /**
    * Create a new ID header for Message-ID or Content-ID.
    * @param string $name
@@ -144,7 +144,7 @@ class Swift_Mime_SimpleHeaderFactory implements Swift_Mime_HeaderFactory
     $this->_setHeaderCharset($header);
     return $header;
   }
-  
+
   /**
    * Create a new Path header with an address (path) in it.
    * @param string $name
@@ -161,7 +161,7 @@ class Swift_Mime_SimpleHeaderFactory implements Swift_Mime_HeaderFactory
     $this->_setHeaderCharset($header);
     return $header;
   }
-  
+
   /**
    * Notify this observer that the entity's charset has changed.
    * @param string $charset
@@ -172,9 +172,9 @@ class Swift_Mime_SimpleHeaderFactory implements Swift_Mime_HeaderFactory
     $this->_encoder->charsetChanged($charset);
     $this->_paramEncoder->charsetChanged($charset);
   }
-  
+
   // -- Private methods
-  
+
   /** Apply the charset to the Header */
   private function _setHeaderCharset(Swift_Mime_Header $header)
   {
@@ -183,5 +183,5 @@ class Swift_Mime_SimpleHeaderFactory implements Swift_Mime_HeaderFactory
       $header->setCharset($this->_charset);
     }
   }
-  
+
 }

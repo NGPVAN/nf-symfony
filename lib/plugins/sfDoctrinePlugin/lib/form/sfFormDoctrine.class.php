@@ -187,7 +187,7 @@ abstract class sfFormDoctrine extends sfFormObject
         if ($this->validatorSchema[$field] instanceof sfValidatorFile)
         {
           $values[$field] = $this->processUploadedFile($field, null, $valuesToProcess);
-        }          
+        }
       }
     }
 
@@ -402,11 +402,11 @@ abstract class sfFormDoctrine extends sfFormObject
 
   /**
    * Returns the name of the related model.
-   * 
+   *
    * @param string $alias A relation alias
-   * 
+   *
    * @return string
-   * 
+   *
    * @throws InvalidArgumentException If no relation with the supplied alias exists on the current model
    */
   protected function getRelatedModelName($alias)

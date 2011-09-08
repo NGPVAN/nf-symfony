@@ -48,7 +48,7 @@ class PhpLintTask extends Task {
 
 	/**
 	 * Override default php interpreter
-	 * @todo	Do some sort of checking if the path is correct but would 
+	 * @todo	Do some sort of checking if the path is correct but would
 	 *			require traversing the systems executeable path too
 	 * @param	string	$sPhp
 	 */
@@ -74,7 +74,7 @@ class PhpLintTask extends Task {
 
 	/**
 	 * Set an property name in which to put any errors.
-	 * @param string $propname 
+	 * @param string $propname
 	 */
 	public function setErrorproperty($propname)
 	{
@@ -140,9 +140,9 @@ class PhpLintTask extends Task {
 					} else {
 						$this->log("Could not parse file", Project::MSG_ERR);
 					}
-					$this->badFiles[] = $file;	
+					$this->badFiles[] = $file;
 					$this->hasErrors = true;
-					
+
 				} else {
 					$this->log($file.': No syntax errors detected', Project::MSG_INFO);
 				}
@@ -154,6 +154,3 @@ class PhpLintTask extends Task {
 		}
 	}
 }
-
-
-

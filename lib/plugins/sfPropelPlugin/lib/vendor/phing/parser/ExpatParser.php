@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
 require_once 'phing/parser/AbstractSAXParser.php';
 include_once 'phing/parser/ExpatParseException.php';
 include_once 'phing/system/io/IOException.php';
@@ -42,21 +42,21 @@ include_once 'phing/system/io/FileReader.php';
  */
 
 class ExpatParser extends AbstractSAXParser {
-    
+
     /** @var resource */
     private $parser;
-    
+
     /** @var Reader */
     private $reader;
-    
+
     private $file;
-    
+
     private $buffer = 4096;
-    
+
     private $error_string = "";
-    
+
     private $line = 0;
-    
+
     /** @var Location Current cursor pos in XML file. */
     private $location;
 
@@ -124,17 +124,17 @@ class ExpatParser extends AbstractSAXParser {
      * @access public
      */
     function parse() {
-    
-        while ( ($data = $this->reader->read()) !== -1 ) {            
+
+        while ( ($data = $this->reader->read()) !== -1 ) {
             if (!xml_parse($this->parser, $data, $this->reader->eof())) {
                 $error = xml_error_string(xml_get_error_code($this->parser));
                 $e = new ExpatParseException($error, $this->getLocation());
-                xml_parser_free($this->parser);                
-                throw $e;  
+                xml_parser_free($this->parser);
+                throw $e;
             }
         }
         xml_parser_free($this->parser);
-        
+
         return 1;
     }
 }

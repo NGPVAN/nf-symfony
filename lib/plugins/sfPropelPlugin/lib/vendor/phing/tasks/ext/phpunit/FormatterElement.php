@@ -32,19 +32,19 @@ require_once 'phing/system/io/PhingFile.php';
 class FormatterElement
 {
 	protected $formatter = NULL;
-	
+
 	protected $type = "";
-	
+
 	protected $useFile = true;
-	
+
 	protected $toDir = ".";
-	
+
 	protected $outfile = "";
 
 	function setType($type)
 	{
 		$this->type = $type;
-		
+
 		if ($this->type == "summary")
 		{
 			if (PHPUnitUtil::$installedVersion == 3)
@@ -52,7 +52,7 @@ class FormatterElement
 				require_once 'phing/tasks/ext/phpunit/phpunit3/SummaryPHPUnit3ResultFormatter.php';
 				$this->formatter = new SummaryPHPUnit3ResultFormatter();
 			}
-			else			
+			else
 			{
 				require_once 'phing/tasks/ext/phpunit/phpunit2/SummaryPHPUnit2ResultFormatter.php';
 				$this->formatter = new SummaryPHPUnit2ResultFormatter();
@@ -105,17 +105,17 @@ class FormatterElement
 	{
 		$this->useFile = $useFile;
 	}
-	
+
 	function getUseFile()
 	{
 		return $this->useFile;
 	}
-	
+
 	function setToDir($toDir)
 	{
 		$this->toDir = $toDir;
 	}
-	
+
 	function getToDir()
 	{
 		return $this->toDir;
@@ -125,7 +125,7 @@ class FormatterElement
 	{
 		$this->outfile = $outfile;
 	}
-	
+
 	function getOutfile()
 	{
 		if ($this->outfile)
@@ -137,7 +137,7 @@ class FormatterElement
 			return $this->formatter->getPreferredOutfile() . $this->getExtension();
 		}
 	}
-	
+
 	function getExtension()
 	{
 		return $this->formatter->getExtension();

@@ -126,7 +126,7 @@ class DataTypeHandler extends AbstractHandler {
         $nef = new NestedElementHandler($this->parser, $this, $this->configurator, $this->element, $this->wrapper, $this->target);
         $nef->init($name, $attrs);
     }
-    
+
    /**
     * Overrides endElement for data types. Tells the type
     * handler that processing the element had been finished so
@@ -140,5 +140,5 @@ class DataTypeHandler extends AbstractHandler {
        $this->element->parsingComplete();
        parent::endElement($name);
    }
-         
+
 }

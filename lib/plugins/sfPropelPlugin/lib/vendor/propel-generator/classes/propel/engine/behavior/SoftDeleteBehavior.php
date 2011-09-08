@@ -19,7 +19,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://propel.phpdb.org>.
  */
- 
+
 /**
  * Gives a model class the ability to remain in database even when the user deletes object
  * Uses an additional column storing the deletion date
@@ -36,7 +36,7 @@ class SoftDeleteBehavior extends Behavior
     'add_columns'    => 'true',
     'deleted_column' => 'deleted_at',
   );
-  
+
   /**
    * Add the deleted_column to the current table
    */
@@ -50,12 +50,12 @@ class SoftDeleteBehavior extends Behavior
       ));
     }
   }
-  
+
   protected function getColumnSetter()
   {
   	return 'set' . $this->getColumnForParameter('deleted_column')->getPhpName();
   }
-  
+
   public function preDelete()
   {
   	return <<<EOT
@@ -67,7 +67,7 @@ if (!empty(\$ret) && {$this->getTable()->getPhpName()}Peer::isSoftDeleteEnabled(
 }
 EOT;
   }
-  
+
   public function preSelect()
   {
   	return <<<EOT
@@ -78,7 +78,7 @@ if ({$this->getTable()->getPhpName()}Peer::isSoftDeleteEnabled()) {
 }
 EOT;
   }
-  
+
   public function objectMethods()
   {
   	return <<<EOT
@@ -104,13 +104,13 @@ public function unDelete(PropelPDO \$con = null)
 }
 EOT;
   }
-  
+
   public function staticAttributes()
   {
   	return "protected static \$softDelete = true;
 ";
   }
-  
+
   public function staticMethods()
   {
   	$script = "
@@ -140,7 +140,7 @@ public static function isSoftDeleteEnabled()
 	return self::\$softDelete;
 }
 ";
-	
+
 	$script .= "
 /**
  * Soft delete records, given a {$this->getTable()->getPhpName()} or Criteria object OR a primary key value.
@@ -198,7 +198,7 @@ public static function doDelete2(\$values, PropelPDO \$con = null)
 		return {$this->getTable()->getPhpName()}Peer::doSoftDelete(\$values, \$con);
 	} else {
 		return {$this->getTable()->getPhpName()}Peer::doForceDelete(\$values, \$con);
-	}	
+	}
 }
 
 /**
@@ -236,18 +236,18 @@ public static function doDeleteAll2(PropelPDO \$con = null)
 		return {$this->getTable()->getPhpName()}Peer::doSoftDeleteAll(\$con);
 	} else {
 		return {$this->getTable()->getPhpName()}Peer::doForceDeleteAll(\$con);
-	}	
+	}
 }
 ";
 	return $script;
   }
-  
+
   public function peerFilter(&$script)
   {
   	$script = str_replace(array(
-  		'public static function doDelete(', 
+  		'public static function doDelete(',
   		'public static function doDelete2(',
-  		'public static function doDeleteAll(', 
+  		'public static function doDeleteAll(',
   		'public static function doDeleteAll2('
   	), array(
   		'public static function doForceDelete(',

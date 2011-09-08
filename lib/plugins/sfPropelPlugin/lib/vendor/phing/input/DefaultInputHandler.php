@@ -19,7 +19,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
 require_once 'phing/input/InputHandler.php';
 include_once 'phing/system/io/ConsoleReader.php';
 
@@ -32,15 +32,15 @@ include_once 'phing/system/io/ConsoleReader.php';
  * @package phing.input
  */
 class DefaultInputHandler implements InputHandler {
-    
+
     /**
      * Prompts and requests input.  May loop until a valid input has
      * been entered.
-     * @throws BuildException 
+     * @throws BuildException
      */
     public function handleInput(InputRequest $request) {
         $prompt = $this->getPrompt($request);
-        $in = new ConsoleReader();           
+        $in = new ConsoleReader();
         do {
             print $prompt;
             try {
@@ -66,16 +66,16 @@ class DefaultInputHandler implements InputHandler {
      */
     protected function getPrompt(InputRequest $request) {
         $prompt = $request->getPrompt();
-        
+
         if ($request instanceof YesNoInputRequest) {
             $prompt .= '(' . implode('/', $request->getChoices()) .')';
         } elseif ($request instanceof MultipleChoiceInputRequest) { // (a,b,c,d)
-            $prompt .= '(' . implode(',', $request->getChoices()) . ')';            
+            $prompt .= '(' . implode(',', $request->getChoices()) . ')';
         }
         if ($request->getDefaultValue() !== null) {
             $prompt .= ' ['.$request->getDefaultValue().']';
         }
-        $pchar = $request->getPromptChar();        
+        $pchar = $request->getPromptChar();
         return $prompt . ($pchar ? $pchar . ' ' : ' ');
-    } 
+    }
 }

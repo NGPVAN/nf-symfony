@@ -64,12 +64,12 @@ class MajoritySelector extends BaseSelectorContainer {
      * @return whether the file should be selected or not
      */
     public function isSelected(PhingFile $basedir, $filename, PhingFile $file) {
-        
+
         $this->validate();
-        
+
         $yesvotes = 0;
         $novotes = 0;
-        
+
         $selectors = $this->selectorElements();
         for($i=0,$size=count($selectors); $i < $size; $i++) {
             $result = $selectors[$i]->isSelected($basedir,$filename,$file);
@@ -89,4 +89,3 @@ class MajoritySelector extends BaseSelectorContainer {
         return $this->allowtie;
     }
 }
-

@@ -46,8 +46,8 @@ $t->diag('validate date array');
 $t->is($v->clean(array('hour' => 20, 'minute' => 10, 'second' => 15)), '20:10:15', '->clean() accepts an array as an input');
 $t->is($v->clean(array('hour' => '20', 'minute' => '10', 'second' => '15')), '20:10:15', '->clean() accepts an array as an input');
 $t->is($v->clean(array('hour' => '', 'minute' => '', 'second' => '')), null, '->clean() accepts an array as an input');
-$t->is($v->clean(array('hour' => 0, 'minute' => 0, 'second' => 0)), '00:00:00', '->clean() accepts an array as an input'); 
-$t->is($v->clean(array('hour' => '0', 'minute' => '0', 'second' => '0')), '00:00:00', '->clean() accepts an array as an input'); 
+$t->is($v->clean(array('hour' => 0, 'minute' => 0, 'second' => 0)), '00:00:00', '->clean() accepts an array as an input');
+$t->is($v->clean(array('hour' => '0', 'minute' => '0', 'second' => '0')), '00:00:00', '->clean() accepts an array as an input');
 
 try
 {

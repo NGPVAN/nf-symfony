@@ -68,7 +68,7 @@ class FilenameSelector extends BaseExtendSelector {
     public function setName($pattern) {
         $pattern = str_replace('\\', DIRECTORY_SEPARATOR, $pattern);
         $pattern = str_replace('/', DIRECTORY_SEPARATOR, $pattern);
-                
+
         if (StringHelper::endsWith(DIRECTORY_SEPARATOR, $pattern)) {
             $pattern .= "**";
         }
@@ -149,9 +149,8 @@ class FilenameSelector extends BaseExtendSelector {
      */
     public function isSelected(PhingFile $basedir, $filename, PhingFile $file) {
         $this->validate();
-        return (SelectorUtils::matchPath($this->pattern, $filename, $this->casesensitive) 
+        return (SelectorUtils::matchPath($this->pattern, $filename, $this->casesensitive)
             === !($this->negated));
     }
 
 }
-

@@ -1,7 +1,7 @@
 <?php
 /*
- *  $Id: FileWriter.php 123 2006-09-14 20:19:08Z mrook $  
- * 
+ *  $Id: FileWriter.php 123 2006-09-14 20:19:08Z mrook $
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -18,13 +18,13 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
 include_once 'phing/system/io/PhingFile.php';
 require_once 'phing/system/io/Writer.php';
 
 /**
  * Writer class for OutputStream objects.
- * 
+ *
  * Unlike the Java counterpart, this class does not (yet) handle
  * character set transformations.  This will be an important function
  * of this class with move to supporting PHP6.
@@ -37,7 +37,7 @@ class OutputStreamWriter extends Writer {
 	 * @var OutputStream
 	 */
     protected $outStream;
-    
+
     /**
      * Construct a new OutputStreamWriter.
      * @param OutputStream $outStream OutputStream to write to
@@ -45,14 +45,14 @@ class OutputStreamWriter extends Writer {
     public function __construct(OutputStream $outStream) {
         $this->outStream = $outStream;
     }
-	
+
     /**
      * Close the stream.
      */
     public function close() {
     	return $this->outStream->close();
     }
-	
+
     /**
      * Write char data to stream.
      *
@@ -64,14 +64,14 @@ class OutputStreamWriter extends Writer {
     public function write($buf, $off = null, $len = null) {
     	return $this->outStream->write($buf, $off, $len);
     }
-    
+
     /**
      * Flush output to the stream.
      */
 	public function flush() {
     	$this->outStream->flush();
     }
-    
+
     /**
      * Gets a string representation of attached stream resource.
      *
@@ -81,4 +81,3 @@ class OutputStreamWriter extends Writer {
     	return $this->outStream->__toString();
     }
 }
-

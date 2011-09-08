@@ -65,7 +65,7 @@ class PropelPDO extends PDO {
 	 * @var        boolean
 	 */
 	protected $cachePreparedStatements = false;
-	
+
 	/**
 	 * Whether the final commit is possible
 	 * Is false if a nested transaction is rolled back
@@ -116,7 +116,7 @@ class PropelPDO extends PDO {
 	{
 		return ($this->getNestedTransactionCount() > 0);
 	}
-	
+
 	/**
 	 * Overrides PDO::beginTransaction() to prevent errors due to already-in-progress transaction.
 	 */
@@ -163,12 +163,12 @@ class PropelPDO extends PDO {
 		$return = true;
 		$opcount = $this->getNestedTransactionCount();
 		if ($opcount > 0) {
-			if ($opcount === 1) { 
-				$return = parent::rollBack(); 
+			if ($opcount === 1) {
+				$return = parent::rollBack();
 			} else {
 				$this->isUncommitable = true;
 			}
-			$this->decrementNestedTransactionCount(); 
+			$this->decrementNestedTransactionCount();
 		}
 		return $return;
 	}
@@ -186,14 +186,14 @@ class PropelPDO extends PDO {
 			// If we're in a transaction, always roll it back
 			// regardless of nesting level.
 			$return = parent::rollBack();
-			
+
 			// reset nested transaction count to 0 so that we don't
 			// try to commit (or rollback) the transaction outside this scope.
 			$this->nestedTransactionCount = 0;
 		}
 		return $return;
 	}
-  
+
 	/**
 	 * Sets a connection attribute.
 	 *

@@ -19,7 +19,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
 require_once 'phing/types/selectors/ExtendFileSelector.php';
 require_once 'phing/types/selectors/BaseSelector.php';
 include_once 'phing/types/Parameter.php';
@@ -59,4 +59,3 @@ abstract class BaseExtendSelector extends BaseSelector implements ExtendFileSele
         return $this->parameters;
     }
 }
-

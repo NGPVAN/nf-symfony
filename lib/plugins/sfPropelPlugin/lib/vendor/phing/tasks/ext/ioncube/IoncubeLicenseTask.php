@@ -33,10 +33,10 @@ require_once 'phing/tasks/ext/ioncube/IoncubeComment.php';
 class IoncubeLicenseTask extends Task
 {
 	private $ioncubePath = "/usr/local/ioncube";
-	
+
 	private $licensePath = "";
 	private $passPhrase = "";
-	
+
 	private $comments = array();
 
 	/**
@@ -103,17 +103,17 @@ class IoncubeLicenseTask extends Task
 	function main()
 	{
 		$arguments = $this->constructArguments();
-		
+
 		$makelicense = new PhingFile($this->ioncubePath, 'make_license');
-		
+
 		$this->log("Running ionCube make_license...");
-		
+
 		exec($makelicense->__toString() . " " . $arguments . " 2>&1", $output, $return);
-		
+
         if ($return != 0)
         {
 			throw new BuildException("Could not execute ionCube make_license: " . implode(' ', $output));
-        }       
+        }
 	}
 
 	/**
@@ -122,17 +122,17 @@ class IoncubeLicenseTask extends Task
 	private function constructArguments()
 	{
 		$arguments = "";
-		
+
 		if (!empty($this->passPhrase))
 		{
 			$arguments.= "--passphrase '" . $this->passPhrase . "' ";
 		}
-		
+
 		foreach ($this->comments as $comment)
 		{
 			$arguments.= "--header-line '" . $comment->getValue() . "' ";
 		}
-		
+
 		if (!empty($this->licensePath))
 		{
 			$arguments.= "--o '" . $this->licensePath . "' ";

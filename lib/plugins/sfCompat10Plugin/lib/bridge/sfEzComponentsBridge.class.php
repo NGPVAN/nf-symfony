@@ -14,7 +14,7 @@ if (file_exists($sf_ez_lib_dir.'Base/src/base.php'))
 {
   // svn installation
   require_once($sf_ez_lib_dir.'Base/src/base.php');
-} 
+}
 elseif (file_exists($sf_ez_lib_dir.'Base/base.php'))
 {
   // pear installation

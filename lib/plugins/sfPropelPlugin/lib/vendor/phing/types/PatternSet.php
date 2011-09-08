@@ -398,7 +398,7 @@ class PatternSetNameEntry {
 
     /**
      * The unless-condition property for this pattern to be applied.
-     * @var string 
+     * @var string
      */
     private $unlessCond;
 
@@ -446,7 +446,7 @@ class PatternSetNameEntry {
 
 	/**
 	 * Evaluates the pattern.
-	 * @return string The pattern or null if it is ruled out by a condition. 
+	 * @return string The pattern or null if it is ruled out by a condition.
 	 */
 	public function evalName(Project $project) {
 		return $this->valid($project) ? $this->name : null;

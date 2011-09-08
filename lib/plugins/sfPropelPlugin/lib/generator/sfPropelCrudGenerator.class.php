@@ -80,7 +80,7 @@ class sfPropelCrudGenerator extends sfAdminGenerator
   protected function loadMapBuilderClasses()
   {
     $this->tableMap = call_user_func(array($this->peerClassName, 'getTableMap'));
-    // load all related table maps, 
+    // load all related table maps,
     // and all tables related to the related table maps (for m2m relations)
     foreach ($this->tableMap->getRelations() as $relation)
     {

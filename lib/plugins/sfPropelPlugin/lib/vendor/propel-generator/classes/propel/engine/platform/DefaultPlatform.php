@@ -260,7 +260,7 @@ class DefaultPlatform implements Platform {
 	{
 		return true;
 	}
-	
+
 	/**
 	 * Whether the underlying PDO driver for this platform returns BLOB columns as streams (instead of strings).
 	 * @return     boolean

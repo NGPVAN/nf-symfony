@@ -54,13 +54,13 @@ class TableMap {
 
   // The Package for this table
   protected $package;
-  
+
   // Whether to use an id generator for pkey
   protected $useIdGenerator;
-  
+
   // The primary key columns in the table
   protected $primaryKeys = array();
-  
+
   // The foreign key columns in the table
   protected $foreignKeys = array();
 
@@ -69,10 +69,10 @@ class TableMap {
 
   // Relations are lazy loaded. This property tells if the relations are loaded or not
   protected $relationsBuilt = false;
-  
+
   // Object to store information that is needed if the for generating primary keys
   protected $pkInfo;
-  
+
   /**
    * Construct a new TableMap.
    *
@@ -83,7 +83,7 @@ class TableMap {
     if(!is_null($dbMap)) $this->setDatabaseMap($dbMap);
     $this->initialize();
   }
-  
+
   /**
    * Initialize the TableMap to build columns, relations, etc
    * This method should be overridden by descendents
@@ -101,7 +101,7 @@ class TableMap {
   {
     $this->dbMap = $dbMap;
   }
-  
+
   /**
    * Get the DatabaseMap containing this TableMap.
    *
@@ -121,7 +121,7 @@ class TableMap {
   {
     $this->tableName = $name;
   }
-  
+
   /**
    * Get the name of the Table.
    *
@@ -141,7 +141,7 @@ class TableMap {
   {
     $this->phpName = $phpName;
   }
-  
+
   /**
    * Get the PHP name of the Table.
    *
@@ -170,7 +170,7 @@ class TableMap {
   {
     return $this->classname;
   }
-  
+
   /**
    * Set the Package of the Table
    *
@@ -189,7 +189,7 @@ class TableMap {
   {
     return $this->package;
   }
-    
+
   /**
    * Set whether or not to use Id generator for primary key.
    * @param      boolean $bit
@@ -217,7 +217,7 @@ class TableMap {
   {
     $this->pkInfo = $pkInfo;
   }
-  
+
   /**
    * Get the information used to generate a primary key
    *
@@ -267,7 +267,7 @@ class TableMap {
 
     return $this->columns[$name];
   }
-  
+
   /**
    * Add a pre-created column to this table. It will replace any
    * existing column.
@@ -280,7 +280,7 @@ class TableMap {
     $this->columns[ $cmap->getColumnName() ] = $cmap;
     return $cmap;
   }
-  
+
   /**
    * Does this table contain the specified column?
    *
@@ -297,7 +297,7 @@ class TableMap {
     }
     return isset($this->columns[$name]);
   }
-  
+
   /**
    * Get a ColumnMap for the named table.
    *
@@ -316,7 +316,7 @@ class TableMap {
     }
     return $this->columns[$name];
   }
-  
+
   /**
    * Get a ColumnMap[] of the columns in this table.
    *
@@ -374,7 +374,7 @@ class TableMap {
   {
     return $this->addColumn($columnName, $phpName, $type, $isNotNull, $size, $defaultValue, true, $fkTable, $fkColumn);
   }
-  
+
   /**
    * Returns array of ColumnMap objects that make up the primary key for this table
    *
@@ -384,7 +384,7 @@ class TableMap {
   {
     return $this->primaryKeys;
   }
-  
+
   /**
    * Returns array of ColumnMap objects that are foreign keys for this table
    *
@@ -421,7 +421,7 @@ class TableMap {
       $col->addValidator($validator);
     }
   }
-  
+
   /**
    * Build relations
    * Relations are lazy loaded for performance reasons
@@ -429,14 +429,14 @@ class TableMap {
    */
   public function buildRelations()
   {
-  }  
-  
+  }
+
   /**
    * Adds a RelationMap to the table
-   * 
+   *
    * @param      string $name The relation name
    * @param      string $tablePhpName The related table name
-   * @param      integer $type The relation type (either RelationMap::MANY_TO_ONE, RelationMap::ONE_TO_MANY, or RelationMAp::ONE_TO_ONE) 
+   * @param      integer $type The relation type (either RelationMap::MANY_TO_ONE, RelationMap::ONE_TO_MANY, or RelationMAp::ONE_TO_ONE)
    * @param      array $columnMapping An associative array mapping column names (local => foreign)
    * @return     RelationMap the built RelationMap object
    */
@@ -472,18 +472,18 @@ class TableMap {
   /**
    * Gets a RelationMap of the table by relation name
    *
-   * @param       String $name The relation name 
+   * @param       String $name The relation name
    * @return      boolean true if the relation exists
    */
   public function hasRelation($name)
   {
     return array_key_exists($name, $this->getRelations());
   }
-  
+
   /**
    * Gets a RelationMap of the table by relation name
    *
-   * @param       String $name The relation name 
+   * @param       String $name The relation name
    * @return      RelationMap The relation object
    * @throws      PropelException When called on an inexistent relation
    */
@@ -499,7 +499,7 @@ class TableMap {
   /**
    * Gets the RelationMap objects of the table
    * This method will build the relations if they are not built yet
-   * 
+   *
    * @return      Array list of RelationMap objects
    */
   public function getRelations()
@@ -513,7 +513,7 @@ class TableMap {
   }
 
   /**
-   * 
+   *
    * Gets the list of behaviors registered for this table
    *
    * @return array
@@ -524,7 +524,7 @@ class TableMap {
   }
 
   // Deprecated methods and attributres, to be removed
-  
+
   /**
    * Does this table contain the specified column?
    *
@@ -537,7 +537,7 @@ class TableMap {
   {
     return $this->hasColumn($name, $normalize);
   }
-  
+
   /**
    * Normalizes the column name, removing table prefix and uppercasing.
    * article.first_name becomes FIRST_NAME
@@ -550,7 +550,7 @@ class TableMap {
   {
     return ColumnMap::normalizeName($name);
   }
-  
+
   /**
    * Returns array of ColumnMap objects that make up the primary key for this table.
    *
@@ -561,11 +561,11 @@ class TableMap {
   {
     return array_values($this->primaryKeys);
   }
-    
+
   //---Utility methods for doing intelligent lookup of table names
 
-  /** 
-   * The prefix on the table name. 
+  /**
+   * The prefix on the table name.
    * @deprecated Not used anywhere in Propel
    */
   private $prefix;
@@ -593,7 +593,7 @@ class TableMap {
   {
     $this->prefix = $prefix;
   }
-  
+
   /**
    * Tell me if i have PREFIX in my string.
    *

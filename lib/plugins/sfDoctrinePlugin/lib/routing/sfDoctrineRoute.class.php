@@ -105,7 +105,7 @@ class sfDoctrineRoute extends sfObjectRoute
       $results = $tableModel->$method($this->filterParameters($parameters));
     }
 
-    // If query returned a Doctrine_Record instance instead of a 
+    // If query returned a Doctrine_Record instance instead of a
     // Doctrine_Collection then we need to create a new Doctrine_Collection with
     // one element inside and return that
     if ($results instanceof Doctrine_Record)

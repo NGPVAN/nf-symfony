@@ -47,22 +47,22 @@ include_once 'phing/tasks/system/PhingTask.php';
  * @package   phing.tasks.system
  */
 class ForeachTask extends Task {
-    
+
     /** Delimter-separated list of values to process. */
     private $list;
-    
+
     /** Name of parameter to pass to callee */
     private $param;
-    
+
     /** Delimter that separates items in $list */
     private $delimiter = ',';
-    
+
     /**
      * PhingCallTask that will be invoked w/ calleeTarget.
      * @var PhingCallTask
      */
     private $callee;
-    
+
     /**
      * Target to execute.
      * @var string
@@ -80,7 +80,7 @@ class ForeachTask extends Task {
     /**
      * This method does the work.
      * @return void
-     */   
+     */
     function main() {
         if ($this->list === null) {
             throw new BuildException("Missing list to iterate through");
@@ -99,9 +99,9 @@ class ForeachTask extends Task {
         $callee->setTarget($this->calleeTarget);
         $callee->setInheritAll(true);
         $callee->setInheritRefs(true);
-        
+
         $arr = explode($this->delimiter, $this->list);
-        
+
         foreach ($arr as $value) {
             $this->log("Setting param '$this->param' to value '$value'", Project::MSG_VERBOSE);
             $prop = $callee->createProperty();

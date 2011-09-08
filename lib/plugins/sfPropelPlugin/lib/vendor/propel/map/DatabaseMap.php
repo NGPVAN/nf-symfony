@@ -42,9 +42,9 @@ class DatabaseMap
   /** @var string Name of the database. */
   protected $name;
 
-  /** @var array TableMap[] Tables in the database, using table name as key */ 
+  /** @var array TableMap[] Tables in the database, using table name as key */
   protected $tables = array();
-  
+
   /** @var array TableMap[] Tables in the database, using table phpName as key */
   protected $tablesByPhpName = array();
 
@@ -57,7 +57,7 @@ class DatabaseMap
   {
     $this->name = $name;
   }
-  
+
   /**
    * Get the name of this database.
    *
@@ -67,7 +67,7 @@ class DatabaseMap
   {
     return $this->name;
   }
-  
+
   /**
    * Add a new table to the database by name.
    *
@@ -79,7 +79,7 @@ class DatabaseMap
     $this->tables[$tableName] = new TableMap($tableName, $this);
     return $this->tables[$tableName];
   }
-  
+
   /**
    * Add a new table object to the database.
    *
@@ -91,7 +91,7 @@ class DatabaseMap
     $this->tables[$table->getName()] = $table;
     $this->tablesByPhpName[$table->getPhpName()] = $table;
   }
-  
+
   /**
    * Add a new table to the database, using the tablemap class name.
    *
@@ -108,7 +108,7 @@ class DatabaseMap
       return $this->getTable($table->getName());
     }
   }
-  
+
   /**
    * Does this database contain this specific table?
    *
@@ -155,15 +155,15 @@ class DatabaseMap
    * @param      $qualifiedColumnName Name of the column.
    * @return     ColumnMap A TableMap
    * @throws     PropelException if the table is undefined, or if the table is undefined
-   */  
+   */
   public function getColumn($qualifiedColumnName)
   {
     list($tableName, $columnName) = explode('.', $qualifiedColumnName);
     return $this->getTable($tableName)->getColumn($columnName, false);
   }
-  
+
   // deprecated methods
-  
+
   /**
    * Does this database contain this specific table?
    *
@@ -175,7 +175,7 @@ class DatabaseMap
   {
     return $this->hasTable($name);
   }
-  
+
   public function getTableByPhpName($phpName)
   {
     if (array_key_exists($phpName, $this->tablesByPhpName)) {
@@ -187,14 +187,14 @@ class DatabaseMap
       throw new PropelException("Cannot fetch TableMap for undefined table phpName: " . $phpName);
     }
   }
-  
-  /** 
-   * Convenience method to get the DBAdapter registered with Propel for this database. 
+
+  /**
+   * Convenience method to get the DBAdapter registered with Propel for this database.
    * @return  DBAdapter
-   * @see     Propel::getDB(string) 
-   */ 
-  public function getDBAdapter() 
-  { 
-    return Propel::getDB($this->name); 
-  }  
+   * @see     Propel::getDB(string)
+   */
+  public function getDBAdapter()
+  {
+    return Propel::getDB($this->name);
+  }
 }

@@ -45,7 +45,7 @@ class DateSelector extends BaseExtendSelector {
     const GRANULARITY_KEY = "granularity";
     const WHEN_KEY = "when";
     private static $timeComparisons = array("before", "after", "equal");
-    
+
     public function __construct() {
         //if (Os.isFamily("dos")) {
         //    granularity = 2000;
@@ -92,13 +92,13 @@ class DateSelector extends BaseExtendSelector {
      *
      * @param string $dateTime a string in MM/DD/YYYY HH:MM AM_PM format
      */
-    public function setDatetime($dateTime) {        
+    public function setDatetime($dateTime) {
         $dt = strtotime($dateTime);
         if ($dt == -1) {
             $this->setError("Date of " . $dateTime
                         . " Cannot be parsed correctly. It should be in"
                         . " a format parsable by PHP's strtotime() function.");
-        } else {        
+        } else {
             $this->dateTime = $dateTime;
             $this->setSeconds($dt);
         }
@@ -157,7 +157,7 @@ class DateSelector extends BaseExtendSelector {
                         break;
                     case self::CHECKDIRS_KEY:
                         $this->setCheckdirs($parameters[$i]->getValue());
-                        break;                    
+                        break;
                     case self::GRANULARITY_KEY:
                         $this->setGranularity($parameters[$i]->getValue());
                         break;
@@ -210,5 +210,3 @@ class DateSelector extends BaseExtendSelector {
     }
 
 }
-
-

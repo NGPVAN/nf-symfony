@@ -23,7 +23,7 @@ require_once 'phing/Task.php';
 
 /**
  * Deletes a file or directory, or set of files defined by a fileset.
- * 
+ *
  * @version   $Revision: 1.13 $
  * @package   phing.tasks.system
  */
@@ -37,19 +37,19 @@ class DeleteTask extends Task {
     protected $quiet = false;
     protected $failonerror = true;
     protected $verbosity = Project::MSG_VERBOSE;
-	
+
 	/** Any filelists of files that should be deleted. */
     private $filelists = array();
-	
-    /** 
+
+    /**
      * Set the name of a single file to be removed.
      * @param PhingFile $file
      */
-    function setFile(PhingFile $file) {       
+    function setFile(PhingFile $file) {
         $this->file = $file;
     }
 
-    /** 
+    /**
      * Set the directory from which files are to be deleted.
      * @param PhingFile $dir
      */
@@ -100,7 +100,7 @@ class DeleteTask extends Task {
         $num = array_push($this->filesets, new FileSet());
         return $this->filesets[$num-1];
     }
-	
+
 	/** Nested creator, adds a set of files (nested fileset attribute). */
     function createFileList() {
         $num = array_push($this->filelists, new FileList());
@@ -132,7 +132,7 @@ class DeleteTask extends Task {
                             throw new BuildException($message);
                         } else {
                             $this->log($message, $this->quiet ? Project::MSG_VERBOSE : Project::MSG_WARN);
-                        }                        
+                        }
                     }
                 }
             } else {
@@ -147,7 +147,7 @@ class DeleteTask extends Task {
             }
             $this->removeDir($this->dir);
         }
-		
+
 		// delete the files in the filelists
 		foreach($this->filelists as $fl) {
 			try {
@@ -162,7 +162,7 @@ class DeleteTask extends Task {
 				}
 			}
 		}
-			
+
         // delete the files in the filesets
         foreach($this->filesets as $fs) {
             try {
@@ -180,7 +180,7 @@ class DeleteTask extends Task {
                 }
         }
     }
-    
+
     /**
      * Recursively removes a directory.
      * @param PhingFile $d The directory to remove.
@@ -190,7 +190,7 @@ class DeleteTask extends Task {
         if ($list === null) {
             $list = array();
         }
-        
+
         foreach($list as $s) {
             $f = new PhingFile($d, $s);
             if ($f->isDirectory()) {
@@ -206,7 +206,7 @@ class DeleteTask extends Task {
                     } else {
                         $this->log($message, $this->quiet ? Project::MSG_VERBOSE : Project::MSG_WARN);
                     }
-                }               
+                }
             }
         }
         $this->log("Deleting directory " . $d->getAbsolutePath(), $this->verbosity);
@@ -219,7 +219,7 @@ class DeleteTask extends Task {
             } else {
               $this->log($message, $this->quiet ? Project::MSG_VERBOSE : Project::MSG_WARN);
             }
-        }               
+        }
     }
 
     /**
@@ -244,7 +244,7 @@ class DeleteTask extends Task {
                     } else {
                         $this->log($message, $this->quiet ? Project::MSG_VERBOSE : Project::MSG_WARN);
                     }
-                }               
+                }
 
             }
         }

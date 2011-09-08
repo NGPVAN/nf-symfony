@@ -21,7 +21,7 @@
  */
 class Swift_Mime_EmbeddedFile extends Swift_Mime_Attachment
 {
-  
+
   /**
    * Creates a new Attachment with $headers and $encoder.
    * @param Swift_Mime_HeaderSet $headers
@@ -37,7 +37,7 @@ class Swift_Mime_EmbeddedFile extends Swift_Mime_Attachment
     $this->setDisposition('inline');
     $this->setId($this->getId());
   }
-  
+
   /**
    * Get the nesting level of this EmbeddedFile.
    * Returns {@link LEVEL_RELATED}.
@@ -47,5 +47,5 @@ class Swift_Mime_EmbeddedFile extends Swift_Mime_Attachment
   {
     return self::LEVEL_RELATED;
   }
-  
+
 }

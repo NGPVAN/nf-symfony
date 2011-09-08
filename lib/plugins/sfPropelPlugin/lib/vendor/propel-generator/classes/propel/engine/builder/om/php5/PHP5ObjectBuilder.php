@@ -262,10 +262,10 @@ abstract class ".$this->getClassname()." extends ".ClassTools::classname($this->
 		$this->addFKMethods($script);
 		$this->addRefFKMethods($script);
 		$this->addClearAllReferences($script);
-		
+
 		// apply behaviors
     $this->applyBehaviorModifier('objectMethods', $script, "	");
-		
+
 		$this->addPrimaryString($script);
 	}
 
@@ -324,7 +324,7 @@ abstract class ".$this->getClassname()." extends ".ClassTools::classname($this->
 
 		$this->addAlreadyInSaveAttribute($script);
 		$this->addAlreadyInValidationAttribute($script);
-		
+
 		// apply behaviors
     $this->applyBehaviorModifier('objectAttributes', $script, "	");
 	}
@@ -2019,7 +2019,7 @@ abstract class ".$this->getClassname()." extends ".ClassTools::classname($this->
 		if (\$con === null) {
 			\$con = Propel::getConnection(".$this->getPeerClassname()."::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
-		
+
 		\$con->beginTransaction();
 		try {";
 		if($this->getGeneratorConfig()->getBuildProperty('addHooks')) {
@@ -2566,27 +2566,27 @@ abstract class ".$this->getClassname()." extends ".ClassTools::classname($this->
 
 		$varName = $this->getFKVarName($fk);
 		$pCollName = $this->getFKPhpNameAffix($fk, $plural = true);
-		
+
 		$fkPeerBuilder = $this->getNewPeerBuilder($this->getForeignTable($fk));
 		$fkObjectBuilder = $this->getNewObjectBuilder($this->getForeignTable($fk))->getStubObjectBuilder();
 		$className = $fkObjectBuilder->getClassname(); // get the Classname that has maybe a prefix
-		
+
 		$and = "";
 		$comma = "";
 		$conditional = "";
 		$argmap = array(); // foreign -> local mapping
 		$argsize = 0;
 		foreach ($fk->getLocalColumns() as $columnName) {
-			
+
 			$lfmap = $fk->getLocalForeignMapping();
-			
+
 			$localColumn = $table->getColumn($columnName);
 			$foreignColumn = $fk->getForeignTable()->getColumn($lfmap[$columnName]);
-			
+
 			$column = $table->getColumn($columnName);
 			$cptype = $column->getPhpType();
 			$clo = strtolower($column->getName());
-			
+
 			if ($cptype == "integer" || $cptype == "float" || $cptype == "double") {
 				$conditional .= $and . "\$this->". $clo ." != 0";
 			} elseif ($cptype == "string") {
@@ -2594,13 +2594,13 @@ abstract class ".$this->getClassname()." extends ".ClassTools::classname($this->
 			} else {
 				$conditional .= $and . "\$this->" . $clo ." !== null";
 			}
-			
+
 			$argmap[] = array('foreign' => $foreignColumn, 'local' => $localColumn);
 			$and = " && ";
 			$comma = ", ";
 			$argsize = $argsize + 1;
 		}
-		
+
 		// If the related column is a primary kay and if it's a simple association,
 		// The use retrieveByPk() instead of doSelect() to take advantage of instance pooling
 		$useRetrieveByPk = count($argmap) == 1 && $argmap[0]['foreign']->isPrimaryKey();
@@ -3336,7 +3336,7 @@ abstract class ".$this->getClassname()." extends ".ClassTools::classname($this->
 ";
 			} // foreach foreign k
 		} // if (count(foreign keys))
-		
+
 		if ($table->hasAutoIncrementPrimaryKey() ) {
 		$script .= "
 			if (\$this->isNew() ) {
@@ -3557,11 +3557,11 @@ abstract class ".$this->getClassname()." extends ".ClassTools::classname($this->
 		if (\$con === null) {
 			\$con = Propel::getConnection(".$this->getPeerClassname()."::DATABASE_NAME, Propel::CONNECTION_WRITE);
 		}
-		
+
 		\$con->beginTransaction();
 		\$isInsert = \$this->isNew();
 		try {";
-		
+
 		if($this->getGeneratorConfig()->getBuildProperty('addHooks')) {
 			// save with runtime hools
 			$script .= "
@@ -3640,7 +3640,7 @@ abstract class ".$this->getClassname()." extends ".ClassTools::classname($this->
 			".$this->getPeerClassname()."::addInstanceToPool(\$this);
 			return \$affectedRows;";
 		}
-		
+
 		$script .= "
 		} catch (PropelException \$e) {
 			\$con->rollBack();

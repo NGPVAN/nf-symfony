@@ -1,4 +1,3 @@
-
 function double_list_move(srcId, destId)
 {
   var src=document.getElementById(srcId);

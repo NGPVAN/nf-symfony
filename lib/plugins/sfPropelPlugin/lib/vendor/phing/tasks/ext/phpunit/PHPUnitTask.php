@@ -61,7 +61,7 @@ class PHPUnitTask extends Task
 		if (version_compare(PHP_VERSION, '5.0.3') < 0) {
 		    throw new BuildException("PHPUnit2Task requires PHP version >= 5.0.3.", $this->getLocation());
 		}
-		
+
 		/**
 		 * Determine PHPUnit version number
 		 */
@@ -80,7 +80,7 @@ class PHPUnitTask extends Task
 		{
 			throw new BuildException("PHPUnit task depends on PHPUnit 2 or 3 package being installed.", $this->getLocation());
 		}
-		
+
 		if (version_compare($version, "3.0.0") >= 0)
 		{
 			PHPUnitUtil::$installedVersion = 3;
@@ -93,7 +93,7 @@ class PHPUnitTask extends Task
 		{
 			PHPUnitUtil::$installedVersion = 2;
 		}
-		
+
 		/**
 		 * Other dependencies that should only be loaded when class is actually used.
 		 */
@@ -110,12 +110,12 @@ class PHPUnitTask extends Task
 		{
 			require_once 'PHPUnit/Framework.php';
 			require_once 'PHPUnit/Util/Filter.php';
-			
+
 			// point PHPUnit_MAIN_METHOD define to non-existing method
 			if (!defined('PHPUnit_MAIN_METHOD')) {
 				define('PHPUnit_MAIN_METHOD', 'PHPUnitTask::undefined');
 			}
-			
+
 			PHPUnit_Util_Filter::addFileToFilter($pwd . '/PHPUnitTask.php', 'PHING');
 			PHPUnit_Util_Filter::addFileToFilter($pwd . '/PHPUnitTestRunner.php', 'PHING');
 			PHPUnit_Util_Filter::addFileToFilter($pwd . '/../../../Task.php', 'PHING');
@@ -127,7 +127,7 @@ class PHPUnitTask extends Task
 		{
 			require_once 'PHPUnit2/Framework.php';
 			require_once 'PHPUnit2/Util/Filter.php';
-			
+
 			PHPUnit2_Util_Filter::addFileToFilter($pwd . '/PHPUnitTask.php');
 			PHPUnit2_Util_Filter::addFileToFilter($pwd . '/PHPUnitTestRunner.php');
 			PHPUnit2_Util_Filter::addFileToFilter($pwd . '/../../../Task.php');
@@ -136,27 +136,27 @@ class PHPUnitTask extends Task
 			PHPUnit2_Util_Filter::addFileToFilter($pwd . '/../../../Phing.php');
 		}
 	}
-	
+
 	function setErrorproperty($value)
 	{
 		$this->errorproperty = $value;
 	}
-	
+
 	function setFailureproperty($value)
 	{
 		$this->failureproperty = $value;
 	}
-	
+
 	function setIncompleteproperty($value)
 	{
 		$this->incompleteproperty = $value;
 	}
-	
+
 	function setSkippedproperty($value)
 	{
 		$this->skippedproperty = $value;
 	}
-	
+
 	function setHaltonerror($value)
 	{
 		$this->haltonerror = $value;
@@ -181,7 +181,7 @@ class PHPUnitTask extends Task
 	{
 		$this->printsummary = $printsummary;
 	}
-	
+
 	function setCodecoverage($codecoverage)
 	{
 		$this->codecoverage = $codecoverage;
@@ -235,7 +235,7 @@ class PHPUnitTask extends Task
 	function main()
 	{
 		$tests = array();
-		
+
 		if ($this->printsummary)
 		{
 			$fe = new FormatterElement();
@@ -243,21 +243,21 @@ class PHPUnitTask extends Task
 			$fe->setUseFile(false);
 			$this->formatters[] = $fe;
 		}
-		
+
 		foreach ($this->batchtests as $batchtest)
 		{
 			$tests = array_merge($tests, $batchtest->elements());
-		}			
-		
+		}
+
 		foreach ($this->formatters as $fe)
 		{
-			$formatter = $fe->getFormatter();			
+			$formatter = $fe->getFormatter();
 			$formatter->setProject($this->getProject());
 
 			if ($fe->getUseFile())
 			{
 				$destFile = new PhingFile($fe->getToDir(), $fe->getOutfile());
-				
+
 				$writer = new FileWriter($destFile->getAbsolutePath());
 
 				$formatter->setOutput($writer);
@@ -269,11 +269,11 @@ class PHPUnitTask extends Task
 
 			$formatter->startTestRun();
 		}
-		
+
 		foreach ($tests as $test)
 		{
 			$suite = NULL;
-			
+
 			if ((PHPUnitUtil::$installedVersion == 3 && is_subclass_of($test, 'PHPUnit_Framework_TestSuite')) || (PHPUnitUtil::$installedVersion == 2 && is_subclass_of($test, 'PHPUnit2_Framework_TestSuite')))
 			{
 				if (is_object($test))
@@ -298,7 +298,7 @@ class PHPUnitTask extends Task
 					$suite = new PHPUnit2_Framework_TestSuite(new ReflectionClass($test));
 				}
 			}
-			
+
 			$this->execute($suite);
 		}
 
@@ -307,7 +307,7 @@ class PHPUnitTask extends Task
 			$formatter = $fe->getFormatter();
 			$formatter->endTestRun();
 		}
-		
+
 		if ($this->testfailed)
 		{
 			throw new BuildException("One or more tests failed");
@@ -320,7 +320,7 @@ class PHPUnitTask extends Task
 	private function execute($suite)
 	{
 		$runner = new PHPUnitTestRunner($suite, $this->project, $this->groups, $this->excludeGroups);
-		
+
 		$runner->setCodecoverage($this->codecoverage);
 
 		foreach ($this->formatters as $fe)
@@ -333,7 +333,7 @@ class PHPUnitTask extends Task
 		$runner->run();
 
 		$retcode = $runner->getRetCode();
-		
+
 		if ($retcode == PHPUnitTestRunner::ERRORS) {
 		    if ($this->errorproperty) {
 				$this->project->setNewProperty($this->errorproperty, true);
@@ -345,7 +345,7 @@ class PHPUnitTask extends Task
 			if ($this->failureproperty) {
 				$this->project->setNewProperty($this->failureproperty, true);
 			}
-			
+
 			if ($this->haltonfailure) {
 				$this->testfailed = true;
 			}
@@ -353,7 +353,7 @@ class PHPUnitTask extends Task
 			if ($this->incompleteproperty) {
 				$this->project->setNewProperty($this->incompleteproperty, true);
 			}
-			
+
 			if ($this->haltonincomplete) {
 				$this->testfailed = true;
 			}
@@ -361,7 +361,7 @@ class PHPUnitTask extends Task
 			if ($this->skippedproperty) {
 				$this->project->setNewProperty($this->skippedproperty, true);
 			}
-			
+
 			if ($this->haltonskipped) {
 				$this->testfailed = true;
 			}
@@ -387,4 +387,3 @@ class PHPUnitTask extends Task
 		return $batchtest;
 	}
 }
-

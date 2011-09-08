@@ -19,14 +19,14 @@
  */
 class Swift_Mime_Headers_DateHeader extends Swift_Mime_Headers_AbstractHeader
 {
-  
+
   /**
    * The UNIX timestamp value of this Header.
    * @var int
    * @access private
    */
   private $_timestamp;
-  
+
   /**
    * Creates a new DateHeader with $name and $timestamp.
    * Example:
@@ -41,7 +41,7 @@ class Swift_Mime_Headers_DateHeader extends Swift_Mime_Headers_AbstractHeader
   {
     $this->setFieldName($name);
   }
-  
+
   /**
    * Get the type of Header that this instance represents.
    * @return int
@@ -52,7 +52,7 @@ class Swift_Mime_Headers_DateHeader extends Swift_Mime_Headers_AbstractHeader
   {
     return self::TYPE_DATE;
   }
-  
+
   /**
    * Set the model for the field body.
    * This method takes a UNIX timestamp.
@@ -62,7 +62,7 @@ class Swift_Mime_Headers_DateHeader extends Swift_Mime_Headers_AbstractHeader
   {
     $this->setTimestamp($model);
   }
-  
+
   /**
    * Get the model for the field body.
    * This method returns a UNIX timestamp.
@@ -72,7 +72,7 @@ class Swift_Mime_Headers_DateHeader extends Swift_Mime_Headers_AbstractHeader
   {
     return $this->getTimestamp();
   }
-  
+
   /**
    * Get the UNIX timestamp of the Date in this Header.
    * @return int
@@ -81,7 +81,7 @@ class Swift_Mime_Headers_DateHeader extends Swift_Mime_Headers_AbstractHeader
   {
     return $this->_timestamp;
   }
-  
+
   /**
    * Set the UNIX timestamp of the Date in this Header.
    * @param int $timestamp
@@ -95,7 +95,7 @@ class Swift_Mime_Headers_DateHeader extends Swift_Mime_Headers_AbstractHeader
     $this->clearCachedValueIf($this->_timestamp != $timestamp);
     $this->_timestamp = $timestamp;
   }
-  
+
   /**
    * Get the string value of the body in this Header.
    * This is not necessarily RFC 2822 compliant since folding white space will
@@ -114,5 +114,5 @@ class Swift_Mime_Headers_DateHeader extends Swift_Mime_Headers_AbstractHeader
     }
     return $this->getCachedValue();
   }
-  
+
 }

@@ -48,7 +48,7 @@ abstract class AbstractHandler {
         $this->parser = $parser;
         $this->parser->setHandler($this);
     }
-        
+
     /**
      * Gets invoked when a XML open tag occurs
      *
@@ -77,7 +77,7 @@ abstract class AbstractHandler {
      * @param  string  the name of the XML element
      */
     public function endElement($name) {
-        $this->finished();        
+        $this->finished();
         $this->parser->setHandler($this->parentHandler);
     }
 

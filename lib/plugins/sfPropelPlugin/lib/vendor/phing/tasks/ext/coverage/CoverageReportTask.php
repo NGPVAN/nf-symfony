@@ -42,13 +42,13 @@ class CoverageReportTask extends Task
 
 	/** the classpath to use (optional) */
 	private $classpath = NULL;
-	
+
 	/** the path to the GeSHi library (optional) */
 	private $geshipath = "";
-	
+
 	/** the path to the GeSHi language files (optional) */
 	private $geshilanguagespath = "";
-	
+
 	function setClasspath(Path $classpath)
 	{
 		if ($this->classpath === null)
@@ -66,7 +66,7 @@ class CoverageReportTask extends Task
 		$this->classpath = new Path();
 		return $this->classpath;
 	}
-	
+
 	function setGeshiPath($path)
 	{
 		$this->geshipath = $path;
@@ -150,7 +150,7 @@ class CoverageReportTask extends Task
 		if ($this->geshipath)
 		{
 			require_once $this->geshipath . '/geshi.php';
-			
+
 			$source = file_get_contents($filename);
 
 			$geshi = new GeSHi($source, 'php', $this->geshilanguagespath);
@@ -161,7 +161,7 @@ class CoverageReportTask extends Task
 
 			$geshi->enable_classes(true);
 
-			$geshi->set_url_for_keyword_group(3, ''); 
+			$geshi->set_url_for_keyword_group(3, '');
 
 			$html = $geshi->parse_code();
 
@@ -180,13 +180,13 @@ class CoverageReportTask extends Task
 		else
 		{
 			$lines = file($filename);
-			
+
 			for ($i = 0; $i < count($lines); $i++)
 			{
 				$line = $lines[$i];
-				
+
 				$line = rtrim($line);
-				
+
 				if (function_exists('mb_convert_encoding'))
 				{
 					$lines[$i] = mb_convert_encoding($line, 'UTF-8');
@@ -196,7 +196,7 @@ class CoverageReportTask extends Task
 					$lines[$i] = utf8_encode($line);
 				}
 			}
-			
+
 			return $lines;
 		}
 	}
@@ -205,7 +205,7 @@ class CoverageReportTask extends Task
 	{
 		$sourceElement = $this->doc->createElement('sourcefile');
 		$sourceElement->setAttribute('name', basename($filename));
-		
+
 		/**
 		 * Add original/full filename to document
 		 */
@@ -235,34 +235,34 @@ class CoverageReportTask extends Task
 
 		return $sourceElement;
 	}
-	
+
 	protected function filterCovered($var)
 	{
 		return ($var >= 0);
 	}
 
 	protected function transformCoverageInformation($filename, $coverageInformation)
-	{	
+	{
 		$classes = PHPUnitUtil::getDefinedClasses($filename, $this->classpath);
-		
+
 		if (is_array($classes))
 		{
 			foreach ($classes as $classname)
 			{
 				$reflection = new ReflectionClass($classname);
-				
+
 				$methods = $reflection->getMethods();
-				
+
 				$classElement = $this->doc->createElement('class');
 				$classElement->setAttribute('name', $reflection->getName());
-				
+
 				$this->addClassToPackage($reflection->getName(), $classElement);
 
 				$classStartLine = $reflection->getStartLine();
-				
+
 				$methodscovered = 0;
 				$methodcount = 0;
-				
+
 				// Strange PHP5 reflection bug, classes without parent class or implemented interfaces seem to start one line off
 				if ($reflection->getParentClass() == NULL && count($reflection->getInterfaces()) == 0)
 				{
@@ -272,9 +272,9 @@ class CoverageReportTask extends Task
 				{
 					unset($coverageInformation[$classStartLine]);
 				}
-				
-				reset($coverageInformation);				
-				
+
+				reset($coverageInformation);
+
 				foreach ($methods as $method)
 				{
 					// PHP5 reflection considers methods of a parent class to be part of a subclass, we don't
@@ -388,19 +388,19 @@ class CoverageReportTask extends Task
 	function main()
 	{
 		$this->log("Transforming coverage report");
-		
+
 		$database = new PhingFile($this->project->getProperty('coverage.database'));
-		
+
 		$props = new Properties();
 		$props->load($database);
 
 		foreach ($props->keys() as $filename)
 		{
 			$file = unserialize($props->getProperty($filename));
-			
+
 			$this->transformCoverageInformation($file['fullname'], $file['coverage']);
 		}
-		
+
 		$this->calculateStatistics();
 
 		$this->doc->save($this->outfile);

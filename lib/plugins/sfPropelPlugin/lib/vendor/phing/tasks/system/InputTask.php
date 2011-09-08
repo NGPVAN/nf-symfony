@@ -23,10 +23,10 @@ require_once 'phing/Task.php';
 include_once 'phing/input/InputRequest.php';
 include_once 'phing/input/YesNoInputRequest.php';
 include_once 'phing/input/MultipleChoiceInputRequest.php';
- 
+
 /**
  * Reads input from the InputHandler.
- * 
+ *
  * @see       Project::getInputHandler()
  * @author    Hans Lellelid <hans@xmpl.org> (Phing)
  * @author    Ulrich Schmidt <usch@usch.net> (Ant)
@@ -35,13 +35,13 @@ include_once 'phing/input/MultipleChoiceInputRequest.php';
  * @package   phing.tasks.system
  */
 class InputTask extends Task {
-    
+
     private $validargs;
     private $message = ""; // required
     private $propertyName; // required
     private $defaultValue;
     private $promptChar;
-    
+
     /**
      * Defines valid input parameters as comma separated strings. If set, input
      * task will reject any input not defined as accepted and requires the user
@@ -77,7 +77,7 @@ class InputTask extends Task {
     public function addText($msg) {
         $this->message .= $this->project->replaceProperties($msg);
     }
-    
+
     /**
      * Add a default value.
      * @param string $v
@@ -85,7 +85,7 @@ class InputTask extends Task {
     public function setDefaultValue($v) {
         $this->defaultValue = $v;
     }
-    
+
     /**
      * Set the character/string to use for the prompt.
      * @param string $c
@@ -93,20 +93,20 @@ class InputTask extends Task {
     public function setPromptChar($c) {
         $this->promptChar = $c;
     }
-    
+
     /**
      * Actual method executed by phing.
      * @throws BuildException
      */
     public function main() {
-    
+
         if ($this->propertyName === null) {
             throw new BuildException("You must specify a value for propertyName attribute.");
         }
-        
+
         if ($this->validargs !== null) {
             $accept = preg_split('/[\s,]+/', $this->validargs);
-            
+
             // is it a boolean (yes/no) inputrequest?
             $yesno = false;
             if (count($accept) == 2) {
@@ -123,21 +123,21 @@ class InputTask extends Task {
         } else {
             $request = new InputRequest($this->message);
         }
-        
-        // default default is curr prop value        
+
+        // default default is curr prop value
         $request->setDefaultValue($this->project->getProperty($this->propertyName));
-        
+
         $request->setPromptChar($this->promptChar);
-        
+
         // unless overridden...
         if ($this->defaultValue !== null) {
             $request->setDefaultValue($this->defaultValue);
         }
-        
+
         $this->project->getInputHandler()->handleInput($request);
 
         $value = $request->getInput();
-        
+
         if ($value !== null) {
             $this->project->setUserProperty($this->propertyName, $value);
         }

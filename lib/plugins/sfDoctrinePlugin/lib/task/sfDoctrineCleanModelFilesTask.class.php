@@ -88,7 +88,7 @@ EOF;
 
   /**
    * Returns models defined in YAML.
-   * 
+   *
    * @return array
    */
   protected function getYamlModels($yamlSchemaPath)
@@ -98,7 +98,7 @@ EOF;
 
   /**
    * Returns the schema as defined in YAML.
-   * 
+   *
    * @return array
    */
   protected function getYamlSchema($yamlSchemaPath)
@@ -108,7 +108,7 @@ EOF;
 
   /**
    * Returns models that have class files.
-   * 
+   *
    * @return array
    */
   protected function getFileModels($modelsPath)

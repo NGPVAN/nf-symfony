@@ -25,8 +25,8 @@ if (!extension_loaded('mysqli'))
 // Configure your database with the settings below in order to run the test
 $mysqli_config = array(
   'host'     => 'localhost',
-  'username' => 'root', 
-  'password' => '', 
+  'username' => 'root',
+  'password' => '',
 );
 
 if (!isset($mysqli_config))
@@ -57,7 +57,7 @@ mysqli_query($connection, "CREATE TABLE `session` (
   `sess_id` varchar(40) NOT NULL PRIMARY KEY,
   `sess_time` int(10) unsigned NOT NULL default '0',
   `sess_data` text collate utf8_unicode_ci
-) ENGINE=MyISAM") 
+) ENGINE=MyISAM")
   or $t->fail('Can not create table session');
 
 ini_set('session.use_cookies', 0);

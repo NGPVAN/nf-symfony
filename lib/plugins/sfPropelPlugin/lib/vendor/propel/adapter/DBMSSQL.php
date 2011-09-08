@@ -122,9 +122,9 @@ class DBMSSQL extends DBAdapter {
     $selectSegment = array();
     preg_match('/\Aselect(.*)from(.*)/si',$sql,$selectSegment);
     if (count($selectSegment)==3)
-    {      
+    {
       $selectStatement = trim($selectSegment[1]);
-      $fromStatement = trim($selectSegment[2]);      
+      $fromStatement = trim($selectSegment[2]);
     }
     else
     {
@@ -156,13 +156,13 @@ class DBMSSQL extends DBAdapter {
 
         //add an alias to the inner select so all columns will be unique
         $innerSelect .= $column." AS [$column],";
-        
+
         //use the alias in the outer select if one was present on the original select column
         if(isset($alias)) {
           $outerSelect .= "[$column] AS $alias,";
         } else {
           $outerSelect .= "[$column],";
-        }        
+        }
       } else {
         //agregate columns must always have an alias clause
         if(!isset($alias)) {
@@ -183,7 +183,7 @@ class DBMSSQL extends DBAdapter {
     //ROW_NUMBER() starts at 1 not 0
     $from = ($offset+1);
     $to = ($limit+$offset);
-       
+
     //substring our select strings to get rid of the last comma and add our FROM and SELECT clauses
     $innerSelect = "SELECT ROW_NUMBER() OVER(ORDER BY $countColumn) AS RowNumber, ".substr($innerSelect,0,-1).' FROM';
     $outerSelect = 'SELECT '.substr($outerSelect,0,-1).' FROM';

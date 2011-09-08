@@ -177,7 +177,7 @@ abstract class sfModelGenerator extends sfGenerator
     return implode(".'&", $params);
   }
 
-  /** 
+  /**
    * Configures this generator.
    */
   abstract protected function configure();

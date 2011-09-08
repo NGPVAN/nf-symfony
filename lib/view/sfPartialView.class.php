@@ -26,7 +26,7 @@ class sfPartialView extends sfPHPView
 
   /**
    * Constructor.
-   * 
+   *
    * @see sfView
    */
   public function initialize($context, $moduleName, $actionName, $viewName)

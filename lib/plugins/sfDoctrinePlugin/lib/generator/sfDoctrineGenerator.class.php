@@ -33,7 +33,7 @@ class sfDoctrineGenerator extends sfModelGenerator
     $this->setGeneratorClass('sfDoctrineModule');
   }
 
-  /** 
+  /**
    * Configures this generator.
    */
   public function configure()
@@ -200,7 +200,7 @@ class sfDoctrineGenerator extends sfModelGenerator
    *
    * @param  string $context The Context
    *
-   * @return array An array of configuration for all the fields in a given context 
+   * @return array An array of configuration for all the fields in a given context
    */
   public function getFieldsConfiguration($context)
   {

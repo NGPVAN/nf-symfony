@@ -20,7 +20,7 @@
 
 /**
  * sfMessageSource_MySQL class.
- * 
+ *
  * Retrieve the message translation from a MySQL database.
  *
  * See the MessageSource::factory() method to instantiate this class.
@@ -93,19 +93,19 @@ class sfMessageSource_MySQL extends sfMessageSource_Database
 {
   /**
    * The datasource string, full DSN to the database.
-   * @var string 
+   * @var string
    */
   protected $source;
 
   /**
    * The DSN array property, parsed by PEAR's DB DSN parser.
-   * @var array 
+   * @var array
    */
   protected $dsn;
 
   /**
    * A resource link to the database
-   * @var db 
+   * @var db
    */
   protected $db;
 
@@ -203,7 +203,7 @@ class sfMessageSource_MySQL extends sfMessageSource_Database
   /**
    * Gets the database connection.
    *
-   * @return db database connection. 
+   * @return db database connection.
    */
   public function connection()
   {
@@ -265,7 +265,7 @@ class sfMessageSource_MySQL extends sfMessageSource_Database
    *
    * @param string $variant catalogue+variant
    * @return boolean true if the catalogue+variant is in the database, false otherwise.
-   */ 
+   */
   public function isValidSource($variant)
   {
     $variant = mysql_real_escape_string ($variant, $this->db);
@@ -283,7 +283,7 @@ class sfMessageSource_MySQL extends sfMessageSource_Database
    * Retrieves catalogue details, array($cat_id, $variant, $count).
    *
    * @param string $catalogue catalogue
-   * @return array catalogue details, array($cat_id, $variant, $count). 
+   * @return array catalogue details, array($cat_id, $variant, $count).
    */
   protected function getCatalogueDetails($catalogue = 'messages')
   {
@@ -316,7 +316,7 @@ class sfMessageSource_MySQL extends sfMessageSource_Database
   /**
    * Updates the catalogue last modified time.
    *
-   * @return boolean true if updated, false otherwise. 
+   * @return boolean true if updated, false otherwise.
    */
   protected function updateCatalogueTime($cat_id, $variant)
   {
@@ -333,7 +333,7 @@ class sfMessageSource_MySQL extends sfMessageSource_Database
   }
 
   /**
-   * Saves the list of untranslated blocks to the translation source. 
+   * Saves the list of untranslated blocks to the translation source.
    * If the translation was not found, you should add those
    * strings to the translation source via the <b>append()</b> method.
    *
@@ -391,7 +391,7 @@ class sfMessageSource_MySQL extends sfMessageSource_Database
    *
    * @param string $message   the source message to delete.
    * @param string $catalogue the catalogue to delete from.
-   * @return boolean true if deleted, false otherwise. 
+   * @return boolean true if deleted, false otherwise.
    */
   function delete($message, $catalogue = 'messages')
   {
@@ -427,7 +427,7 @@ class sfMessageSource_MySQL extends sfMessageSource_Database
    * @param string $target    the new translation string.
    * @param string $comments  comments
    * @param string $catalogue the catalogue of the translation.
-   * @return boolean true if translation was updated, false otherwise. 
+   * @return boolean true if translation was updated, false otherwise.
    */
   function update($text, $target, $comments, $catalogue = 'messages')
   {
@@ -463,7 +463,7 @@ class sfMessageSource_MySQL extends sfMessageSource_Database
   /**
    * Returns a list of catalogue as key and all it variants as value.
    *
-   * @return array list of catalogues 
+   * @return array list of catalogues
    */
   function catalogues()
   {

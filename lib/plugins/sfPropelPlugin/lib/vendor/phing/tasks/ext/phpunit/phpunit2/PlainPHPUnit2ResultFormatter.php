@@ -35,12 +35,12 @@ require_once 'phing/tasks/ext/phpunit/phpunit2/PHPUnit2ResultFormatter.php';
 class PlainPHPUnit2ResultFormatter extends PHPUnit2ResultFormatter
 {
 	private $inner = "";
-	
+
 	function getExtension()
 	{
 		return ".txt";
 	}
-	
+
 	function getPreferredOutfile()
 	{
 		return "testresults";
@@ -49,14 +49,14 @@ class PlainPHPUnit2ResultFormatter extends PHPUnit2ResultFormatter
 	function startTestSuite(PHPUnit2_Framework_TestSuite $suite)
 	{
 		parent::startTestSuite($suite);
-		
+
 		$this->inner = "";
 	}
-	
+
 	function endTestSuite(PHPUnit2_Framework_TestSuite $suite)
 	{
 		parent::endTestSuite($suite);
-		
+
 		$sb = "Testsuite: " . $suite->getName() . "\n";
 		$sb.= "Tests run: " . $this->getRunCount();
 		$sb.= ", Failures: " . $this->getFailureCount();
@@ -74,21 +74,21 @@ class PlainPHPUnit2ResultFormatter extends PHPUnit2ResultFormatter
 	function addError(PHPUnit2_Framework_Test $test, Exception $e)
 	{
 		parent::addError($test, $e);
-		
+
 		$this->formatError("ERROR", $test, $e);
 	}
 
 	function addFailure(PHPUnit2_Framework_Test $test, PHPUnit2_Framework_AssertionFailedError $t)
 	{
 		parent::addFailure($test, $t);
-		
+
 		$this->formatError("FAILED", $test, $t);
 	}
 
 	function addIncompleteTest(PHPUnit2_Framework_Test $test, Exception $e)
 	{
 		parent::addIncompleteTest($test, $e);
-		
+
 		$this->formatError("INCOMPLETE", $test, $e);
 	}
 
@@ -103,11 +103,11 @@ class PlainPHPUnit2ResultFormatter extends PHPUnit2ResultFormatter
 		$this->inner.= $e->getMessage() . "\n";
 		$this->inner.= PHPUnit2_Util_Filter::getFilteredStackTrace($e) . "\n";
 	}
-	
+
 	function endTestRun()
 	{
 		parent::endTestRun();
-		
+
 		if ($this->out != NULL)
 		{
 			$this->out->close();

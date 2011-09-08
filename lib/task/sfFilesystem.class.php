@@ -426,7 +426,7 @@ class sfFilesystem
    * @param string $to   The target directory
    *
    * @return string
-   */ 
+   */
   protected function calculateRelativeDir($from, $to)
   {
     $from = $this->canonicalizePath($from);

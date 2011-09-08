@@ -23,25 +23,25 @@ class Swift_ByteStream_FileByteStream
   extends Swift_ByteStream_AbstractFilterableInputStream
   implements Swift_FileStream
 {
-  
+
   /** The internal pointer offset */
   private $_offset = 0;
-  
+
   /** The path to the file */
   private $_path;
-  
+
   /** The mode this file is opened in for writing */
   private $_mode;
-  
+
   /** A lazy-loaded resource handle for reading the file */
   private $_reader;
-  
+
   /** A lazy-loaded resource handle for writing the file */
   private $_writer;
-  
+
   /** If magic_quotes_runtime is on, this will be true */
   private $_quotes = false;
-  
+
   /**
    * Create a new FileByteStream for $path.
    * @param string $path
@@ -53,7 +53,7 @@ class Swift_ByteStream_FileByteStream
     $this->_mode = $writable ? 'w+b' : 'rb';
     $this->_quotes = get_magic_quotes_runtime();
   }
-  
+
   /**
    * Get the complete path to the file.
    * @return string
@@ -62,7 +62,7 @@ class Swift_ByteStream_FileByteStream
   {
     return $this->_path;
   }
-  
+
   /**
    * Reads $length bytes from the stream into a string and moves the pointer
    * through the stream by $length. If less bytes exist than are requested the
@@ -94,7 +94,7 @@ class Swift_ByteStream_FileByteStream
       return false;
     }
   }
-  
+
   /**
    * Move the internal read pointer to $byteOffset in the stream.
    * @param int $byteOffset
@@ -108,21 +108,21 @@ class Swift_ByteStream_FileByteStream
     }
     $this->_offset = $byteOffset;
   }
-  
+
   // -- Private methods
-  
+
   /** Just write the bytes to the file */
   protected function _commit($bytes)
   {
     fwrite($this->_getWriteHandle(), $bytes);
     $this->_resetReadHandle();
   }
-  
+
   /** Not used */
   protected function _flush()
   {
   }
-  
+
   /** Get the resource for reading */
   private function _getReadHandle()
   {
@@ -138,7 +138,7 @@ class Swift_ByteStream_FileByteStream
     }
     return $this->_reader;
   }
-  
+
   /** Get the resource for writing */
   private function _getWriteHandle()
   {
@@ -153,7 +153,7 @@ class Swift_ByteStream_FileByteStream
     }
     return $this->_writer;
   }
-  
+
   /** Force a reload of the resource for writing */
   private function _resetWriteHandle()
   {
@@ -163,7 +163,7 @@ class Swift_ByteStream_FileByteStream
       $this->_writer = null;
     }
   }
-  
+
   /** Force a reload of the resource for reading */
   private function _resetReadHandle()
   {
@@ -173,5 +173,5 @@ class Swift_ByteStream_FileByteStream
       $this->_reader = null;
     }
   }
-  
+
 }

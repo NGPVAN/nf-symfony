@@ -87,7 +87,7 @@ class MssqlPlatform extends DefaultPlatform {
 	{
 		return false;
 	}
-	
+
 	/**
 	 * @see        Platform::hasSize(String)
 	 */

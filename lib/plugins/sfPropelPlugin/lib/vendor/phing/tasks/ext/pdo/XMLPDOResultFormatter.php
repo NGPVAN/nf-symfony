@@ -24,9 +24,9 @@ require_once 'phing/tasks/ext/pdo/PDOResultFormatter.php';
 
 /**
  * XML formatter for PDO results.
- * 
+ *
  * This class reprsents the output of a query using a simple XML schema.
- * 
+ *
  * <results>
  * 	<row>
  * 	 <col name="id">value</col>
@@ -40,7 +40,7 @@ require_once 'phing/tasks/ext/pdo/PDOResultFormatter.php';
  *
  * The actual names of the colums will depend on the fetchmode that was used
  * with PDO.
- * 
+ *
  * @author Hans Lellelid <hans@xmpl.org>
  * @package phing.tasks.ext.pdo
  * @since 2.3.0
@@ -69,7 +69,7 @@ class XMLPDOResultFormatter extends PDOResultFormatter {
 	 * @var boolean
 	 */
 	private $formatOutput = true;
-	
+
 	/**
 	 * Set the DOM document encoding.
 	 * @param string $v
@@ -77,7 +77,7 @@ class XMLPDOResultFormatter extends PDOResultFormatter {
 	public function setEncoding($v) {
 		$this->encoding = $v;
 	}
-	
+
 	/**
 	 * @param boolean $v
 	 */
@@ -91,44 +91,44 @@ class XMLPDOResultFormatter extends PDOResultFormatter {
 		$this->doc->appendChild($this->rootNode);
 		$this->doc->formatOutput = $this->formatOutput;
 	}
-	
+
 	/**
 	 * Processes a specific row from PDO result set.
 	 *
 	 * @param array $row Row of PDO result set.
 	 */
 	public function processRow($row) {
-		
+
 		$rowNode = $this->doc->createElement('row');
 		$this->rootNode->appendChild($rowNode);
 
 		foreach($row as $columnName => $columnValue) {
-			
+
 			$colNode = $this->doc->createElement('column');
 			$colNode->setAttribute('name', $columnName);
-			
+
 			if ($columnValue != null) {
 				$columnValue = trim($columnValue);
 				$colNode->nodeValue = $columnValue;
 			}
 			$rowNode->appendChild($colNode);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Gets a preferred filename for an output file.
-	 * 
+	 *
 	 * If no filename is specified, this is where the results will be placed
 	 * (unless usefile=false).
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getPreferredOutfile()
 	{
 		return new PhingFile('results.xml');
 	}
-	
+
 	/**
 	 * Write XML to file and free the DOM objects.
 	 */

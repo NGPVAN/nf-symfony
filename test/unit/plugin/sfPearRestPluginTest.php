@@ -17,7 +17,7 @@ $t = new lime_test(5);
 @include_once('PEAR.php');
 if (!class_exists('PEAR'))
 {
-  $t->skip('PEAR must be installed', 5); 
+  $t->skip('PEAR must be installed', 5);
   return;
 }
 

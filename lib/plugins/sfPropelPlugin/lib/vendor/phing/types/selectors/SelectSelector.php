@@ -36,7 +36,7 @@ require_once 'phing/types/selectors/AndSelector.php';
  * @package   phing.types.selectors
  */
 class SelectSelector extends AndSelector {
-         
+
     public function toString() {
         $buf = "";
         if ($this->hasSelectors()) {
@@ -121,4 +121,3 @@ class SelectSelector extends AndSelector {
     }
 
 }
-

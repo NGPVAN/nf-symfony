@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  *  $Id: PregEngine.php 325 2007-12-20 15:44:58Z hans $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information please see
- * <http://phing.info>. 
+ * <http://phing.info>.
  */
 
 require_once 'phing/util/regexp/RegexpEngine.php';
@@ -24,7 +24,7 @@ require_once 'phing/util/regexp/RegexpEngine.php';
 /**
  * PREG Regexp Engine.
  * Implements a regexp engine using PHP's preg_match(), preg_match_all(), and preg_replace() functions.
- * 
+ *
  * @author hans lellelid, hans@velum.net
  * @package phing.util.regex
  */
@@ -34,7 +34,7 @@ class PregEngine implements RegexpEngine {
      * @var boolean
      */
     private $ignoreCase = false;
-        
+
     /**
      * Sets whether or not regex operation is case sensitive.
      * @param boolean $bit
@@ -51,7 +51,7 @@ class PregEngine implements RegexpEngine {
     function getIgnoreCase() {
         return $this->ignoreCase;
     }
-        
+
     /**
      * The pattern needs to be converted into PREG style -- which includes adding expression delims & any flags, etc.
      * @param string $pattern
@@ -61,7 +61,7 @@ class PregEngine implements RegexpEngine {
     {
         return '/'.$pattern.'/'.($this->ignoreCase ? 'i' : '');
     }
-    
+
     /**
      * Matches pattern against source string and sets the matches array.
      * @param string $pattern The regex pattern to match.
@@ -69,7 +69,7 @@ class PregEngine implements RegexpEngine {
      * @param array $matches The array in which to store matches.
      * @return boolean Success of matching operation.
      */
-    function match($pattern, $source, &$matches) { 
+    function match($pattern, $source, &$matches) {
         return preg_match($this->preparePattern($pattern), $source, $matches);
     }
 
@@ -79,7 +79,7 @@ class PregEngine implements RegexpEngine {
      * @param string $source The source string.
      * @param array $matches The array in which to store matches.
      * @return boolean Success of matching operation.
-     */        
+     */
     function matchAll($pattern, $source, &$matches) {
         return preg_match_all($this->preparePattern($pattern), $source, $matches);
     }
@@ -92,7 +92,7 @@ class PregEngine implements RegexpEngine {
      * @param string $replace The string with which to replace matches.
      * @param string $source The source string.
      * @return string The replaced source string.
-     */        
+     */
     function replace($pattern, $replace, $source) {
         // convert \1 -> $1, because we want to use the more generic \1 in the XML
         // but PREG prefers $1 syntax.
@@ -101,4 +101,3 @@ class PregEngine implements RegexpEngine {
     }
 
 }
-

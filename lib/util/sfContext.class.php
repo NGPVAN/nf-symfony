@@ -447,7 +447,7 @@ class sfContext implements ArrayAccess
   {
     return $this->configuration->getConfigCache();
   }
-  
+
   /**
    * Returns true if the context object exists (implements the ArrayAccess interface).
    *
@@ -551,7 +551,7 @@ class sfContext implements ArrayAccess
 
     return $parameters;
   }
-  
+
   /**
    * Calls methods defined via sfEventDispatcher.
    *

@@ -19,7 +19,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://propel.phpdb.org>.
  */
- 
+
 /**
  * Adds a primary key to models defined without one
  *
@@ -51,7 +51,7 @@ class AutoAddPkBehavior extends Behavior
       }
     }
   }
-  
+
   /**
    * Add the primary key to the current table
    */

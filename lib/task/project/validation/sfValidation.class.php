@@ -77,7 +77,7 @@ abstract class sfValidation extends sfBaseTask
 
   /**
    * Returns all project lib directories.
-   * 
+   *
    * @param string $subdirectory A subdirectory within lib (i.e. "/form")
    */
   protected function getProjectLibDirectories($subdirectory = null)

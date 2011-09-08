@@ -27,20 +27,20 @@ include_once 'phing/tasks/ext/pdo/PDOSQLExecFormatterElement.php';
  * Executes a series of SQL statements on a database using PDO.
  *
  * <p>Statements can
- * either be read in from a text file using the <i>src</i> attribute or from 
+ * either be read in from a text file using the <i>src</i> attribute or from
  * between the enclosing SQL tags.</p>
- * 
- * <p>Multiple statements can be provided, separated by semicolons (or the 
- * defined <i>delimiter</i>). Individual lines within the statements can be 
+ *
+ * <p>Multiple statements can be provided, separated by semicolons (or the
+ * defined <i>delimiter</i>). Individual lines within the statements can be
  * commented using either --, // or REM at the start of the line.</p>
- * 
- * <p>The <i>autocommit</i> attribute specifies whether auto-commit should be 
- * turned on or off whilst executing the statements. If auto-commit is turned 
- * on each statement will be executed and committed. If it is turned off the 
+ *
+ * <p>The <i>autocommit</i> attribute specifies whether auto-commit should be
+ * turned on or off whilst executing the statements. If auto-commit is turned
+ * on each statement will be executed and committed. If it is turned off the
  * statements will all be executed as one transaction.</p>
- * 
- * <p>The <i>onerror</i> attribute specifies how to proceed when an error occurs 
- * during the execution of one of the statements. 
+ *
+ * <p>The <i>onerror</i> attribute specifies how to proceed when an error occurs
+ * during the execution of one of the statements.
  * The possible values are: <b>continue</b> execution, only show the error;
  * <b>stop</b> execution and commit transaction;
  * and <b>abort</b> execution and transaction and fail task.</p>
@@ -147,7 +147,7 @@ class PDOSQLExecTask extends PDOTask {
     }
 
     /**
-     * Set an inline SQL command to execute. 
+     * Set an inline SQL command to execute.
      * NB: Properties are not expanded in this text.
      */
     public function addText($sql) {
@@ -347,7 +347,7 @@ class PDOSQLExecTask extends PDOTask {
     			}
     			throw new BuildException($e->getMessage(), $this->location);
     		}
-    			
+
     		// Close the formatters.
     		$this->closeFormatters();
 
@@ -368,7 +368,7 @@ class PDOSQLExecTask extends PDOTask {
 
     /**
      * read in lines and execute them
-     * @throws PDOException, IOException 
+     * @throws PDOException, IOException
      */
     public function runStatements(Reader $reader) {
     	$sql = "";
@@ -452,7 +452,7 @@ class PDOSQLExecTask extends PDOTask {
      * Whether the passed-in SQL statement is a SELECT statement.
      * This does a pretty simple match, checking to see if statement starts with
      * 'select' (but not 'select into').
-     * 
+     *
      * @param string $sql
      * @return boolean Whether specified SQL looks like a SELECT query.
      */
@@ -464,7 +464,7 @@ class PDOSQLExecTask extends PDOTask {
 
     /**
      * Exec the sql statement.
-     * @throws PDOException 
+     * @throws PDOException
      */
     protected function execSQL($sql) {
 
@@ -610,5 +610,3 @@ class PDOSQLExecTransaction {
     	}
     }
 }
-
-

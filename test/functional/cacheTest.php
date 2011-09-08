@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -505,7 +505,7 @@ $b->setHttpHeader('If-Modified-Since', sfWebResponse::getDate(sfConfig::get('LAS
 $b->launch();
 
 // test with sfSQLiteCache class
-if (extension_loaded('SQLite') || extension_loaded('pdo_SQLite')) 
+if (extension_loaded('SQLite') || extension_loaded('pdo_SQLite'))
 {
   sfConfig::set('sf_factory_view_cache', 'sfSQLiteCache');
   sfConfig::set('sf_factory_view_cache_parameters', array('database' => sfConfig::get('sf_template_cache_dir').DIRECTORY_SEPARATOR.'cache.db'));

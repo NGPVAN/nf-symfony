@@ -33,5 +33,3 @@ $t->is($p->getDoctrineConnection()->getName(), 'doctrine', 'initialize() - creat
 $t->is($p->getDoctrineConnection()->getAttribute(Doctrine_Core::ATTR_USE_NATIVE_ENUM), true, 'initialize() - setups doctrine attributes - attribute value is not a string');
 $t->is($p->getDoctrineConnection()->getAttribute(Doctrine_Core::ATTR_VALIDATE), Doctrine_Core::VALIDATE_ALL, 'initialize() - setups doctrine attributes - attribute value is a string and constant exists');
 $t->is($p->getDoctrineConnection()->getAttribute(Doctrine_Core::ATTR_TBLNAME_FORMAT), $parameters['attributes']['tblname_format'], 'initialize() - setups doctrine attributes - attribute value is a string and constant not exists');
-
-

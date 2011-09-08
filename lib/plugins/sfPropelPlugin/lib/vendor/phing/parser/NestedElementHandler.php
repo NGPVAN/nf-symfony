@@ -90,7 +90,7 @@ class NestedElementHandler extends AbstractHandler {
             $this->parent = $parent;
         }
         $this->parentWrapper = $parentWrapper;
-        $this->target = $target;        
+        $this->target = $target;
     }
 
     /**
@@ -121,12 +121,12 @@ class NestedElementHandler extends AbstractHandler {
             if ($this->parent instanceof UnknownElement) {
                 $this->child = new UnknownElement(strtolower($propType));
                 $this->parent->addChild($this->child);
-            } else {                
+            } else {
                 $this->child = $ih->createElement($project, $this->parent, strtolower($propType));
             }
-            
+
             $configurator->configureId($this->child, $attrs);
-            
+
             if ($this->parentWrapper !== null) {
                 $this->childWrapper = new RuntimeConfigurable($this->child, $propType);
                 $this->childWrapper->setAttributes($attrs);
@@ -149,16 +149,16 @@ class NestedElementHandler extends AbstractHandler {
      */
     function characters($data) {
 
-        $configurator = $this->configurator;        
+        $configurator = $this->configurator;
         $project = $this->configurator->project;
 
         if ($this->parentWrapper === null) {
-            try {                
+            try {
                 $configurator->addText($project, $this->child, $data);
             } catch (BuildException $exc) {
                 throw new ExpatParseException($exc->getMessage(), $this->parser->getLocation());
             }
-        } else {                    
+        } else {
             $this->childWrapper->addText($data);
         }
     }

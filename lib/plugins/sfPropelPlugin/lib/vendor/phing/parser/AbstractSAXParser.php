@@ -32,7 +32,7 @@
  * @package   phing.parser
  */
 abstract class AbstractSAXParser {
-    
+
     /** The AbstractHandler object. */
     protected $handler;
 
@@ -64,7 +64,7 @@ abstract class AbstractSAXParser {
      * in the actual parser implementation.
      * It gives control to the current active handler object by calling the
      * <code>startElement()</code> method.
-     * 
+     *
      * @param  object  the php's internal parser handle
      * @param  string  the open tag name
      * @param  array   the tag's attributes if any

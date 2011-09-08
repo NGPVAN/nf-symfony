@@ -4,7 +4,7 @@
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
  * (c) 2004-2006 Sean Kerr <sean@code-box.org>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -68,7 +68,7 @@ class sfMySQLSessionStorage extends sfDatabaseSessionStorage
     $db_table    = $this->options['db_table'];
     $db_time_col = $this->options['db_time_col'];
 
-    // delete the record older than the authorised session life time 
+    // delete the record older than the authorised session life time
     $lifetime = $this->db_escape($lifetime); // We never know...
     $sql = "DELETE FROM $db_table WHERE $db_time_col + $lifetime < UNIX_TIMESTAMP()";
 

@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
 require_once 'phing/Task.php';
 require_once 'phing/tasks/ext/dbdeploy/DbmsSyntax.php';
 
@@ -33,12 +33,12 @@ require_once 'phing/tasks/ext/dbdeploy/DbmsSyntax.php';
 class DbmsSyntaxFactory
 {
 	private $dbms;
-	
+
 	public function __construct($dbms)
 	{
 		$this->dbms = $dbms;
 	}
-	
+
 	public function getDbmsSyntax()
 	{
 		switch ($this->dbms){
@@ -56,4 +56,3 @@ class DbmsSyntaxFactory
 		}
 	}
 }
-

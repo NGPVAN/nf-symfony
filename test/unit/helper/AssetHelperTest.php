@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -90,21 +90,21 @@ sfConfig::set('sf_compat_10', $compatMode);
 
 // stylesheet_tag()
 $t->diag('stylesheet_tag()');
-$t->is(stylesheet_tag('style'), 
-  '<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />'."\n", 
+$t->is(stylesheet_tag('style'),
+  '<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />'."\n",
   'stylesheet_tag() takes a stylesheet name as its first argument');
 $t->is(stylesheet_tag('random.styles', '/css/stylish'),
   '<link rel="stylesheet" type="text/css" media="screen" href="/css/random.styles" />'."\n".
-  '<link rel="stylesheet" type="text/css" media="screen" href="/css/stylish.css" />'."\n", 
+  '<link rel="stylesheet" type="text/css" media="screen" href="/css/stylish.css" />'."\n",
   'stylesheet_tag() can takes n stylesheet names as its arguments');
-$t->is(stylesheet_tag('style', array('media' => 'all')), 
-  '<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />'."\n", 
+$t->is(stylesheet_tag('style', array('media' => 'all')),
+  '<link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />'."\n",
   'stylesheet_tag() can take a media option');
-$t->is(stylesheet_tag('style', array('absolute' => true)), 
-  '<link rel="stylesheet" type="text/css" media="screen" href="http://localhost/css/style.css" />'."\n", 
+$t->is(stylesheet_tag('style', array('absolute' => true)),
+  '<link rel="stylesheet" type="text/css" media="screen" href="http://localhost/css/style.css" />'."\n",
   'stylesheet_tag() can take an absolute option to output an absolute file name');
-$t->is(stylesheet_tag('style', array('raw_name' => true)), 
-  '<link rel="stylesheet" type="text/css" media="screen" href="style" />'."\n", 
+$t->is(stylesheet_tag('style', array('raw_name' => true)),
+  '<link rel="stylesheet" type="text/css" media="screen" href="style" />'."\n",
   'stylesheet_tag() can take a raw_name option to bypass file name decoration');
 $t->is(stylesheet_tag('style', array('condition' => 'IE 6')),
   '<!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" /><![endif]-->'."\n",
@@ -113,20 +113,20 @@ $t->is(stylesheet_tag('style', array('condition' => 'IE 6')),
 // javascript_include_tag()
 $t->diag('javascript_include_tag()');
 $t->is(javascript_include_tag('xmlhr'),
-  '<script type="text/javascript" src="/js/xmlhr.js"></script>'."\n", 
+  '<script type="text/javascript" src="/js/xmlhr.js"></script>'."\n",
   'javascript_include_tag() takes a javascript name as its first argument');
 $t->is(javascript_include_tag('common.javascript', '/elsewhere/cools'),
   '<script type="text/javascript" src="/js/common.javascript"></script>'."\n".
   '<script type="text/javascript" src="/elsewhere/cools.js"></script>'."\n",
   'javascript_include_tag() can takes n javascript file names as its arguments');
 $t->is(javascript_include_tag('xmlhr', array('absolute' => true)),
-  '<script type="text/javascript" src="http://localhost/js/xmlhr.js"></script>'."\n", 
+  '<script type="text/javascript" src="http://localhost/js/xmlhr.js"></script>'."\n",
   'javascript_include_tag() can take an absolute option to output an absolute file name');
 $t->is(javascript_include_tag('xmlhr', array('raw_name' => true)),
-  '<script type="text/javascript" src="xmlhr"></script>'."\n", 
+  '<script type="text/javascript" src="xmlhr"></script>'."\n",
   'javascript_include_tag() can take a raw_name option to bypass file name decoration');
 $t->is(javascript_include_tag('xmlhr', array('defer' => 'defer')),
-  '<script type="text/javascript" src="/js/xmlhr.js" defer="defer"></script>'."\n", 
+  '<script type="text/javascript" src="/js/xmlhr.js" defer="defer"></script>'."\n",
   'javascript_include_tag() can take additional html options like defer');
 $t->is(javascript_include_tag('xmlhr', array('condition' => 'IE 6')),
   '<!--[if IE 6]><script type="text/javascript" src="/js/xmlhr.js"></script><![endif]-->'."\n",
@@ -157,35 +157,35 @@ $t->is(image_path('img.jpg', true), 'http://localhost/images/img.jpg', 'image_pa
 $t->diag('use_javascript() get_javascripts()');
 use_javascript('xmlhr');
 $t->is(get_javascripts(),
-  '<script type="text/javascript" src="/js/xmlhr.js"></script>'."\n", 
+  '<script type="text/javascript" src="/js/xmlhr.js"></script>'."\n",
   'get_javascripts() returns a javascript previously added by use_javascript()');
 use_javascript('xmlhr', '', array('raw_name' => true));
 $t->is(get_javascripts(),
-  '<script type="text/javascript" src="xmlhr"></script>'."\n", 
+  '<script type="text/javascript" src="xmlhr"></script>'."\n",
   'use_javascript() accepts an array of options as a third parameter');
 use_javascript('xmlhr', '', array('absolute' => true));
 $t->is(get_javascripts(),
-  '<script type="text/javascript" src="http://localhost/js/xmlhr.js"></script>'."\n", 
+  '<script type="text/javascript" src="http://localhost/js/xmlhr.js"></script>'."\n",
   'use_javascript() accepts an array of options as a third parameter');
 use_javascript('xmlhr');
 use_javascript('xmlhr2');
 $t->is(get_javascripts(),
-  '<script type="text/javascript" src="/js/xmlhr.js"></script>'."\n".'<script type="text/javascript" src="/js/xmlhr2.js"></script>'."\n", 
+  '<script type="text/javascript" src="/js/xmlhr.js"></script>'."\n".'<script type="text/javascript" src="/js/xmlhr2.js"></script>'."\n",
   'get_javascripts() returns all the javascripts previously added by use_javascript()');
 
 // use_stylesheet() get_stylesheets()
 $t->diag('use_stylesheet() get_stylesheets()');
 use_stylesheet('style');
 $t->is(get_stylesheets(),
-  '<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />'."\n", 
+  '<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />'."\n",
   'get_stylesheets() returns a stylesheet previously added by use_stylesheet()');
 use_stylesheet('style', '', array('raw_name' => true));
 $t->is(get_stylesheets(),
-  '<link rel="stylesheet" type="text/css" media="screen" href="style" />'."\n", 
+  '<link rel="stylesheet" type="text/css" media="screen" href="style" />'."\n",
   'use_stylesheet() accepts an array of options as a third parameter');
 use_stylesheet('style', '', array('absolute' => true));
 $t->is(get_stylesheets(),
-  '<link rel="stylesheet" type="text/css" media="screen" href="http://localhost/css/style.css" />'."\n", 
+  '<link rel="stylesheet" type="text/css" media="screen" href="http://localhost/css/style.css" />'."\n",
   'use_stylesheet() accepts an array of options as a third parameter');
 use_stylesheet('style');
 use_stylesheet('style2');
@@ -219,7 +219,7 @@ $t->is(get_javascripts(),
 $t->diag('use_dynamic_stylesheet()');
 use_dynamic_stylesheet('module/action');
 $t->is(get_stylesheets(),
-  '<link rel="stylesheet" type="text/css" media="screen" href="module/action?sf_format=css" />'."\n", 
+  '<link rel="stylesheet" type="text/css" media="screen" href="module/action?sf_format=css" />'."\n",
   'use_dynamic_stylesheet() register a dynamic stylesheet in the response'
 );
 
@@ -272,13 +272,13 @@ $t->diag('Custom asset path handling');
 sfConfig::set('sf_web_js_dir_name', 'static/js');
 $t->is(javascript_path('xmlhr'), '/static/js/xmlhr.js', 'javascript_path() decorates a relative filename with js dir name and extension with custom js dir');
 $t->is(javascript_include_tag('xmlhr'),
-  '<script type="text/javascript" src="/static/js/xmlhr.js"></script>'."\n", 
+  '<script type="text/javascript" src="/static/js/xmlhr.js"></script>'."\n",
   'javascript_include_tag() takes a javascript name as its first argument');
 
 sfConfig::set('sf_web_css_dir_name', 'static/css');
 $t->is(stylesheet_path('style'), '/static/css/style.css', 'stylesheet_path() decorates a relative filename with css dir name and extension with custom css dir');
-$t->is(stylesheet_tag('style'), 
-  '<link rel="stylesheet" type="text/css" media="screen" href="/static/css/style.css" />'."\n", 
+$t->is(stylesheet_tag('style'),
+  '<link rel="stylesheet" type="text/css" media="screen" href="/static/css/style.css" />'."\n",
   'stylesheet_tag() takes a stylesheet name as its first argument');
 
 sfConfig::set('sf_web_images_dir_name', 'static/img');

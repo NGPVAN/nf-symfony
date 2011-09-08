@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
 include_once 'phing/Task.php';
 
 /**
@@ -31,16 +31,16 @@ include_once 'phing/Task.php';
  */
 
 class EchoTask extends Task {
-	
+
     protected $msg = "";
-    
+
     protected $file = "";
-    
+
     protected $append = false;
-    
+
     protected $level = "info";
 
-    function main() {		
+    function main() {
 		switch ($this->level)
 		{
 			case "error": $loglevel = Project::MSG_ERR; break;
@@ -49,7 +49,7 @@ class EchoTask extends Task {
 			case "verbose": $loglevel = Project::MSG_VERBOSE; break;
 			case "debug": $loglevel = Project::MSG_DEBUG; break;
 		}
-		
+
 		if (empty($this->file))
 		{
         	$this->log($this->msg, $loglevel);
@@ -64,13 +64,13 @@ class EchoTask extends Task {
 			{
 				$handle = fopen($this->file, "w");
 			}
-			
+
 			fwrite($handle, $this->msg);
-			
+
 			fclose($handle);
 		}
     }
-    
+
     /** setter for file */
     function setFile($file)
     {
@@ -98,7 +98,7 @@ class EchoTask extends Task {
     function setMessage($msg) {
         $this->msg = (string) $msg;
     }
-    
+
     /** Supporting the <echo>Message</echo> syntax. */
     function addText($msg)
     {

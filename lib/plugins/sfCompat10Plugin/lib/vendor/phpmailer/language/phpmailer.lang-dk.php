@@ -1,6 +1,6 @@
 <?php
 /**
- * PHPMailer language file.  
+ * PHPMailer language file.
  * Danish Version
  * Author: Mikael Stokkebro <info@stokkebro.dk>
  */

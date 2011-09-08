@@ -25,7 +25,7 @@ include_once 'phing/types/selectors/BaseExtendSelector.php';
 /**
  * Selector that filters files based on whether they contain a
  * particular string.
- * 
+ *
  * @author Hans Lellelid <hans@xmpl.org> (Phing)
  * @author Bruce Atherton <bruce@callenish.com> (Ant)
  * @package phing.types.selectors
@@ -88,7 +88,7 @@ class ContainsSelector extends BaseExtendSelector {
                         break;
                     default:
                         $this->setError("Invalid parameter " . $paramname);
-                }                
+                }
             } // for each param
         } // if params
     }
@@ -125,10 +125,10 @@ class ContainsSelector extends BaseExtendSelector {
         if (!$this->casesensitive) {
             $userstr = strtolower($this->contains);
         }
-        
+
         $in = null;
         try {
-            $in = new BufferedReader(new FileReader($file));        
+            $in = new BufferedReader(new FileReader($file));
             $teststr = $in->readLine();
             while ($teststr !== null) {
                 if (!$this->casesensitive) {
@@ -144,8 +144,7 @@ class ContainsSelector extends BaseExtendSelector {
             if ($in) $in->close();
             throw new BuildException("Could not read file " . $filename);
         }
-        $in->close();                
+        $in->close();
     }
 
 }
-

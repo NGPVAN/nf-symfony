@@ -16,31 +16,31 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information please see
- * <http://phing.info>. 
+ * <http://phing.info>.
  */
 
 /**
  * Wrapper class for PHP stream that supports read operations.
- * 
+ *
  * @package   phing.system.io
  */
 class InputStream {
-	
+
 	/**
 	 * @var resource The attached PHP stream.
 	 */
 	protected $stream;
-	
+
 	/**
 	 * @var int Position of stream cursor.
 	 */
     protected $currentPosition = 0;
-    
+
     /**
      * @var int Marked position of stream cursor.
      */
     protected $mark = 0;
-	
+
 	/**
      * Construct a new InputStream.
      * @param resource $stream Configured PHP stream for writing.
@@ -72,18 +72,18 @@ class InputStream {
 
         return $skipped;
     }
-    
+
     /**
      * Read data from stream until $len chars or EOF.
      * @param int $len Num chars to read.  If not specified this stream will read until EOF.
      * @return string chars read or -1 if eof.
      */
     public function read($len = null) {
-    	
+
         if ($this->eof()) {
             return -1;
         }
-        
+
         if ($len === null) { // we want to keep reading until we get an eof
 			$out = "";
         	while(!$this->eof()) {
@@ -96,8 +96,8 @@ class InputStream {
         }
 
         return $out;
-    }    
-    
+    }
+
     /**
      * Marks the current position in this input stream.
      * @throws IOException - if the underlying stream doesn't support this method.
@@ -108,7 +108,7 @@ class InputStream {
     	}
         $this->mark = $this->currentPosition;
     }
-    
+
     /**
      * Whether the input stream supports mark and reset methods.
      * @return boolean
@@ -116,7 +116,7 @@ class InputStream {
     public function markSupported() {
     	return false;
     }
-    
+
     /**
      * Repositions this stream to the position at the time the mark method was last called on this input stream.
      * @throws IOException - if the underlying stream doesn't support this method.
@@ -129,7 +129,7 @@ class InputStream {
         fseek($this->stream, SEEK_SET, $this->mark);
         $this->mark = 0;
     }
-	
+
     /**
      * Closes stream.
      * @throws IOException if stream cannot be closed (note that calling close() on an already-closed stream will not raise an exception)
@@ -145,7 +145,7 @@ class InputStream {
         }
         $this->stream = null;
     }
-    
+
     /**
      * Whether eof has been reached with stream.
      * @return boolean
@@ -153,7 +153,7 @@ class InputStream {
     public function eof() {
         return feof($this->stream);
     }
-     
+
     /**
      * Reads a entire until EOF and places contents in passed-in variable.  Stream is closed after read.
      *
@@ -167,7 +167,7 @@ class InputStream {
 		$rBuffer = $this->read();
 		$this->close();
     }
-    
+
     /**
      * Returns string representation of attached stream.
      * @return string

@@ -35,22 +35,22 @@ include_once 'phing/lib/Zip.php';
  * @since     2.1.0
  */
 class ZipTask extends MatchingTask {
-    
+
 	/**
 	 * @var PhingFile
 	 */
     private $zipFile;
-    
+
     /**
      * @var PhingFile
      */
     private $baseDir;
-	
+
     /**
      * Whether to include empty dirs in the archive.
      */
     private $includeEmpty = true;
-    
+
     private $filesets = array();
     private $fileSetFiles = array();
 
@@ -89,13 +89,13 @@ class ZipTask extends MatchingTask {
     function setIncludeEmptyDirs($bool) {
         $this->includeEmpty = (boolean) $bool;
     }
-    
+
     /**
      * do the work
      * @throws BuildException
      */
     public function main() {
-    
+
         if ($this->zipFile === null) {
             throw new BuildException("zipfile attribute must be set!", $this->getLocation());
         }
@@ -111,13 +111,13 @@ class ZipTask extends MatchingTask {
         // shouldn't need to clone, since the entries in filesets
         // themselves won't be modified -- only elements will be added
         $savedFileSets = $this->filesets;
-        
+
         try {
             if ($this->baseDir !== null) {
                 if (!$this->baseDir->exists()) {
                     throw new BuildException("basedir does not exist!", $this->getLocation());
                 }
-                
+
                 if (empty($this->filesets))
                 {
 	                // add the main fileset to the list of filesets to process.
@@ -131,8 +131,8 @@ class ZipTask extends MatchingTask {
                 throw new BuildException("You must supply either a basedir "
                                          . "attribute or some nested filesets.",
                                          $this->getLocation());
-            }                        
-            
+            }
+
             // check if zip is out of date with respect to each
             // fileset
             $upToDate = true;
@@ -147,42 +147,42 @@ class ZipTask extends MatchingTask {
                     }
                 }
             }
-            
+
             if ($upToDate) {
                 $this->log("Nothing to do: " . $this->zipFile->__toString() . " is up to date.", Project::MSG_INFO);
                 return;
             }
 
             $this->log("Building zip: " . $this->zipFile->__toString(), Project::MSG_INFO);
-            
+
             $zip = new Archive_Zip($this->zipFile->getAbsolutePath());
-            
+
             foreach($this->filesets as $fs) {
-            	
+
             	$files = $fs->getFiles($this->project, $this->includeEmpty);
-            	
+
                 $fsBasedir = (null != $this->baseDir) ? $this->baseDir :
 									$fs->getDir($this->project);
-                
+
                 $filesToZip = array();
                 for ($i=0, $fcount=count($files); $i < $fcount; $i++) {
                     $f = new PhingFile($fsBasedir, $files[$i]);
                     $filesToZip[] = $f->getAbsolutePath();
-                    $this->log("Adding " . $f->getPath() . " to archive.", Project::MSG_VERBOSE);                        
+                    $this->log("Adding " . $f->getPath() . " to archive.", Project::MSG_VERBOSE);
                 }
                 $zip->add($filesToZip, array('remove_path' => $fsBasedir->getCanonicalPath()));
             }
-                         
-                
+
+
         } catch (IOException $ioe) {
                 $msg = "Problem creating ZIP: " . $ioe->getMessage();
                 $this->filesets = $savedFileSets;
                 throw new BuildException($msg, $ioe, $this->getLocation());
         }
-        
+
         $this->filesets = $savedFileSets;
     }
-           
+
     /**
      * @param array $files array of filenames
      * @param PhingFile $dir
@@ -194,7 +194,7 @@ class ZipTask extends MatchingTask {
         $mm->setTo($this->zipFile->getAbsolutePath());
         return count($sfs->restrict($files, $dir, null, $mm)) == 0;
     }
-   
+
 }
 
 
@@ -202,10 +202,10 @@ class ZipTask extends MatchingTask {
 
 /**
  * This is a FileSet with the to specify permissions.
- * 
+ *
  * Permissions are currently not implemented by PEAR Archive_Tar,
  * but hopefully they will be in the future.
- * 
+ *
  */
 class ZipFileSet extends FileSet {
 
@@ -217,22 +217,22 @@ class ZipFileSet extends FileSet {
      *    the baseDir for the project.
      */
     public function getFiles(Project $p, $includeEmpty = true) {
-    
+
         if ($this->files === null) {
-        
+
             $ds = $this->getDirectoryScanner($p);
             $this->files = $ds->getIncludedFiles();
-            
+
             if ($includeEmpty) {
-            
+
 	            // first any empty directories that will not be implicitly added by any of the files
 				$implicitDirs = array();
 				foreach($this->files as $file) {
 					$implicitDirs[] = dirname($file);
-				} 
-				
+				}
+
 				$incDirs = $ds->getIncludedDirectories();
-				
+
 				// we'll need to add to that list of implicit dirs any directories
 				// that contain other *directories* (and not files), since otherwise
 				// we get duplicate directories in the resulting tar
@@ -243,12 +243,12 @@ class ZipFileSet extends FileSet {
 						}
 					}
 				}
-				
+
 				$implicitDirs = array_unique($implicitDirs);
-				
+
 				// Now add any empty dirs (dirs not covered by the implicit dirs)
-				// to the files array. 
-				
+				// to the files array.
+
 				foreach($incDirs as $dir) { // we cannot simply use array_diff() since we want to disregard empty/. dirs
 					if ($dir != "" && $dir != "." && !in_array($dir, $implicitDirs)) {
 						// it's an empty dir, so we'll add it.
@@ -256,9 +256,9 @@ class ZipFileSet extends FileSet {
 					}
 				}
 			} // if $includeEmpty
-			
+
         } // if ($this->files===null)
-        
+
         return $this->files;
     }
 

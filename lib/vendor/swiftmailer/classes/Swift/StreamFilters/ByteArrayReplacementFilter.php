@@ -34,7 +34,7 @@ class Swift_StreamFilters_ByteArrayReplacementFilter
 
   /**  Gives the size of the largest search */
   private $_treeMaxLen = 0;
-  
+
   private $_repSize;
 
   /**
@@ -49,7 +49,7 @@ class Swift_StreamFilters_ByteArrayReplacementFilter
     $this->_tree = array();
     $this->_replace = array();
     $this->_repSize = array();
-    
+
     $tree = null;
     $i = null;
     $last_size = $size = 0;
@@ -130,7 +130,7 @@ class Swift_StreamFilters_ByteArrayReplacementFilter
     {
       return $buffer;
     }
-    
+
     $newBuffer = array();
     $buf_size = count($buffer);
     for ($i = 0; $i < $buf_size; ++$i)
@@ -168,7 +168,7 @@ class Swift_StreamFilters_ByteArrayReplacementFilter
           {
             $newBuffer[] = $buffer[$i];
           }
-          
+
           // We start the next loop
           continue 2;
         }
@@ -181,7 +181,7 @@ class Swift_StreamFilters_ByteArrayReplacementFilter
       // Normal byte, move it to output buffer
       $newBuffer[] = $buffer[$i];
     }
-    
+
     return $newBuffer;
   }
 

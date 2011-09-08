@@ -25,7 +25,7 @@ include_once 'phing/types/Commandline.php';
 
 /**
  * Task for performing CVS operations.
- * 
+ *
  *  NOTE: This implementation has been moved here from Cvs.java with
  *  the addition of some accessors for extensibility.  Another task
  *  can extend this with some customized output processing.
@@ -40,16 +40,16 @@ include_once 'phing/types/Commandline.php';
  */
 class CvsTask extends Task {
 
-    /** 
+    /**
      * Default compression level to use, if compression is enabled via
-     * setCompression( true ). 
+     * setCompression( true ).
      */
     const DEFAULT_COMPRESSION_LEVEL = 3;
 
     private $cmd;
 
-    /** 
-     * List of Commandline children 
+    /**
+     * List of Commandline children
      * @var array Commandline[]
      */
     private $commandlines = array();
@@ -73,7 +73,7 @@ class CvsTask extends Task {
      * the default command.
      */
     private static $default_command = "checkout";
-    
+
     /**
      * the CVS command to execute.
      */
@@ -110,42 +110,42 @@ class CvsTask extends Task {
      * @var File
      */
     private $dest;
-   
+
     private $error;
-    
+
     private $output;
-   
+
     /**
      * If true it will stop the build if cvs exits with error.
      * Default is false. (Iulian)
      * @var boolean
      */
     private $failOnError = false;
-  
+
     public function init() {
         $this->cmd = new Commandline();
     }
-    
+
     /**
      * Sets up the environment for toExecute and then runs it.
      * @param Commandline $toExecute
      * @throws BuildException
      */
     protected function runCommand(Commandline $toExecute) {
-    
+
         // We are putting variables into the script's environment
-        // and not removing them (!)  This should be fine, but is 
+        // and not removing them (!)  This should be fine, but is
         // worth remembering and testing.
-            
+
         if ($this->port > 0) {
             putenv("CVS_CLIENT_PORT=".$this->port);
         }
-        
+
          // Need a better cross platform integration with <cvspass>, so
          // use the same filename.
 
         if ($this->passFile === null) {
-            $defaultPassFile = new PhingFile(Phing::getProperty("cygwin.user.home", Phing::getProperty("user.home")) 
+            $defaultPassFile = new PhingFile(Phing::getProperty("cygwin.user.home", Phing::getProperty("user.home"))
                 . DIRECTORY_SEPARATOR . ".cvspass");
             if($defaultPassFile->exists()) {
                 $this->setPassfile($defaultPassFile);
@@ -153,14 +153,14 @@ class CvsTask extends Task {
         }
 
         if ($this->passFile !== null) {
-            if ($this->passFile->isFile() && $this->passFile->canRead()) {            
+            if ($this->passFile->isFile() && $this->passFile->canRead()) {
                 putenv("CVS_PASSFILE=" . $this->passFile->__toString());
                 $this->log("Using cvs passfile: " . $this->passFile->__toString(), Project::MSG_INFO);
             } elseif (!$this->passFile->canRead()) {
-                $this->log("cvs passfile: " . $this->passFile->__toString() 
+                $this->log("cvs passfile: " . $this->passFile->__toString()
                     . " ignored as it is not readable", Project::MSG_WARN);
             } else {
-                $this->log("cvs passfile: " . $this->passFile->__toString() 
+                $this->log("cvs passfile: " . $this->passFile->__toString()
                     . " ignored as it is not a file",
                     Project::MSG_WARN);
             }
@@ -170,10 +170,10 @@ class CvsTask extends Task {
             putenv("CVS_RSH=".$this->cvsRsh);
         }
 
-        // Use the ExecTask to handle execution of the command        
+        // Use the ExecTask to handle execution of the command
         $exe = new ExecTask($this->project);
         $exe->setProject($this->project);
-        
+
         //exe.setAntRun(project);
         if ($this->dest === null) {
             $this->dest = $this->project->getBaseDir();
@@ -182,7 +182,7 @@ class CvsTask extends Task {
         if (!$this->dest->exists()) {
             $this->dest->mkdirs();
         }
-        
+
         if ($this->output !== null) {
             $exe->setOutput($this->output);
         }
@@ -190,15 +190,15 @@ class CvsTask extends Task {
         if ($this->error !== null) {
             $exe->setError($this->error);
         }
-        
+
         $exe->setDir($this->dest);
-        
+
         if (is_object($toExecute)) {
             $toExecuteStr = $toExecute->__toString(); // unfortunately no more automagic for initial 5.0.0 release :(
         }
-        
+
         $exe->setCommand($toExecuteStr);
-        
+
         try {
             $actualCommandLine = $toExecuteStr; // we converted to string above
             $this->log($actualCommandLine, Project::MSG_INFO);
@@ -207,7 +207,7 @@ class CvsTask extends Task {
             /*Throw an exception if cvs exited with error. (Iulian)*/
             if ($this->failOnError && $retCode !== 0) {
                 throw new BuildException("cvs exited with error code "
-                                         . $retCode 
+                                         . $retCode
                                          . PHP_EOL
                                          . "Command line was ["
                                          . $toExecute->describeCommand() . "]", $this->getLocation());
@@ -238,7 +238,7 @@ class CvsTask extends Task {
     }
 
     /**
-     * 
+     *
      * @return void
      * @throws BuildException
      */
@@ -263,13 +263,13 @@ class CvsTask extends Task {
             for ($i = 0, $vecsize=count($this->commandlines); $i < $vecsize; $i++) {
                 $this->runCommand($this->commandlines[$i]);
             }
-            
+
             // finally    {
             if ($cloned !== null) {
                 $this->removeCommandline($cloned);
             }
             $this->setCommand($savedCommand);
-            
+
         } catch (Exception $e) {
             // finally {
             if ($cloned !== null) {
@@ -345,7 +345,7 @@ class CvsTask extends Task {
     public function setPassfile(PhingFile $passFile) {
         $this->passFile = $passFile;
     }
-    
+
     /**
      * @return File
      */
@@ -417,7 +417,7 @@ class CvsTask extends Task {
     public function setCommand($c) {
         $this->command = $c;
     }
-    
+
     public function getCommand() {
         return $this->command;
     }
@@ -458,7 +458,7 @@ class CvsTask extends Task {
             return;
         }
         $c->setExecutable("cvs");
-        
+
         if ($this->cvsModule !== null) {
             $c->createArgument()->setLine($this->cvsModule);
         }
@@ -491,7 +491,7 @@ class CvsTask extends Task {
     */
     public function addConfiguredCommandline(Commandline $c, $insertAtStart = false) {
         if ($c === null) {
-            return; 
+            return;
         }
         $this->configureCommandline($c);
         if ($insertAtStart) {
@@ -517,7 +517,7 @@ class CvsTask extends Task {
      * level, AbstractCvsTask.DEFAULT_COMPRESSION_LEVEL.
      */
     public function setCompression($usecomp) {
-        $this->setCompressionLevel($usecomp ? 
+        $this->setCompressionLevel($usecomp ?
                             self::DEFAULT_COMPRESSION_LEVEL : 0);
     }
 
@@ -528,7 +528,7 @@ class CvsTask extends Task {
     function setOutput(PhingFile $f) {
         $this->output = $f;
     }
-    
+
     /**
      * File to which error output should be written.
      * @param PhingFile $output

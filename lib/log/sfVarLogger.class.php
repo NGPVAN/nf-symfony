@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -53,7 +53,7 @@ class sfVarLogger extends sfLogger
    * Each log entry has the following attributes:
    *
    *  * priority
-   *  * time   
+   *  * time
    *  * message
    *  * type
    *  * debugStack
@@ -159,7 +159,7 @@ class sfVarLogger extends sfLogger
    * Returns the debug stack.
    *
    * @return array
-   * 
+   *
    * @see debug_backtrace()
    */
   protected function getDebugBacktrace()
@@ -195,7 +195,7 @@ class sfVarLogger extends sfLogger
    * Returns the xdebug stack.
    *
    * @return array The xdebug stack as an array
-   * 
+   *
    * @deprecated Use {@link getDebugBacktrace()} instead. Will be removed in symfony 1.4.
    */
   protected function getXDebugStack()

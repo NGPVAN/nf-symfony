@@ -315,7 +315,7 @@ abstract class OMBuilder extends DataModelBuilder {
 
 		return $relCol;
 	}
-	
+
 	/**
 	 * Whether to add the include statements.
 	 * This is based on the build property propel.addIncludes
@@ -324,7 +324,7 @@ abstract class OMBuilder extends DataModelBuilder {
 	{
 		return $this->getBuildProperty('addIncludes');
 	}
-	
+
 	/**
    * Checks whether any registered behavior on that table has a modifier for a hook
    * @param string $hookName The name of the hook as called from one of this class methods, e.g. "preSave"
@@ -335,7 +335,7 @@ abstract class OMBuilder extends DataModelBuilder {
   {
     $modifierGetter = 'get' . $modifier;
     foreach ($this->getTable()->getBehaviors() as $behavior) {
-      if(method_exists($behavior->$modifierGetter(), $hookName)) { 
+      if(method_exists($behavior->$modifierGetter(), $hookName)) {
         return true;
       }
     }
@@ -360,7 +360,7 @@ abstract class OMBuilder extends DataModelBuilder {
         } else {
           // regular hook: the behavior returns a string to append to the script string
           $script .= "\n" . $tab . '// ' . $behavior->getName() . " behavior\n";
-          $script .= preg_replace('/^/m', $tab, $modifier->$hookName());           
+          $script .= preg_replace('/^/m', $tab, $modifier->$hookName());
          }
       }
     }

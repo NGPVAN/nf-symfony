@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
 require_once 'phing/Task.php';
 require_once 'phing/tasks/ext/dbdeploy/DbmsSyntaxFactory.php';
 
@@ -26,15 +26,15 @@ require_once 'phing/tasks/ext/dbdeploy/DbmsSyntaxFactory.php';
 /**
  *  Generate SQL script for db using dbdeploy schema version table and delta scripts
  *
- *  <dbdeploy url="mysql:host=localhost;dbname=test" userid="dbdeploy" password="dbdeploy" dir="db" outputfile=""> 
- * 
+ *  <dbdeploy url="mysql:host=localhost;dbname=test" userid="dbdeploy" password="dbdeploy" dir="db" outputfile="">
+ *
  *  @author   Luke Crouch at SourceForge (http://sourceforge.net)
  *  @version  $Revision: 1.1 $
  *  @package  phing.tasks.ext.dbdeploy
  */
 
 class DbDeployTask extends Task {
-	
+
 	public static $TABLE_NAME = 'changelog';
 
 	protected $url;
@@ -46,35 +46,35 @@ class DbDeployTask extends Task {
 	protected $deltaSet = 'Main';
 	protected $lastChangeToApply = 999;
 	protected $dbmsSyntax = null;
-	
+
     function main() {
     	try{
     		// get correct DbmsSyntax object
     		$dbms = substr($this->url, 0, strpos($this->url, ':'));
     		$dbmsSyntaxFactory = new DbmsSyntaxFactory($dbms);
     		$this->dbmsSyntax = $dbmsSyntaxFactory->getDbmsSyntax();
-    		
+
 			// open file handles for output
     		$outputFileHandle = fopen($this->outputFile, "w+");
     		$undoOutputFileHandle = fopen($this->undoOutputFile, "w+");
-    		
+
     		// figure out which revisions are in the db already
 			$this->appliedChangeNumbers = $this->getAppliedChangeNumbers();
 			$this->log('Current db revision: ' . $this->getLastChangeAppliedInDb());
-			
+
 			// generate sql file needed to take db to "lastChangeToApply" version
 			$doSql = $this->doDeploy();
 			$undoSql = $this->undoDeploy();
-			
+
 			// write the do and undo SQL to their respective files
 			fwrite($outputFileHandle, $doSql);
 			fwrite($undoOutputFileHandle, $undoSql);
-			
+
     	} catch (Exception $e){
     		throw new BuildException($e);
     	}
     }
-	
+
     function getAppliedChangeNumbers(){
     	if(count($this->appliedChangeNumbers) == 0){
 	        $this->log('Getting applied changed numbers from DB: ' . $this->url );
@@ -89,14 +89,14 @@ class DbDeployTask extends Task {
     	}
     	return $this->appliedChangeNumbers;
     }
-    
+
     function getLastChangeAppliedInDb(){
     	return (count($this->appliedChangeNumbers) > 0) ? max($this->appliedChangeNumbers) : 0;
     }
 
     function doDeploy(){
     	$sqlToPerformDeploy = '';
-    	$lastChangeAppliedInDb = $this->getLastChangeAppliedInDb();    	
+    	$lastChangeAppliedInDb = $this->getLastChangeAppliedInDb();
     	$files = $this->getDeltasFilesArray();
     	ksort($files);
     	foreach($files as $fileChangeNumber=>$fileName){
@@ -115,10 +115,10 @@ class DbDeployTask extends Task {
     	}
 		return $sqlToPerformDeploy;
     }
-    
+
     function undoDeploy(){
     	$sqlToPerformUndo = '';
-    	$lastChangeAppliedInDb = $this->getLastChangeAppliedInDb();    	
+    	$lastChangeAppliedInDb = $this->getLastChangeAppliedInDb();
     	$files = $this->getDeltasFilesArray();
     	krsort($files);
     	foreach($files as $fileChangeNumber=>$fileName){
@@ -134,7 +134,7 @@ class DbDeployTask extends Task {
     	}
 		return $sqlToPerformUndo;
     }
-    
+
    function getDeltasFilesArray(){
     	$baseDir = realpath($this->dir);
     	$dh = opendir($baseDir);
@@ -146,15 +146,15 @@ class DbDeployTask extends Task {
     	}
     	return $files;
     }
-    
+
 	function setUrl($url){
 		$this->url = $url;
 	}
-	
+
 	function setUserId($userid){
 		$this->userid = $userid;
 	}
-	
+
 	function setPassword($password){
 		$this->password = $password;
 	}
@@ -170,7 +170,7 @@ class DbDeployTask extends Task {
 	function setUndoOutputFile($undoOutputFile){
 		$this->undoOutputFile = $undoOutputFile;
 	}
-	
+
 	function setLastChangeToApply($lastChangeToApply){
 		$this->lastChangeToApply = $lastChangeToApply;
 	}
@@ -178,7 +178,7 @@ class DbDeployTask extends Task {
 	function setDeltaSet($deltaSet){
 		$this->deltaSet = $deltaSet;
 	}
-	
+
     /**
      * Add a new fileset.
      * @return FileSet
@@ -189,4 +189,3 @@ class DbDeployTask extends Task {
         return $this->fileset;
     }
 }
-

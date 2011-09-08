@@ -313,7 +313,7 @@ class Phing {
 
 		// 3) Finally, cycle through to parse remaining args
 		//
-		$keys = array_keys($args); // Use keys and iterate to max(keys) since there may be some gaps		
+		$keys = array_keys($args); // Use keys and iterate to max(keys) since there may be some gaps
 		$max = $keys ? max($keys) : -1;
 		for($i=0; $i <= $max; $i++) {
 

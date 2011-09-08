@@ -19,7 +19,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
 include_once 'phing/util/StringHelper.php';
 
 /**
@@ -112,7 +112,7 @@ class SelectorUtils {
             return true;
         }
     }
-    
+
     /**
      * Tests whether or not a given path matches a given pattern.
      *
@@ -127,7 +127,7 @@ class SelectorUtils {
      *         or <code>false</code> otherwise.
      */
     public static function matchPath($pattern, $str, $isCaseSensitive = true) {
-    
+
         // When str starts with a DIRECTORY_SEPARATOR, pattern has to start with a
         // DIRECTORY_SEPARATOR.
         // When pattern starts with a DIRECTORY_SEPARATOR, str has to start with a
@@ -144,7 +144,7 @@ class SelectorUtils {
         $patIdxEnd   = count($patDirs)-1;
         $strIdxStart = 0;
         $strIdxEnd   = count($strDirs)-1;
-        
+
         // up to first '**'
         while ($patIdxStart <= $patIdxEnd && $strIdxStart <= $strIdxEnd) {
             $patDir = $patDirs[$patIdxStart];
@@ -182,7 +182,7 @@ class SelectorUtils {
             $patIdxEnd--;
             $strIdxEnd--;
         }
-        
+
         if ($strIdxStart > $strIdxEnd) {
             // String is exhausted
             for ($i = $patIdxStart; $i <= $patIdxEnd; $i++) {
@@ -213,14 +213,14 @@ class SelectorUtils {
             $foundIdx  = -1;
 
             //strLoop:    (start of outer loop)
-            for ($i=0; $i <= $strLength - $patLength; $i++) {                
+            for ($i=0; $i <= $strLength - $patLength; $i++) {
                 for ($j = 0; $j < $patLength; $j++) {
                     $subPat = $patDirs[$patIdxStart+$j+1];
                     $subStr = $strDirs[$strIdxStart+$i+$j];
                     if (!self::match($subPat, $subStr, $isCaseSensitive)) {
                         continue 2; // continue up two levels (to strLoop:)
                     }
-                }                                
+                }
                 $foundIdx = $strIdxStart+$i; // only reached if all sub patterns matched
                 break;
             }
@@ -260,14 +260,14 @@ class SelectorUtils {
      *         or <code>false</code> otherwise.
      */
     public static function match($pattern, $str, $isCaseSensitive = true) {
-    
+
         $patArr = StringHelper::toCharArray($pattern);
         $strArr = StringHelper::toCharArray($str);
         $patIdxStart = 0;
         $patIdxEnd   = count($patArr)-1;
         $strIdxStart = 0;
         $strIdxEnd   = count($strArr)-1;
-        
+
         $containsStar = false;
         for ($i = 0, $size=count($patArr); $i < $size; $i++) {
             if ($patArr[$i] == '*') {
@@ -314,7 +314,7 @@ class SelectorUtils {
             $patIdxStart++;
             $strIdxStart++;
         }
-        
+
         if ($strIdxStart > $strIdxEnd) {
             // All characters in the string are used. Check if only '*'s are
             // left in the pattern. If so, we succeeded. Otherwise failure.
@@ -371,7 +371,7 @@ class SelectorUtils {
             $patLength = ($patIdxTmp - $patIdxStart - 1);
             $strLength = ($strIdxEnd - $strIdxStart + 1);
             $foundIdx  = -1;
-            
+
             //strLoop:
             for ($i = 0; $i <= $strLength - $patLength; $i++) {
                 for ($j = 0; $j < $patLength; $j++) {
@@ -437,4 +437,3 @@ class SelectorUtils {
     }
 
 }
-

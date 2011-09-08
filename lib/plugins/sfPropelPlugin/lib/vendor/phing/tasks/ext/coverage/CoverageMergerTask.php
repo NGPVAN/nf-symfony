@@ -63,30 +63,29 @@ class CoverageMergerTask extends Task
 			$ds->scan();
 
 			$includedFiles = $ds->getIncludedFiles();
-			
+
 			foreach ($includedFiles as $file)
 			{
 				$fs = new PhingFile(basename($ds->getBaseDir()), $file);
-					
+
 				$files[] = $fs->getAbsolutePath();
 			}
 		}
 
 		return $files;
 	}
-	
+
 	function main()
 	{
 		$files = $this->getFilenames();
-		
+
 		$this->log("Merging " . count($files) . " coverage files");
 
 		foreach ($files as $file)
 		{
 			$coverageInformation = unserialize(file_get_contents($file));
-			
+
 			CoverageMerger::merge($this->project, array($coverageInformation));
 		}
 	}
 }
-

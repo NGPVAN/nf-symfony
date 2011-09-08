@@ -22,7 +22,7 @@
 require_once 'phing/system/io/PhingFile.php';
 
 /**
- * Abstract 
+ * Abstract
  *
  * @author Hans Lellelid <hans@xmpl.org>
  * @package phing.tasks.ext.pdo

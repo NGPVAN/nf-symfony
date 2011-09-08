@@ -25,10 +25,10 @@ class Swift_Plugins_BlackholePlugin
   {
     $evt->cancelBubble();
   }
-  
+
   /**
    * Invoked immediately after the Message is sent.
-   * 
+   *
    * @param Swift_Events_SendEvent $evt
    */
   public function sendPerformed(Swift_Events_SendEvent $evt)

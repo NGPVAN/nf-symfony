@@ -66,7 +66,7 @@ class PhingFilterReader extends DataType {
     function createClasspath() {
         if ( $this->isReference() ) {
             throw $this->noChildrenAllowed();
-        }        
+        }
         if ( $this->classPath === null ) {
             $this->classPath = new Path($this->project);
         }
@@ -84,7 +84,7 @@ class PhingFilterReader extends DataType {
         $o = $this->createClasspath();
         $o->setRefid($r);
     }
-	
+
 	function addParam(Parameter $param) {
 		$this->parameters[] = $param;
 	}
@@ -93,7 +93,7 @@ class PhingFilterReader extends DataType {
         $num = array_push($this->parameters, new Parameter());
         return $this->parameters[$num-1];
     }
-		
+
     function getParams() {
         // We return a COPY
         $ret = array();
@@ -104,7 +104,7 @@ class PhingFilterReader extends DataType {
     }
 
     /*
-     * Makes this instance in effect a reference to another PhingFilterReader 
+     * Makes this instance in effect a reference to another PhingFilterReader
      * instance.
      *
      * <p>You must not set another attribute or nest elements inside
@@ -132,5 +132,3 @@ class PhingFilterReader extends DataType {
         parent::setRefid($r);
     }
 }
-
-

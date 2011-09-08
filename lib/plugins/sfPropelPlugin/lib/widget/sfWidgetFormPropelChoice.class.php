@@ -37,7 +37,7 @@ class sfWidgetFormPropelChoice extends sfWidgetFormChoice
    *  * add_empty:   Whether to add a first empty value or not (false by default)
    *                 If the option is not a Boolean, the value will be used as the text value
    *  * method:      The method to use to display object values (__toString by default)
-   *  * key_method:  The method to use to display the object keys (getPrimaryKey by default) 
+   *  * key_method:  The method to use to display the object keys (getPrimaryKey by default)
    *  * order_by:    An array composed of two fields:
    *                   * The column to order by the results (must be in the PhpName format)
    *                   * asc or desc

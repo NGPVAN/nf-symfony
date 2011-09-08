@@ -1,5 +1,5 @@
 <?php
-class zTask extends sfPropelBaseTask 
+class zTask extends sfPropelBaseTask
 {
   public function configure()
   {

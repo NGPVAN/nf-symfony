@@ -53,7 +53,7 @@ class AndSelector extends BaseSelectorContainer {
      */
     public function isSelected(PhingFile $basedir, $filename, PhingFile $file) {
         $this->validate();
-        $selectors = $this->selectorElements();       
+        $selectors = $this->selectorElements();
            for($i=0,$size=count($selectors); $i < $size; $i++) {
             $result = $selectors[$i]->isSelected($basedir, $filename, $file);
             if (!$result) {
@@ -64,4 +64,3 @@ class AndSelector extends BaseSelectorContainer {
     }
 
 }
-

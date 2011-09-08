@@ -208,7 +208,7 @@ class GeneratorConfig {
     $pluralizer = new $classname();
     return $pluralizer;
   }
-  
+
   /**
    * Gets a configured behavior class
    *
@@ -224,6 +224,6 @@ class GeneratorConfig {
       // class path not configured
       $ret = false;
     }
-    return $ret;    
+    return $ret;
   }
 }

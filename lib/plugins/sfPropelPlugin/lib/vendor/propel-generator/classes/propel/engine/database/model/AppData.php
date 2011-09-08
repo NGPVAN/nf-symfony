@@ -67,9 +67,9 @@ class AppData {
 	{
 		$this->platform = $platform;
 	}
-  
+
 	/**
-	 * Gets the platform object to use for any databases added to this application model. 
+	 * Gets the platform object to use for any databases added to this application model.
 	 *
 	 * @return Platform
 	 */
@@ -77,7 +77,7 @@ class AppData {
 	{
 	  return $this->platform;
 	}
-	
+
 	/**
 	 * Set the name of the database.
 	 *

@@ -155,10 +155,10 @@ abstract class BaseObject {
 	{
 		return true;
 	}
-	
+
 	/**
 	 * Code to be run after inserting to database
-	 * @param PropelPDO $con 
+	 * @param PropelPDO $con
 	 */
 	public function postInsert(PropelPDO $con = null) { }
 
@@ -193,7 +193,7 @@ abstract class BaseObject {
 	 * @param PropelPDO $con
 	 */
 	public function postDelete(PropelPDO $con = null) { }
-	
+
 	/**
 	 * Sets the modified state for the object to be false.
 	 * @param      string $col If supplied, only the specified column is reset.

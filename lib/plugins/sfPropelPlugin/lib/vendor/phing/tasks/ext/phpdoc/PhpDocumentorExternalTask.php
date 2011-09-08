@@ -24,7 +24,7 @@ require_once 'phing/tasks/ext/phpdoc/PhpDocumentorTask.php';
 
 /**
  * Task to run phpDocumentor with an external process
- * 
+ *
  * This classes uses the commandline phpdoc script to build documentation.
  * Use this task instead of the PhpDocumentorTask when you've a clash with the
  * Smarty libraries.
@@ -33,7 +33,7 @@ require_once 'phing/tasks/ext/phpdoc/PhpDocumentorTask.php';
  * @author Markus Fischer <markus@fischer.name>
  * @version $Id: PhpDocumentorExternalTask.php 352 2008-02-06 15:26:43Z mrook $
  * @package phing.tasks.ext.phpdoc
- */	
+ */
 class PhpDocumentorExternalTask extends PhpDocumentorTask
 {
 	/**
@@ -74,8 +74,8 @@ class PhpDocumentorExternalTask extends PhpDocumentorTask
 
     /**
      * Ignore symlinks to other files or directories.
-     * 
-     * @param  bool  $bSet 
+     *
+     * @param  bool  $bSet
      */
     public function setIgnoresymlinks($bSet) {
         $this->ignoresymlinks = $bSet;
@@ -97,7 +97,7 @@ class PhpDocumentorExternalTask extends PhpDocumentorTask
 		{
 			throw new BuildException("Could not execute phpDocumentor: " . implode(' ', $output));
 		}
-		
+
 		foreach($output as $line)
 		{
 			if(strpos($line, 'ERROR') !== false)
@@ -105,7 +105,7 @@ class PhpDocumentorExternalTask extends PhpDocumentorTask
 				$this->log($line, Project::MSG_ERR);
 				continue;
 			}
-			
+
 			$this->log($line, Project::MSG_VERBOSE);
 		}
 	}
@@ -149,7 +149,7 @@ class PhpDocumentorExternalTask extends PhpDocumentorTask
 
 		// append any files in filesets
 		$filesToParse = array();
-		foreach($this->filesets as $fs) {		    
+		foreach($this->filesets as $fs) {
 	        $files = $fs->getDirectoryScanner($this->project)->getIncludedFiles();
 	        foreach($files as $filename) {
 	        	 $f = new PhingFile($fs->getDir($this->project), $filename);
@@ -162,7 +162,7 @@ class PhpDocumentorExternalTask extends PhpDocumentorTask
 
 		// append any files in filesets
 		$ricFiles = array();
-		foreach($this->projDocFilesets as $fs) {		    
+		foreach($this->projDocFilesets as $fs) {
 	        $files = $fs->getDirectoryScanner($this->project)->getIncludedFiles();
 	        foreach($files as $filename) {
 	        	 $f = new PhingFile($fs->getDir($this->project), $filename);
@@ -256,6 +256,3 @@ class PhpDocumentorExternalTask extends PhpDocumentorTask
         }
     }
 };
-
-
-

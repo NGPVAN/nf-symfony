@@ -42,7 +42,7 @@ abstract class PDOTask extends Task {
      * Autocommit flag. Default value is false
      */
     private $autocommit = false;
-    
+
     /**
      * DB url.
      */
@@ -62,7 +62,7 @@ abstract class PDOTask extends Task {
      * RDBMS Product needed for this SQL.
      **/
     private $rdbms;
-   
+
       /**
      * Initialize CreoleTask.
      * This method includes any necessary Creole libraries and triggers
@@ -92,7 +92,7 @@ abstract class PDOTask extends Task {
     public function setUrl($url) {
         $this->url = $url;
     }
-        
+
     /**
      * Sets the password; required.
      * @param password The password to set
@@ -111,14 +111,14 @@ abstract class PDOTask extends Task {
     }
 
     /**
-     * Sets the version string, execute task only if 
+     * Sets the version string, execute task only if
      * rdbms version match; optional.
      * @param version The version to set
      */
     public function setVersion($version) {
         $this->version = $version;
     }
-       
+
     protected function getLoaderMap() {
         return self::$loaderMap;
     }
@@ -131,29 +131,29 @@ abstract class PDOTask extends Task {
      * @throws BuildException if the UserId/Password/Url is not set or there is no suitable driver or the driver fails to load.
      */
     protected function getConnection() {
-            
+
         if ($this->url === null) {
             throw new BuildException("Url attribute must be set!", $this->location);
         }
-                
+
         try {
 
             $this->log("Connecting to " . $this->getUrl(), Project::MSG_VERBOSE);
-            
+
             $user = null;
             $pass = null;
-				
+
             if ($this->userId) {
             	$user = $this->getUserId();
             }
-            
+
             if ($this->password) {
                 $pass = $this->getPassword();
-            }            
-            
+            }
+
             $conn = new PDO($this->getUrl(), $user, $pass);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
+
             if ($this->autocommit) {
             	try {
 					$conn->setAttribute(PDO::ATTR_AUTOCOMMIT, $this->autocommit);
@@ -161,9 +161,9 @@ abstract class PDOTask extends Task {
 					$this->log("Unable to enable auto-commit for this database: " . $pe->getMessage(), Project::MSG_WARN);
 				}
 			}
-            
+
             return $conn;
-            
+
         } catch (SQLException $e) {
             throw new BuildException($e->getMessage(), $this->location);
         }

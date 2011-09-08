@@ -50,7 +50,7 @@ class XmlLintTask extends Task {
   public function setSchema(PhingFile $schema) {
     $this->schema = $schema;
   }
-  
+
   /**
    * Nested creator, creates a FileSet for this task
    *
@@ -132,4 +132,3 @@ class XmlLintTask extends Task {
   }
 
 }
-

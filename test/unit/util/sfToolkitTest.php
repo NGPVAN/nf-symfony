@@ -302,4 +302,3 @@ catch (Exception $e)
 {
   $t->pass('::addIncludePath() throws an exception if position is not valid');
 }
-

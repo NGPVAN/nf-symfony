@@ -1,8 +1,8 @@
 <?php
 
 /*
- *  $Id: TailFilter.php 325 2007-12-20 15:44:58Z hans $  
- * 
+ *  $Id: TailFilter.php 325 2007-12-20 15:44:58Z hans $
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -49,33 +49,33 @@ class TailFilter extends BaseParamFilterReader implements ChainableReader {
      * @var string
      */
     const LINES_KEY = "lines";
-    
-    
+
+
     /**
      * Number of lines to be returned in the filtered stream.
      * @var integer
-     */ 
+     */
     private $_lines = 10;
-    
+
     /**
      * Array to hold lines.
      * @var array
-     */ 
+     */
     private    $_lineBuffer = array();
-                
+
     /**
      * Returns the last n lines of a file.
      * @param int $len Num chars to read.
      * @return mixed The filtered buffer or -1 if EOF.
      */
     function read($len = null) {
-    
+
         while ( ($buffer = $this->in->read($len)) !== -1 ) {
             // Remove the last "\n" from buffer for
             // prevent explode to add an empty cell at
             // the end of array
             $buffer= trim($buffer, "\n");
-            
+
             $lines = explode("\n", $buffer);
 
             if ( count($lines) >= $this->_lines ) {
@@ -103,7 +103,7 @@ class TailFilter extends BaseParamFilterReader implements ChainableReader {
 
     /**
      * Sets the number of lines to be returned in the filtered stream.
-     * 
+     *
      * @param integer $lines the number of lines to be returned in the filtered stream.
      */
     function setLines($lines) {
@@ -112,7 +112,7 @@ class TailFilter extends BaseParamFilterReader implements ChainableReader {
 
     /**
      * Returns the number of lines to be returned in the filtered stream.
-     * 
+     *
      * @return integer The number of lines to be returned in the filtered stream.
      */
     function getLines() {
@@ -122,10 +122,10 @@ class TailFilter extends BaseParamFilterReader implements ChainableReader {
     /**
      * Creates a new TailFilter using the passed in
      * Reader for instantiation.
-     * 
+     *
      * @param object A Reader object providing the underlying stream.
      *               Must not be <code>null</code>.
-     * 
+     *
      * @return object A new filter based on this configuration, but filtering
      *         the specified reader.
      */
@@ -133,7 +133,7 @@ class TailFilter extends BaseParamFilterReader implements ChainableReader {
         $newFilter = new TailFilter($reader);
         $newFilter->setLines($this->getLines());
         $newFilter->setInitialized(true);
-        $newFilter->setProject($this->getProject());        
+        $newFilter->setProject($this->getProject());
         return $newFilter;
     }
 
@@ -153,5 +153,3 @@ class TailFilter extends BaseParamFilterReader implements ChainableReader {
         }
     }
 }
-
-

@@ -244,11 +244,11 @@ class XmlToAppData extends AbstractHandler {
 		  		case "id-method-parameter":
 						$this->currTable->addIdMethodParameter($attributes);
 					break;
-          
+
 					case "behavior":
 					  $this->currBehavior = $this->currTable->addBehavior($attributes);
 					break;
-					
+
 					default:
 						$this->_throwInvalidTagException($name);
 				}

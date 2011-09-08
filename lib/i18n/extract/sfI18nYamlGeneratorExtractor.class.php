@@ -82,7 +82,7 @@ class sfI18nYamlGeneratorExtractor extends sfI18nYamlExtractor
         }
       }
     }
-  
+
     return $this->strings;
   }
 

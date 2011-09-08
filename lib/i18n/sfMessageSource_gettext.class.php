@@ -20,28 +20,28 @@
 
 /**
  * sfMessageSource_gettext class.
- * 
+ *
  * Using Gettext MO format as the message source for translation.
  * The gettext classes are based on PEAR's gettext MO and PO classes.
- * 
+ *
  * See the MessageSource::factory() method to instantiate this class.
- * 
+ *
  * @author Xiang Wei Zhuo <weizhuo[at]gmail[dot]com>
  * @version v1.0, last update on Fri Dec 24 16:18:44 EST 2004
  * @package    symfony
  * @subpackage i18n
  */
 class sfMessageSource_gettext extends sfMessageSource_File
-{ 
+{
   /**
    * Message data filename extension.
-   * @var string 
+   * @var string
    */
   protected $dataExt = '.mo';
 
   /**
    * PO data filename extension
-   * @var string 
+   * @var string
    */
   protected $poExt = '.po';
 
@@ -73,7 +73,7 @@ class sfMessageSource_gettext extends sfMessageSource_File
    * Gets the variant for a catalogue depending on the current culture.
    *
    * @param string $catalogue catalogue
-   * @return string the variant. 
+   * @return string the variant.
    * @see save()
    * @see update()
    * @see delete()
@@ -104,12 +104,12 @@ class sfMessageSource_gettext extends sfMessageSource_File
   }
 
   /**
-   * Saves the list of untranslated blocks to the translation source. 
+   * Saves the list of untranslated blocks to the translation source.
    * If the translation was not found, you should add those
    * strings to the translation source via the <b>append()</b> method.
    *
    * @param string $catalogue the catalogue to add to
-   * @return boolean true if saved successfuly, false otherwise.   
+   * @return boolean true if saved successfuly, false otherwise.
    */
   function save($catalogue = 'messages')
   {
@@ -144,7 +144,7 @@ class sfMessageSource_gettext extends sfMessageSource_File
     $strings = array();
     foreach ($messages as $message)
     {
-      $strings[$message] = ''; 
+      $strings[$message] = '';
     }
 
     // load the PO
@@ -189,7 +189,7 @@ class sfMessageSource_gettext extends sfMessageSource_File
    *
    * @param string $message   the source message to delete.
    * @param string $catalogue the catalogue to delete from.
-   * @return boolean true if deleted, false otherwise. 
+   * @return boolean true if deleted, false otherwise.
    */
   function delete($message, $catalogue = 'messages')
   {
@@ -215,7 +215,7 @@ class sfMessageSource_gettext extends sfMessageSource_File
 
     $po = TGettext::factory('PO', $POFile);
     $po->load();
-    $result = $po->toArray(); 
+    $result = $po->toArray();
 
     foreach ($result['strings'] as $string => $value)
     {

@@ -117,7 +117,7 @@ abstract class BaseSelectorContainer extends BaseSelector implements SelectorCon
             if ($o instanceof BaseSelector) {
                 $o->validate();
             }
-        }    
+        }
     }
 
     /* Methods below all add specific selectors */
@@ -256,7 +256,7 @@ abstract class BaseSelectorContainer extends BaseSelector implements SelectorCon
         $this->appendSelector($o);
         return $o;
     }
-    
+
     /**
      * add a type selector entry on the selector list
      */
@@ -265,6 +265,5 @@ abstract class BaseSelectorContainer extends BaseSelector implements SelectorCon
         $this->appendSelector($o);
         return $o;
     }
-    
-}
 
+}

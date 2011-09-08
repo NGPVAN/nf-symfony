@@ -20,42 +20,42 @@
  */
 class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
 {
-  
+
   /**
    * Authenticators available to process the request.
    * @var Swift_Transport_Esmtp_Authenticator[]
    * @access private
    */
   private $_authenticators = array();
-  
+
   /**
    * The username for authentication.
    * @var string
    * @access private
    */
   private $_username;
-  
+
   /**
    * The password for authentication.
    * @var string
    * @access private
    */
   private $_password;
-  
+
   /**
    * The auth mode for authentication.
    * @var string
    * @access private
    */
   private $_auth_mode;
-  
+
   /**
    * The ESMTP AUTH parameters available.
    * @var string[]
    * @access private
    */
   private $_esmtpParams = array();
-  
+
   /**
    * Create a new AuthHandler with $authenticators for support.
    * @param Swift_Transport_Esmtp_Authenticator[] $authenticators
@@ -64,7 +64,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     $this->setAuthenticators($authenticators);
   }
-  
+
   /**
    * Set the Authenticators which can process a login request.
    * @param Swift_Transport_Esmtp_Authenticator[] $authenticators
@@ -73,7 +73,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     $this->_authenticators = $authenticators;
   }
-  
+
   /**
    * Get the Authenticators which can process a login request.
    * @return Swift_Transport_Esmtp_Authenticator[]
@@ -82,7 +82,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     return $this->_authenticators;
   }
-  
+
   /**
    * Set the username to authenticate with.
    * @param string $username
@@ -91,7 +91,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     $this->_username = $username;
   }
-  
+
   /**
    * Get the username to authenticate with.
    * @return string
@@ -100,7 +100,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     return $this->_username;
   }
-  
+
   /**
    * Set the password to authenticate with.
    * @param string $password
@@ -109,7 +109,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     $this->_password = $password;
   }
-  
+
   /**
    * Get the password to authenticate with.
    * @return string
@@ -118,7 +118,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     return $this->_password;
   }
-  
+
   /**
    * Set the auth mode to use to authenticate.
    * @param string $mode
@@ -127,7 +127,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     $this->_auth_mode = $mode;
   }
-  
+
   /**
    * Get the auth mode to use to authenticate.
    * @return string
@@ -136,7 +136,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     return $this->_auth_mode;
   }
-  
+
   /**
    * Get the name of the ESMTP extension this handles.
    * @return boolean
@@ -145,7 +145,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     return 'AUTH';
   }
-  
+
   /**
    * Set the parameters which the EHLO greeting indicated.
    * @param string[] $parameters
@@ -154,7 +154,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     $this->_esmtpParams = $parameters;
   }
-  
+
   /**
    * Runs immediately after a EHLO has been issued.
    * @param Swift_Transport_SmtpAgent $agent to read/write
@@ -182,7 +182,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
         );
     }
   }
-  
+
   /**
    * Not used.
    */
@@ -190,7 +190,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     return array();
   }
-  
+
   /**
    * Not used.
    */
@@ -198,7 +198,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     return array();
   }
-  
+
   /**
    * Not used.
    */
@@ -206,7 +206,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
     $command, $codes = array(), &$failedRecipients = null, &$stop = false)
   {
   }
-    
+
   /**
    * Returns +1, -1 or 0 according to the rules for usort().
    * This method is called to ensure extensions can be execute in an appropriate order.
@@ -217,7 +217,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     return 0;
   }
-  
+
   /**
    * Returns an array of method names which are exposed to the Esmtp class.
    * @return string[]
@@ -226,16 +226,16 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   {
     return array('setUsername', 'getUsername', 'setPassword', 'getPassword', 'setAuthMode', 'getAuthMode');
   }
-  
+
   /**
    * Not used.
    */
   public function resetState()
   {
   }
-  
+
   // -- Protected methods
-  
+
   /**
    * Returns the authenticator list for the given agent.
    * @param  Swift_Transport_SmtpAgent $agent

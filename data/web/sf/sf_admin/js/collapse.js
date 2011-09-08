@@ -73,7 +73,7 @@ var CollapsedFieldsets = {
         collapse_link.onclick = new Function('CollapsedFieldsets.show('+fieldset_index+'); return false;');
     collapse_link.innerHTML = 'show';
   },
-  
+
   uncollapse_all: function() {
     var fieldsets = document.getElementsByTagName('fieldset');
     for (var i=0; i<fieldsets.length; i++) {

@@ -19,14 +19,14 @@
  */
 class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
 {
-  
+
   /**
    * The address in this Header (if specified).
    * @var string
    * @access private
    */
   private $_address;
-  
+
   /**
    * Creates a new PathHeader with the given $name.
    * @param string $name
@@ -36,7 +36,7 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
     $this->setFieldName($name);
     $this->initializeGrammar();
   }
-  
+
   /**
    * Get the type of Header that this instance represents.
    * @return int
@@ -47,7 +47,7 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
   {
     return self::TYPE_PATH;
   }
-  
+
   /**
    * Set the model for the field body.
    * This method takes a string for an address.
@@ -58,7 +58,7 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
   {
     $this->setAddress($model);
   }
-  
+
   /**
    * Get the model for the field body.
    * This method returns a string email address.
@@ -68,7 +68,7 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
   {
     return $this->getAddress();
   }
-  
+
   /**
    * Set the Address which should appear in this Header.
    * @param string $address
@@ -93,7 +93,7 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
     }
     $this->setCachedValue(null);
   }
-  
+
   /**
    * Get the address which is used in this Header (if any).
    * Null is returned if no address is set.
@@ -103,7 +103,7 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
   {
     return $this->_address;
   }
-  
+
   /**
    * Get the string value of the body in this Header.
    * This is not necessarily RFC 2822 compliant since folding white space will
@@ -122,5 +122,5 @@ class Swift_Mime_Headers_PathHeader extends Swift_Mime_Headers_AbstractHeader
     }
     return $this->getCachedValue();
   }
-  
+
 }

@@ -19,7 +19,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
 require_once 'phing/tasks/system/condition/ConditionBase.php';
 require_once 'phing/tasks/system/SequentialTask.php';
 
@@ -148,7 +148,7 @@ class IfTask extends ConditionBase {
     }
 
     public function main() {
-	
+
         if ($this->countConditions() > 1) {
             throw new BuildException("You must not nest more than one condition into <if>");
         }
@@ -157,7 +157,7 @@ class IfTask extends ConditionBase {
         }
 		$conditions = $this->getConditions();
 		$c = $conditions[0];
-		
+
         if ($c->evaluate()) {
             if ($this->thenTasks != null) {
                 $this->thenTasks->main();
@@ -194,27 +194,27 @@ class ElseIfTask extends ConditionBase {
             }
             $this->thenTasks = $t;
         }
-	
+
 		/**
 		 * @return boolean
 		 */
         public function evaluate() {
-		
+
             if ($this->countConditions() > 1) {
                 throw new BuildException("You must not nest more than one condition into <elseif>");
             }
             if ($this->countConditions() < 1) {
                 throw new BuildException("You must nest a condition into <elseif>");
             }
-			
+
 			$conditions = $this->getConditions();
 			$c = $conditions[0];
 
             return $c->evaluate();
         }
-		
+
 		/**
-		 * 
+		 *
 		 */
         public function main() {
             if ($this->thenTasks != null) {

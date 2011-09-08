@@ -327,4 +327,3 @@ function _get_class_decorated($object)
     return get_class($object);
   }
 }
-

@@ -131,7 +131,7 @@ class sfDoctrineDatabase extends sfDatabase
 
   /**
    * Returns the connection profiler.
-   * 
+   *
    * @return sfDoctrineConnectionProfiler|null
    */
   public function getProfiler()
@@ -160,9 +160,9 @@ class sfDoctrineDatabase extends sfDatabase
     {
       $this->connection = null;
     }
-    if ($this->_doctrineConnection !== null) 
-    { 
-      $this->_doctrineConnection->getManager()->closeConnection($this->_doctrineConnection); 
+    if ($this->_doctrineConnection !== null)
+    {
+      $this->_doctrineConnection->getManager()->closeConnection($this->_doctrineConnection);
     }
   }
 }

@@ -36,7 +36,7 @@ class TimestampableBehavior extends Behavior
     'create_column' => 'created_at',
     'update_column' => 'updated_at'
   );
-  
+
   /**
    * Add the create_column and update_columns to the current table
    */
@@ -54,10 +54,10 @@ class TimestampableBehavior extends Behavior
       ));
     }
   }
-  
+
   /**
    * Get the setter of one of the columns of the behavior
-   * 
+   *
    * @param  string $column One of the behavior colums, 'create_column' or 'update_column'
    * @return string The related setter, 'setCreatedOn' or 'setUpdatedOn'
    */
@@ -65,7 +65,7 @@ class TimestampableBehavior extends Behavior
   {
     return 'set' . $this->getColumnForParameter($column)->getPhpName();
   }
-  
+
   /**
    * Add code in ObjectBuilder::preSave
    *
@@ -75,7 +75,7 @@ class TimestampableBehavior extends Behavior
   {
     return "\$this->" . $this->getColumnSetter('update_column') . "(time());";
   }
-  
+
   /**
    * Add code in ObjectBuilder::preInsert
    *
@@ -83,6 +83,6 @@ class TimestampableBehavior extends Behavior
    */
   public function preInsert()
   {
-    return "\$this->" . $this->getColumnSetter('create_column') . "(time());";    
+    return "\$this->" . $this->getColumnSetter('create_column') . "(time());";
   }
 }

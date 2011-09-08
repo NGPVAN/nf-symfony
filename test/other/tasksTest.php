@@ -155,10 +155,10 @@ copy(dirname(__FILE__).'/fixtures/task/zTask.class.php', $c->tmp_dir.DS.'lib'.DS
 mkdir($pluginDir = $c->tmp_dir.DS.'plugins'.DS.'myFooPlugin'.DS.'lib'.DS.'task', 0777, true);
 copy(dirname(__FILE__).'/fixtures/task/myPluginTask.class.php', $pluginDir.DS.'myPluginTask.class.php');
 file_put_contents(
-  $projectConfigurationFile = $c->tmp_dir.DS.'config'.DS.'ProjectConfiguration.class.php', 
+  $projectConfigurationFile = $c->tmp_dir.DS.'config'.DS.'ProjectConfiguration.class.php',
   str_replace(
-    '$this->enablePlugins(\'sfPropelPlugin\')', 
-    '$this->enablePlugins(array(\'myFooPlugin\', \'sfPropelPlugin\'))', 
+    '$this->enablePlugins(\'sfPropelPlugin\')',
+    '$this->enablePlugins(array(\'myFooPlugin\', \'sfPropelPlugin\'))',
     file_get_contents($projectConfigurationFile)
   )
 );

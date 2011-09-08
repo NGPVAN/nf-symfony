@@ -25,9 +25,9 @@ sfLoader::loadHelpers(array('ObjectAdmin'));
 /**
  * object_doctrine_admin_double_list
  *
- * @param string $object 
- * @param string $method 
- * @param string $options 
+ * @param string $object
+ * @param string $method
+ * @param string $options
  * @return void
  */
 function object_doctrine_admin_double_list($object, $method, $options = array())
@@ -38,9 +38,9 @@ function object_doctrine_admin_double_list($object, $method, $options = array())
 /**
  * object_doctrine_admin_select_list
  *
- * @param string $object 
- * @param string $method 
- * @param string $options 
+ * @param string $object
+ * @param string $method
+ * @param string $options
  * @return void
  */
 function object_doctrine_admin_select_list($object, $method, $options = array())
@@ -51,9 +51,9 @@ function object_doctrine_admin_select_list($object, $method, $options = array())
 /**
  * object_doctrine_admin_check_list
  *
- * @param string $object 
- * @param string $method 
- * @param string $options 
+ * @param string $object
+ * @param string $method
+ * @param string $options
  * @return void
  */
 function object_doctrine_admin_check_list($object, $method, $options = array())
@@ -64,9 +64,9 @@ function object_doctrine_admin_check_list($object, $method, $options = array())
 /**
  * _get_doctrine_object_list
  *
- * @param string $object 
- * @param string $method 
- * @param string $options 
+ * @param string $object
+ * @param string $method
+ * @param string $options
  * @return void
  */
 function _get_doctrine_object_list($object, $method, $options)
@@ -89,7 +89,7 @@ function _get_doctrine_object_list($object, $method, $options)
   }
 
   $associatedObjects = $object->get($method[1][0]);
-  
+
   $ids = array();
   foreach ($associatedObjects as $associatedObject)
   {
@@ -100,16 +100,16 @@ function _get_doctrine_object_list($object, $method, $options)
   {
     $associatedObjects = null;
   }
- 
+
   return array($allObjects, $associatedObjects, $ids);
 }
 
 /**
  * object_enum_tag
  *
- * @param string $object 
- * @param string $method 
- * @param string $options 
+ * @param string $object
+ * @param string $method
+ * @param string $options
  * @return void
  */
 function object_enum_tag($object, $method, $options)
@@ -117,6 +117,6 @@ function object_enum_tag($object, $method, $options)
   $enumValues = _get_option($options, 'enumValues', array());
   $currentValue = _get_object_value($object, $method);
   $enumValues = array_combine($enumValues, $enumValues);
-  
+
   return select_tag(_convert_method_to_name($method, $options), options_for_select($enumValues, $currentValue), $options);
 }

@@ -134,7 +134,7 @@ class sfConfigCache
    *
    * The recompilation only occurs in a non debug environment.
    *
-   * If the configuration file path is relative, symfony will look in directories 
+   * If the configuration file path is relative, symfony will look in directories
    * defined in the sfConfiguration::getConfigPaths() method.
    *
    * @param string  $configPath A filesystem path to a configuration file
@@ -379,7 +379,7 @@ class sfConfigCache
   }
 
   /**
-   * Merges configuration handlers from the config_handlers.yml  
+   * Merges configuration handlers from the config_handlers.yml
    * and the ones defined with registerConfigHandler()
    *
    */

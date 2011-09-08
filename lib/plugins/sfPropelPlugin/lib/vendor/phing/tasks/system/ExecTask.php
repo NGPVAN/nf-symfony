@@ -254,7 +254,7 @@ class ExecTask extends Task {
 	function setCheckreturn($checkreturn) {
 		$this->checkreturn = (bool) $checkreturn;
 	}
-	
+
 	/**
 	 * The name of property to set to return value from exec() call.
 	 * @param string $prop
@@ -263,4 +263,3 @@ class ExecTask extends Task {
 		$this->returnProperty = $prop;
 	}
 }
-

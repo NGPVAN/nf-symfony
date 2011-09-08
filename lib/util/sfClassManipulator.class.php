@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -171,7 +171,7 @@ class sfClassManipulator
 
   /**
    * Filters each line of the given method through a callable.
-   * 
+   *
    * @param string $method   The method name
    * @param mixed  $callable A PHP callable that accepts and returns one line of PHP code
    */

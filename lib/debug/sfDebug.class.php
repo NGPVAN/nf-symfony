@@ -44,7 +44,7 @@ class sfDebug
       'extensions' => get_loaded_extensions(),
     );
 
-    natcasesort($values['extensions']); 
+    natcasesort($values['extensions']);
 
     // assign extension version
     if ($values['extensions'])
@@ -251,9 +251,9 @@ class sfDebug
 
   /**
    * Shortens a file path by replacing symfony directory constants.
-   * 
+   *
    * @param  string $file
-   * 
+   *
    * @return string
    */
   static public function shortenFilePath($file)

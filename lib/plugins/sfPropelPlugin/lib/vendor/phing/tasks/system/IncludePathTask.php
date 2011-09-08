@@ -19,26 +19,26 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
 require_once 'phing/Task.php';
 include_once 'phing/types/Path.php';
 
 /**
  * Adds a normalized path to the PHP include_path.
- * 
+ *
  * This provides a way to alter the include_path without editing any global php.ini settings
  * or PHP_CLASSPATH environment variable.
- * 
+ *
  * <code>
  *   <includepath classpath="new/path/here"/>
  * </code>
- * 
+ *
  * @author    Hans Lellelid <hans@xmpl.org>
  * @version   $Revision: 1.1 $
  * @package   phing.tasks.system
  */
 class IncludePathTask extends Task {
-   
+
     /**
      * Classname of task to register.
      * This can be a dot-path -- relative to a location on PHP include_path.
@@ -46,21 +46,21 @@ class IncludePathTask extends Task {
      * @var string
      */
     private $classname;
-    
+
     /**
      * Path to add to PHP include_path to aid in finding specified class.
      * @var Path
      */
     private $classpath;
-    
+
     /**
      * Refid to already defined classpath
      */
     private $classpathId;
-    
+
     /**
      * Set the classpath to be used when searching for component being defined
-     * 
+     *
      * @param Path $classpath An Path object containing the classpath.
      */
     public function setClasspath(Path $classpath) {
@@ -73,7 +73,7 @@ class IncludePathTask extends Task {
 
     /**
      * Create the classpath to be used when searching for component being defined
-     */ 
+     */
     public function createClasspath() {
         if ($this->classpath === null) {
             $this->classpath = new Path($this->project);
@@ -89,27 +89,27 @@ class IncludePathTask extends Task {
         $this->createClasspath()->setRefid($r);
     }
 
-    
+
     /** Main entry point */
     public function main() {
-    
+
         // Apparently casting to (string) no longer invokes __toString() automatically.
         if (is_object($this->classpath)) {
             $this->classpath = $this->classpath->__toString();
         }
-        
+
         if (empty($this->classpath)) {
             throw new BuildException("Provided classpath was empty.");
         }
-        
+
         $curr_parts = explode(PATH_SEPARATOR, get_include_path());
         $add_parts = explode(PATH_SEPARATOR, $this->classpath);
         $new_parts = array_diff($add_parts, $curr_parts);
-        
+
         if ($new_parts) {
             $this->log("Prepending new include_path components: " . implode(PATH_SEPARATOR, $new_parts), Project::MSG_VERBOSE);
             set_include_path(implode(PATH_SEPARATOR, array_merge($new_parts, $curr_parts)));
         }
-        
+
     }
 }

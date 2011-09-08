@@ -17,13 +17,13 @@
  * @package    symfony
  * @subpackage i18n
  */
- 
+
 /**
  * sfIMessageSource interface.
- * 
+ *
  * All messages source used by MessageFormat must be of sfIMessageSource.
  * It defines a set of operations to add and retrieve messages from the
- * message source. In addition, message source can load a particular 
+ * message source. In addition, message source can load a particular
  * catalogue.
  *
  * @author Xiang Wei Zhuo <weizhuo[at]gmail[dot]com>
@@ -55,7 +55,7 @@ interface sfIMessageSource
    * # "catalogue+variant" the catalogue and its variants.
    * # "source string" translation keys, and its translations.
    * <code>
-   *   array('catalogue+variant' => 
+   *   array('catalogue+variant' =>
    *       array('source string' => 'target string', ...)
    *             ...),
    *        ...);
@@ -66,7 +66,7 @@ interface sfIMessageSource
   function read();
 
   /**
-   * Saves the list of untranslated blocks to the translation source. 
+   * Saves the list of untranslated blocks to the translation source.
    * If the translation was not found, you should add those
    * strings to the translation source via the <b>append()</b> method.
    *
@@ -89,7 +89,7 @@ interface sfIMessageSource
    *
    * @param string $message   the source message to delete.
    * @param string $catalogue the catalogue to delete from.
-   * @return boolean true if deleted, false otherwise. 
+   * @return boolean true if deleted, false otherwise.
    */
   function delete($message, $catalogue = 'messages');
 
@@ -100,14 +100,14 @@ interface sfIMessageSource
    * @param string $target    the new translation string.
    * @param string $comments  comments
    * @param string $catalogue the catalogue of the translation.
-   * @return boolean true if translation was updated, false otherwise. 
+   * @return boolean true if translation was updated, false otherwise.
    */
   function update($text, $target, $comments, $catalogue = 'messages');
 
   /**
    * Returns a list of catalogue as key and all it variants as value.
    *
-   * @return array list of catalogues 
+   * @return array list of catalogues
    */
   function catalogues();
 
@@ -121,7 +121,7 @@ interface sfIMessageSource
   /**
    * Get the culture identifier for the source.
    *
-   * @return string culture identifier. 
+   * @return string culture identifier.
    */
   function getCulture();
 

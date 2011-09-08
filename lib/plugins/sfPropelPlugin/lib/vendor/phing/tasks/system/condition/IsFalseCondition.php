@@ -24,23 +24,23 @@ require_once 'phing/tasks/system/condition/Condition.php';
 
 /**
  * Condition that tests whether a given string evals to false.
- * 
+ *
  * @author Hans Lellelid (Phing)
  * @author Steve Loughran (Ant)
  * @version $Revision: 1.4 $
  * @package phing.tasks.system.condition
  */
 class IsFalseCondition extends ProjectComponent implements Condition {
-    
-    /**  
+
+    /**
      * what we eval
-     */ 
+     */
     private $value;
 
     /**
      * Set the value to be tested.
      * @param boolean $value
-     */ 
+     */
     public function setValue($value) {
         $this->value = $value;
     }
@@ -48,7 +48,7 @@ class IsFalseCondition extends ProjectComponent implements Condition {
     /**
      * return the inverted value;
      * @throws BuildException if someone forgot to spec a value
-     */ 
+     */
     public function evaluate() {
         if ($this->value === null) {
             throw new BuildException("Nothing to test for falsehood");
@@ -57,4 +57,3 @@ class IsFalseCondition extends ProjectComponent implements Condition {
     }
 
 }
-

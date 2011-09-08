@@ -2,7 +2,7 @@
 	calendar-cs.js
 	language: Czech
 	encoding: utf-8
-	author: Mishal (mishal AT mishal DOT cz) 
+	author: Mishal (mishal AT mishal DOT cz)
 	        (opraven formát dnů, měsíců + kosmetické změny :-))
 	        Lubos Jerabek (xnet@seznam.cz)
 	        Jan Uhlir (espinosa@centrum.cz)
@@ -69,4 +69,3 @@ Calendar._TT["TT_DATE_FORMAT"] = "%a, %b %e";
 
 Calendar._TT["WK"] = "týden";
 Calendar._TT["TIME"] = "Čas:";
-

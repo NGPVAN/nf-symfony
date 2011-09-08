@@ -28,13 +28,13 @@ class SMTP
      *  @var int
      */
     public $SMTP_PORT = 25;
-    
+
     /**
      *  SMTP reply line ending
      *  @var string
      */
     public  $CRLF = "\r\n";
-    
+
     /**
      *  Sets whether debugging is turned on
      *  @var bool
@@ -508,7 +508,7 @@ class SMTP
         }
 
         $this->helo_rply = $rply;
-        
+
         return true;
     }
 
