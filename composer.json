@@ -1,5 +1,5 @@
 {
-  "name": "nationalfield/symfony"
+  "name": "nationalfield/symfony",
   "require": {
     "nationalfield/symfony": "dev-composer"
   }
