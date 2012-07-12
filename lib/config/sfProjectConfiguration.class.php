@@ -632,4 +632,8 @@ class sfProjectConfiguration
 
     return $event->getReturnValue();
   }
+
+  public function beforeSettingsConfiguration()
+  {
+  }
 }
