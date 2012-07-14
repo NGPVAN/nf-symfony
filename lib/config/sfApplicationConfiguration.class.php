@@ -118,6 +118,7 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
     }
 
     // load base settings
+    $this->beforeSettingsConfiguration();
     include($configCache->checkConfig('config/settings.yml'));
     if ($file = $configCache->checkConfig('config/app.yml', true))
     {
@@ -145,6 +146,7 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
     // error settings
     ini_set('display_errors', $this->isDebug() ? 'on' : 'off');
     error_reporting(sfConfig::get('sf_error_reporting'));
+
 
     // initialize plugin configuration objects
     $this->initializePlugins();
