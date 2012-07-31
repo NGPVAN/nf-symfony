@@ -19,7 +19,7 @@ instalations.
 2. Removed massive amounts of trailing whitespace.
 
 3. Fixed repeated uses of ob_start being passed a blank string (Causes a bug in
-Symfony 5.4.)
+PHP 5.4)
 
 4. Introduced a hook in the sfApplicationConfiguration which is called before
 the settings.yml is loaded. (see: `beforeSettingsConfiguration`)
