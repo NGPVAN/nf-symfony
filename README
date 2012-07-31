@@ -9,6 +9,21 @@ It has been thoroughly tested in various real-world projects, and is actually in
 It is compatible with most of the available databases engines, including MySQL, PostgreSQL, Oracle, and Microsoft SQL Server.
 It runs on *nix and Windows platforms.
 
+FORK CHANGES
+------------
+
+1. Changing Propel's table generation to use Engine instead of Type in the
+output SQL. Fixes an issue where MySQL tables cannot be created on modern MySQL
+instalations.
+
+2. Removed massive amounts of trailing whitespace.
+
+3. Fixed repeated uses of ob_start being passed a blank string (Causes a bug in
+Symfony 5.4.)
+
+4. Introduced a hook in the sfApplicationConfiguration which is called before
+the settings.yml is loaded. (see: `beforeSettingsConfiguration`)
+
 LICENSE
 -------
 
