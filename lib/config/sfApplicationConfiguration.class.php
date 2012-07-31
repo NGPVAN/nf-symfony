@@ -219,6 +219,8 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
   public function checkLock()
   {
     if (
+      $this->hasLockFile(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.'global.lck')
+      ||
       $this->hasLockFile(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.$this->getApplication().'_'.$this->getEnvironment().'-cli.lck', 5)
       ||
       $this->hasLockFile(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.$this->getApplication().'_'.$this->getEnvironment().'.lck')
