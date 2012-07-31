@@ -24,6 +24,9 @@ PHP 5.4)
 4. Introduced a hook in the sfApplicationConfiguration which is called before
 the settings.yml is loaded. (see: `beforeSettingsConfiguration`)
 
+5. Introduced a global lock (data/global.lck) to disable all environments in
+a single call: `./symfony project:disable -g` or `./symfony project:enable -g`
+
 LICENSE
 -------
 
