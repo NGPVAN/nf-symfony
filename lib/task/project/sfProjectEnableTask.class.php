@@ -23,8 +23,10 @@ class sfProjectEnableTask extends sfBaseTask
    */
   protected function configure()
   {
+    $this->addOption('global', 'g', sfCommandOption::PARAMETER_NONE, 'Globally lock the project.');
+
     $this->addArguments(array(
-      new sfCommandArgument('env', sfCommandArgument::REQUIRED, 'The environment name'),
+      new sfCommandArgument('env', sfCommandArgument::OPTIONAL, 'The environment name'),
       new sfCommandArgument('app', sfCommandArgument::OPTIONAL | sfCommandArgument::IS_ARRAY, 'The application name'),
     ));
 
@@ -50,6 +52,17 @@ EOF;
    */
   protected function execute($arguments = array(), $options = array())
   {
+    if ($options['global']) {
+      $lockFile = sfConfig::get('sf_data_dir').'/global.lck';
+      $this->getFilesystem()->remove($lockFile);
+      $this->logSection('enable', 'Project has been ENABLED');
+      exit(0);
+    }
+
+    if (!$options['global'] && !$arguments['env']) {
+        throw new Exception('Must pass either global or an environment.');
+    }
+
     if (1 == count($arguments['app']) && !file_exists(sfConfig::get('sf_apps_dir').'/'.$arguments['app'][0]))
     {
       // support previous task signature
