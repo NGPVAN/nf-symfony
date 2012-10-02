@@ -565,18 +565,55 @@ class Propel
             );
         } else {
             $servers = $configs['connection'];
-            shuffle($servers);
         }
 
-        $conparams = reset($servers);
-        if (empty($conparams)) {
-            throw new PropelException('No connection information in your runtime configuration file for SLAVE ['.$randkiey.'] to datasource ['.$name.']');
+        $keys = array_keys($servers);
+        shuffle($keys);
+
+        // Weed out blatantly broken configurations or blacklisted servers
+        foreach ($keys as $i => $key) {
+            $conparams = $servers[$key];
+            if (empty($conparams)) {
+                throw new PropelException('No connection information in your runtime configuration file for SLAVE ['.$randkiey.'] to datasource ['.$key.']');
+            }
+
+            if (self::isServerBlacklisted($key)) {
+                unset($servers[$key], $keys[$i]);
+            }
         }
 
-        // initialize master connection
-        $con = Propel::initConnection($conparams, $name);
-        return $con;
+        $_SERVER['failed-slaves'] = array();
+        foreach ($keys as $key) {
+            $conparams = $servers[$key];
+            try {
+                return Propel::initConnection($conparams, $name);
+            } catch (PropelException $e) {
+                $_SERVER['failed-slaves'][] = $key;
+                self::blacklistServer($key);
+            }
+        }
+
+        throw new PropelException('No valid connection information in your runtime configuration file for slaves on datasource [' . $name . '].');
     }
+
+    protected static function isServerBlacklisted($name)
+    {
+        if (!function_exists('apc_exists')) {
+            return false;
+        }
+
+        return apc_exists("propel-slave-$name");
+    }
+
+    protected static function blacklistServer($name)
+    {
+        if (!function_exists('apc_store')) {
+            return true;
+        }
+
+        return apc_store("propel-slave-$name", "down", 60);
+    }
+
 
 	/**
 	 * Opens a new PDO connection for passed-in db name.
