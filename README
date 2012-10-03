@@ -27,6 +27,12 @@ the settings.yml is loaded. (see: `beforeSettingsConfiguration`)
 5. Introduced a global lock (data/global.lck) to disable all environments in
 a single call: `./symfony project:disable -g` or `./symfony project:enable -g`
 
+6. Propel's slave handling will pick a random slave, but will attempt different
+slaves until it finds a good one, or runs out. If APC is enabled, it will store
+the down slave in APC and not attempt to connect to it for 60 seconds.
+Additionally, it will store a list of failed slave connections in
+`$_SERVER['failed-slaves']`.
+
 LICENSE
 -------
 
