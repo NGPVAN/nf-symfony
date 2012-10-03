@@ -573,11 +573,12 @@ class Propel
         // Weed out blatantly broken configurations or blacklisted servers
         foreach ($keys as $i => $key) {
             $conparams = $servers[$key];
+            $dsn = $conparams['dsn'];
             if (empty($conparams)) {
-                throw new PropelException('No connection information in your runtime configuration file for SLAVE ['.$randkiey.'] to datasource ['.$key.']');
+                throw new PropelException('No connection information in your runtime configuration file for SLAVE ['.$randkiey.'] to datasource ['.$dsn.']');
             }
 
-            if (self::isServerBlacklisted($key)) {
+            if (self::isServerBlacklisted($dsn)) {
                 unset($servers[$key], $keys[$i]);
             }
         }
@@ -585,11 +586,12 @@ class Propel
         $_SERVER['failed-slaves'] = array();
         foreach ($keys as $key) {
             $conparams = $servers[$key];
+            $dsn = $conparams['dsn'];
             try {
                 return Propel::initConnection($conparams, $name);
             } catch (PropelException $e) {
-                $_SERVER['failed-slaves'][] = $key;
-                self::blacklistServer($key);
+                $_SERVER['failed-slaves'][] = $dsn;
+                self::blacklistServer($dsn);
             }
         }
 
