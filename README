@@ -33,6 +33,15 @@ the down slave in APC and not attempt to connect to it for 60 seconds.
 Additionally, it will store a list of failed slave connections in
 `$_SERVER['failed-slaves']`.
 
+7. Removed a pass-by-reference flag in UnixFileSystem which was unlike the
+parent method, which caused a STRICT error in PHP 5.4.
+
+8. Switched from using mysql_escape_string to mysql_real_escape_string in
+Propel's MySQL platform. Fixes a deprecation error.
+
+9. Fixes the logic in sfWidgetFormSelectCheckbox to support the case when the
+value is an array, but does not contain the key.
+
 LICENSE
 -------
 
