@@ -25,7 +25,7 @@ include_once 'phing/filters/ReplaceTokens.php'; // For class Token
 
 /**
  * Abstract class for TokenReaders.
- *
+ * 
  * @author    Manuel Holtgewe
  * @version   $Revision: 1.5 $
  * @package   phing.filters.util
@@ -34,7 +34,7 @@ abstract class TokenReader {
 
     /**
      * Reference to the Project the TokenReader is used in.
-     * @var Project
+     * @var Project 
      */
     protected $project;
 
@@ -60,5 +60,7 @@ abstract class TokenReader {
      * @return string
      */
     abstract public function readToken();
-
+    
 }
+
+

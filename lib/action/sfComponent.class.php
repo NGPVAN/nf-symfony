@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage action
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfComponent.class.php 23544 2009-11-03 08:48:31Z fabien $
+ * @version    SVN: $Id: sfComponent.class.php 23922 2009-11-14 14:58:38Z fabien $
  */
 abstract class sfComponent
 {
@@ -131,21 +131,6 @@ abstract class sfComponent
     if (sfConfig::get('sf_logging_enabled'))
     {
       $this->dispatcher->notify(new sfEvent($this, 'application.log', array($message, 'priority' => constant('sfLogger::'.strtoupper($priority)))));
-    }
-  }
-
-  /**
-   * Displays a message as a short message in the sfWebDebug toolbar.
-   *
-   * @param string $message The message text
-   *
-   * @see sfWebDebug
-   */
-  public function debugMessage($message)
-  {
-    if (sfConfig::get('sf_web_debug') && sfConfig::get('sf_logging_enabled'))
-    {
-      $this->dispatcher->notify(new sfEvent(null, 'application.log', array('This function is deprecated in favor of the logMessage function.', 'priority' => sfLogger::ERR)));
     }
   }
 

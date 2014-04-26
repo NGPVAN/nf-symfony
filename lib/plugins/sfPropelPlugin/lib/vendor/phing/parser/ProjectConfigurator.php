@@ -33,7 +33,7 @@ include_once 'phing/system/io/PhingFile.php';
  *
  * @author      Andreas Aderhold <andi@binarycloud.com>
  * @copyright � 2001,2002 THYRELL. All rights reserved
- * @version   $Revision: 1.17 $ $Date: 2007-02-06 15:32:22 -0500 (Tue, 06 Feb 2007) $
+ * @version   $Revision: 1.17 $ $Date: 2007-02-06 21:32:22 +0100 (Tue, 06 Feb 2007) $
  * @access    public
  * @package   phing.parser
  */
@@ -41,10 +41,10 @@ class ProjectConfigurator {
 
     public $project;
     public $locator;
-
+    
     public $buildFile;
     public $buildFileParent;
-
+        
     /**
      * Static call to ProjectConfigurator. Use this to configure a
      * project. Do not use the new operator.
@@ -105,14 +105,14 @@ class ProjectConfigurator {
      * @throws BuildException if attributes can not be configured
      * @access public
      */
-    public static function configure($target, $attrs, Project $project) {
+    public static function configure($target, $attrs, Project $project) {               
 
         if ($target instanceof TaskAdapter) {
             $target = $target->getProxy();
         }
-
+        
 		// if the target is an UnknownElement, this means that the tag had not been registered
-		// when the enclosing element (task, target, etc.) was configured.  It is possible, however,
+		// when the enclosing element (task, target, etc.) was configured.  It is possible, however, 
 		// that the tag was registered (e.g. using <taskdef>) after the original configuration.
 		// ... so, try to load it again:
 		if ($target instanceof UnknownElement) {
@@ -129,7 +129,7 @@ class ProjectConfigurator {
             if ($key == 'id') {
                 continue;
                 // throw new BuildException("Id must be set Extermnally");
-            }
+            }            
             $value = self::replaceProperties($project, $value, $project->getProperties());
             try { // try to set the attribute
                 $ih->setAttribute($project, $target, strtolower($key), $value);
@@ -153,7 +153,7 @@ class ProjectConfigurator {
     public static function addText($project, $target, $text = null) {
         if ($text === null || strlen(trim($text)) === 0) {
             return;
-        }
+        }    
         $ih = IntrospectionHelper::getHelper(get_class($target));
         $text = self::replaceProperties($project, $text, $project->getProperties());
         $ih->addText($project, $target, $text);
@@ -178,10 +178,10 @@ class ProjectConfigurator {
     // for preg_replace_callback().  Clearly we cannot use object
     // variables, since the replaceProperties() is called statically.
     // This is IMO better than using global variables in the callback.
-
+    
     private static $propReplaceProject;
     private static $propReplaceProperties;
-
+         
     /**
      * Replace ${} style constructions in the given value with the
      * string value of the corresponding data types. This method is
@@ -194,29 +194,29 @@ class ProjectConfigurator {
      *                 itself was null
      */
     public static function replaceProperties(Project $project, $value, $keys) {
-
+        
         if ($value === null) {
             return null;
         }
-
+        
         // These are a "hack" to support static callback for preg_replace_callback()
-
-        // make sure these get initialized every time
+        
+        // make sure these get initialized every time        
         self::$propReplaceProperties = $keys;
         self::$propReplaceProject = $project;
-
+        
         // Because we're not doing anything special (like multiple passes),
         // regex is the simplest / fastest.  PropertyTask, though, uses
         // the old parsePropertyString() method, since it has more stringent
         // requirements.
-
+        
         $sb = preg_replace_callback('/\$\{([^}]+)\}/', array('ProjectConfigurator', 'replacePropertyCallback'), $value);
-        return $sb;
+        return $sb;        
     }
-
+    
     /**
      * Private [static] function for use by preg_replace_callback to replace a single param.
-     * This method makes use of a static variable to hold the
+     * This method makes use of a static variable to hold the 
      */
     private static function replacePropertyCallback($matches)
     {
@@ -228,7 +228,7 @@ class ProjectConfigurator {
 			self::$propReplaceProject->log('Property ${'.$propertyName.'} => ' . self::$propReplaceProperties[$propertyName], Project::MSG_DEBUG);
 		}
         return self::$propReplaceProperties[$propertyName];
-    }
+    }           
 
     /**
      * Scan Attributes for the id attribute and maybe add a reference to

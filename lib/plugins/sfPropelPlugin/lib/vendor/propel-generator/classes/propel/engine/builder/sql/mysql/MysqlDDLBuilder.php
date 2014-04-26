@@ -153,7 +153,7 @@ CREATE TABLE ".$this->quoteIdentifier($this->prefixTablename($table->getName()))
 			}
 		}
 
-		$script .= "Engine=$mysqlTableType";
+		$script .= "Type=$mysqlTableType";
 
 		$dbVendorSpecific = $table->getDatabase()->getVendorInfoForType($databaseType);
 		$tableVendorSpecific = $table->getVendorInfoForType($databaseType);
@@ -240,9 +240,9 @@ CREATE TABLE ".$this->quoteIdentifier($this->prefixTablename($table->getName()))
 		 * @var array
 		 */
 		$_indices = array();
-
+		
 		$this->collectIndexedColumns('PRIMARY', $table->getPrimaryKey(), $_indices, 'getName');
-
+		
 		$_tableIndices = array_merge($table->getIndices(), $table->getUnices());
 		foreach ($_tableIndices as $_index) {
 		  $this->collectIndexedColumns($_index->getName(), $_index->getColumns(), $_indices);
@@ -271,7 +271,7 @@ CREATE TABLE ".$this->quoteIdentifier($this->prefixTablename($table->getName()))
 		foreach ($table->getForeignKeys() as $fk) {
 
 			$indexName = $this->quoteIdentifier(substr_replace($fk->getName(), 'FI_',  strrpos($fk->getName(), 'FK_'), 3));
-
+			
 			$localColumns = $fk->getLocalColumns();
 			$localColumnsHash = $this->getColumnList($localColumns);
 
@@ -294,7 +294,7 @@ CREATE TABLE ".$this->quoteIdentifier($this->prefixTablename($table->getName()))
 			$lines[] = $str;
 		}
 	}
-
+	
 	/**
 	 * Helper function to collect indexed columns.
 	 * @param array $columns The column names, or objects with a $callback method
@@ -313,7 +313,7 @@ CREATE TABLE ".$this->quoteIdentifier($this->prefixTablename($table->getName()))
 	      $colnames[] = $col->$callback();
 	    }
 	  }
-
+	  
 	  /**
 	   * "If the table has a multiple-column index, any leftmost prefix of the
 	   * index can be used by the optimizer to find rows. For example, if you

@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
-
+ 
 require_once 'phing/Task.php';
 include_once 'phing/system/io/BufferedReader.php';
 include_once 'phing/system/io/BufferedWriter.php';
@@ -35,7 +35,7 @@ include_once 'phing/util/StringHelper.php';
 class CVSPassTask extends Task {
 
     /** CVS Root */
-    private $cvsRoot;
+    private $cvsRoot; 
     /** Password file to add password to */
     private $passFile;
     /** Password to add to file */
@@ -58,7 +58,7 @@ class CVSPassTask extends Task {
         192, 159, 244, 239, 185, 168, 215, 144, 139, 165, 180, 157, 147, 186, 214, 176,
         227, 231, 219, 169, 175, 156, 206, 198, 129, 164, 150, 210, 154, 177, 134, 127,
         182, 128, 158, 208, 162, 132, 167, 209, 149, 241, 153, 251, 237, 236, 171, 195,
-        243, 233, 253, 240, 194, 250, 191, 155, 142, 137, 245, 235, 163, 242, 178, 152
+        243, 233, 253, 240, 194, 250, 191, 155, 142, 137, 245, 235, 163, 242, 178, 152 
     );
 
     /**
@@ -90,13 +90,13 @@ class CVSPassTask extends Task {
 
         $reader = null;
         $writer = null;
-
+        
         try {
             $buf = "";
 
             if ($this->passFile->exists()) {
                 $reader = new BufferedReader(new FileReader($this->passFile));
-
+                
                 $line = null;
                 while (($line = $reader->readLine()) !== null) {
                     if (!StringHelper::startsWith($this->cvsRoot, $line)) {
@@ -112,29 +112,29 @@ class CVSPassTask extends Task {
             $writer = new BufferedWriter(new FileWriter($this->passFile));
             $writer->write($pwdfile);
             $writer->newLine();
-
+            
             $writer->close();
             if ($reader) {
                 $reader->close();
             }
-
+                        
         } catch (IOException $e) {
             if ($reader) {
                 try {
                     $reader->close();
-                } catch (Exception $e) {}
+                } catch (Exception $e) {}                
             }
-
+            
             if ($writer) {
                 try {
                     $writer->close();
-                } catch (Exception $e) {}
+                } catch (Exception $e) {}                
             }
-
+            
             throw new BuildException($e);
         }
     }
-
+    
     /**
      * "Encode" the password.
      */

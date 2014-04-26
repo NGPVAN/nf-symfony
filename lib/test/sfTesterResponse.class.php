@@ -120,10 +120,10 @@ class sfTesterResponse extends sfTester
 
   /**
    * Checks that a form is rendered correctly.
-   *
+   * 
    * @param  sfForm|string $form     A form object or the name of a form class
    * @param  string        $selector CSS selector for the root form element for this form
-   *
+   * 
    * @return sfTestFunctionalBase|sfTester
    */
   public function checkForm($form, $selector = 'form')
@@ -333,11 +333,11 @@ class sfTesterResponse extends sfTester
 
   /**
    * Tests if a cookie was set.
-   *
+   * 
    * @param  string $name
    * @param  string $value
    * @param  array  $attributes Other cookie attributes to check (expires, path, domain, etc)
-   *
+   * 
    * @return sfTestFunctionalBase|sfTester
    */
   public function setsCookie($name, $value = null, $attributes = array())
@@ -370,20 +370,6 @@ class sfTesterResponse extends sfTester
     }
 
     $this->tester->fail(sprintf('response sets cookie "%s"', $name));
-
-    return $this->getObjectToReturn();
-  }
-
-  /**
-   * Tests whether or not a given string is in the response.
-   *
-   * @param string Text to check
-   *
-   * @return sfTestFunctionalBase|sfTester
-   */
-  public function contains($text)
-  {
-    $this->tester->like($this->response->getContent(), '/'.preg_quote($text, '/').'/', sprintf('response contains "%s"', substr($text, 0, 40)));
 
     return $this->getObjectToReturn();
   }

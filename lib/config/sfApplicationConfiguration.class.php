@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage config
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfApplicationConfiguration.class.php 29526 2010-05-19 13:06:40Z fabien $
+ * @version    SVN: $Id: sfApplicationConfiguration.class.php 33214 2011-11-19 13:47:24Z fabien $
  */
 abstract class sfApplicationConfiguration extends ProjectConfiguration
 {
@@ -118,7 +118,6 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
     }
 
     // load base settings
-    $this->beforeSettingsConfiguration();
     include($configCache->checkConfig('config/settings.yml'));
     if ($file = $configCache->checkConfig('config/app.yml', true))
     {
@@ -147,14 +146,13 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
     ini_set('display_errors', $this->isDebug() ? 'on' : 'off');
     error_reporting(sfConfig::get('sf_error_reporting'));
 
-
     // initialize plugin configuration objects
     $this->initializePlugins();
 
     // compress output
-    if (!self::$coreLoaded)
+    if (!self::$coreLoaded && sfConfig::get('sf_compressed'))
     {
-      ob_start(sfConfig::get('sf_compressed') ? 'ob_gzhandler' : null);
+      ob_start('ob_gzhandler');
     }
 
     self::$coreLoaded = true;
@@ -180,10 +178,10 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
 
   /**
    * Adds enabled plugins to autoload config.
-   *
+   * 
    * @param   sfEvent $event
    * @param   array   $config
-   *
+   * 
    * @return  array
    */
   public function filterAutoloadConfig(sfEvent $event, array $config)
@@ -219,8 +217,6 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
   public function checkLock()
   {
     if (
-      $this->hasLockFile(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.'global.lck')
-      ||
       $this->hasLockFile(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.$this->getApplication().'_'.$this->getEnvironment().'-cli.lck', 5)
       ||
       $this->hasLockFile(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.$this->getApplication().'_'.$this->getEnvironment().'.lck')
@@ -664,31 +660,12 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
 
         if (!$included)
         {
-          // search in the include path
-          if ((@include_once('helper/'.$fileName)) != 1)
-          {
-            $dirs = array_merge($dirs, explode(PATH_SEPARATOR, get_include_path()));
-            $dirs = array_map(array('sfDebug', 'shortenFilePath'), $dirs);
-
-            throw new InvalidArgumentException(sprintf('Unable to load "%sHelper.php" helper in: %s.', $helperName, implode(', ', $dirs)));
-          }
-          else
-          {
-            $this->dispatcher->notify(new sfEvent($this, 'application.log', array('Loading of helpers via the include path has been deprecated.', 'priority' => sfLogger::NOTICE)));
-          }
+          throw new InvalidArgumentException(sprintf('Unable to load "%sHelper.php" helper in: %s.', $helperName, implode(', ', array_map(array('sfDebug', 'shortenFilePath'), $dirs))));
         }
       }
 
       self::$loadedHelpers[$helperName] = true;
     }
-  }
-
-  /**
-   * @deprecated
-   */
-  public function loadPluginConfig()
-  {
-    $this->initializePlugins();
   }
 
   /**

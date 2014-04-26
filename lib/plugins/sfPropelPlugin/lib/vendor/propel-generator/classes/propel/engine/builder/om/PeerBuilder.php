@@ -160,7 +160,7 @@ abstract class PeerBuilder extends OMBuilder {
 			$this->addSelectMethods($script);
 			$this->addGetTableMap($script);
 		}
-
+		
 		$this->addBuildTableMap($script);
 
 		$this->addGetOMClassMethod($script);
@@ -276,7 +276,7 @@ abstract class PeerBuilder extends OMBuilder {
 			return $const;
 		}
 	}
-
+	
 	/**
    * Checks whether any registered behavior on that table has a modifier for a hook
    * @param string $hookName The name of the hook as called from one of this class methods, e.g. "preSave"

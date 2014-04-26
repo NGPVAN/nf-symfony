@@ -40,8 +40,8 @@ class RelationMap {
     MANY_TO_ONE = 1,
     ONE_TO_MANY = 2,
     ONE_TO_ONE = 3;
-
-  protected
+    
+  protected 
     $name,
     $type,
     $localTable,
@@ -59,7 +59,7 @@ class RelationMap {
   {
     $this->name = $name;
   }
-
+  
   /**
    * Get the name of this database.
    *
@@ -129,7 +129,7 @@ class RelationMap {
   {
     return $this->foreignTable;
   }
-
+  
   /**
    * Add a column mapping
    *
@@ -141,7 +141,7 @@ class RelationMap {
     $this->localColumns[] = $local;
     $this->foreignColumns[] = $foreign;
   }
-
+  
   /**
    * Get an associative array mapping local column names to foreign column names
    *
@@ -155,7 +155,7 @@ class RelationMap {
     }
     return $h;
   }
-
+  
   /**
    * Get the local columns
    *
@@ -165,7 +165,7 @@ class RelationMap {
   {
     return $this->localColumns;
   }
-
+  
   /**
    * Get the foreign columns
    *
@@ -175,7 +175,7 @@ class RelationMap {
   {
     return $this->foreignColumns;
   }
-
+  
   /**
    * Set the onUpdate behavior
    *
@@ -195,7 +195,7 @@ class RelationMap {
   {
     return $this->onUpdate;
   }
-
+  
   /**
    * Set the onDelete behavior
    *

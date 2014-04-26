@@ -145,7 +145,7 @@ abstract class XMLElement {
    * Looks in build.properties for path like propel.behavior.[bname].class
    * If not found, tries to autoload [Bname]Behavior
    * If no success, returns 'Behavior'
-   *
+   * 
    * @param  string $bname behavior name, e.g. 'timestampable'
    * @return string        behavior class name, e.g. 'TimestampableBehavior'
    */
@@ -180,7 +180,7 @@ abstract class XMLElement {
 		$xmlstr = $doc->saveXML();
 		return trim(preg_replace('/<\?xml.*?\?>/', '', $xmlstr));
 	}
-
+	
 	/**
 	 * Magic string method
 	 * @see toString()

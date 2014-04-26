@@ -26,7 +26,7 @@ require_once 'phing/tasks/system/condition/ConditionBase.php';
  *
  *  @author    Andreas Aderhold <andi@binarycloud.com>
  *  @copyright © 2001,2002 THYRELL. All rights reserved
- *  @version   $Revision: 1.8 $ $Date: 2006-03-10 09:31:51 -0500 (Fri, 10 Mar 2006) $
+ *  @version   $Revision: 1.8 $ $Date: 2006-03-10 15:31:51 +0100 (Fri, 10 Mar 2006) $
  *  @access    public
  *  @package   phing.tasks.system.condition
  */
@@ -40,7 +40,7 @@ class OsCondition implements Condition {
 
     function evaluate() {
         $osName = strtolower(Phing::getProperty("os.name"));
-
+		
         if ($this->family !== null) {
             if ($this->family === "windows") {
                 return StringHelper::startsWith("win", $osName);

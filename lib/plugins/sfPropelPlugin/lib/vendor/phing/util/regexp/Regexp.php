@@ -1,5 +1,5 @@
 <?php
-/*
+/* 
  *  $Id: Regexp.php 325 2007-12-20 15:44:58Z hans $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information please see
- * <http://phing.info>.
+ * <http://phing.info>. 
  */
 
 /**
@@ -28,34 +28,34 @@
 class Regexp {
 
     /**
-     * Matching groups found.
+     * Matching groups found. 
      * @var array
      */
     private $groups = array();
-
+     
     /**
      * Pattern to match.
      * @var string
      */
     private $pattern;
-
+    
     /**
      * Replacement pattern.
      * @var string
      */
     private $replace;
-
+    
     /**
      * The regex engine -- e.g. 'preg' or 'ereg';
      * @var RegexpEngine
      */
     private $engine;
-
+    
     /**
      * Constructor sets the regex engine to use (preg by default).
      * @param string $_engineType The regex engine to use.
      */
-    function __construct($engineType='preg') {
+    function __construct($engineType='preg') {        
         if ($engineType == 'preg') {
             include_once 'phing/util/regexp/PregEngine.php';
             $this->engine = new PregEngine();
@@ -64,7 +64,7 @@ class Regexp {
             $this->engine = new EregEngine();
         } else {
             throw new BuildException("Invalid engine type for Regexp: " . $engineType);
-        }
+        }                
     }
 
     /**
@@ -73,10 +73,10 @@ class Regexp {
      * @return void
      */
     public function setPattern($pat) {
-        $this->pattern = (string) $pat;
+        $this->pattern = (string) $pat;        
     }
-
-
+    
+    
     /**
      * Gets pattern to use for matching.
      * @return string The pattern to match on.
@@ -84,7 +84,7 @@ class Regexp {
     public function getPattern() {
         return $this->pattern;
     }
-
+    
     /**
      * Sets replacement string.
      * @param string $rep The pattern to replace matches with.
@@ -93,7 +93,7 @@ class Regexp {
     public function setReplace($rep) {
         $this->replace = (string) $rep;
     }
-
+    
     /**
      * Gets replacement string.
      * @return string The pattern to replace matches with.
@@ -102,19 +102,19 @@ class Regexp {
     public function getReplace() {
         return $this->replace;
     }
-
+    
     /**
      * Performs match of specified pattern against $subject.
      * @param string $subject The subject, on which to perform matches.
      * @return boolean Whether or not pattern matches subject string passed.
      */
     public function matches($subject) {
-        if($this->pattern === null) {
+        if($this->pattern === null) {            
             throw new Exception("No pattern specified for regexp match().");
         }
         return $this->engine->match($this->pattern, $subject, $this->groups);
     }
-
+    
     /**
      * Performs replacement of specified pattern and replacement strings.
      * @param string $subject Text on which to perform replacement.
@@ -123,39 +123,39 @@ class Regexp {
     public function replace($subject) {
         if ($this->pattern === null || $this->replace === null) {
             throw new Exception("Missing pattern or replacement string regexp replace().");
-        }
+        }        
         return $this->engine->replace($this->pattern, $this->replace, $subject);
     }
-
+    
     /**
      * Get array of matched groups.
      * @return array Matched groups
-     */
+     */ 
     function getGroups() {
         return $this->groups;
     }
 
     /**
-     * Get specific matched group.
+     * Get specific matched group. 
      * @param integer $idx
      * @return string specified group or NULL if group is not set.
-     */
-    function getGroup($idx) {
+     */ 
+    function getGroup($idx) { 
         if (!isset($this->groups[$idx])) {
             return null;
         }
         return $this->groups[$idx];
     }
-
+    
     /**
      * Sets whether the regexp matching is case insensitive.
      * (default is false -- i.e. case sensisitive)
      * @param boolean $bit
-     */
+     */ 
     function setIgnoreCase($bit) {
         $this->engine->setIgnoreCase($bit);
     }
-
+    
     /**
      * Gets whether the regexp matching is case insensitive.
      * @return boolean
@@ -163,4 +163,5 @@ class Regexp {
     function getIgnoreCase() {
         return $this->engine->getIgnoreCase();
     }
-}
+} 
+

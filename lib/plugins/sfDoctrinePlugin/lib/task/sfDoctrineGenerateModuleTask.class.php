@@ -44,7 +44,6 @@ class sfDoctrineGenerateModuleTask extends sfDoctrineBaseTask
       new sfCommandOption('actions-base-class', null, sfCommandOption::PARAMETER_REQUIRED, 'The base class for the actions', 'sfActions'),
     ));
 
-    $this->aliases = array('doctrine-generate-crud', 'doctrine:generate-crud');
     $this->namespace = 'doctrine';
     $this->name = 'generate-module';
     $this->briefDescription = 'Generates a Doctrine module';
@@ -82,7 +81,7 @@ EOF;
   protected function execute($arguments = array(), $options = array())
   {
     $databaseManager = new sfDatabaseManager($this->configuration);
-
+    
     $properties = parse_ini_file(sfConfig::get('sf_config_dir').'/properties.ini', true);
 
     $this->constants = array(

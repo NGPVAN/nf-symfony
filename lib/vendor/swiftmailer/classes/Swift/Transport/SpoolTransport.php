@@ -29,17 +29,18 @@ class Swift_Transport_SpoolTransport implements Swift_Transport
     $this->_eventDispatcher = $eventDispatcher;
     $this->_spool = $spool;
   }
-
+  
   /**
    * Sets the spool object.
    * @param Swift_Spool $spool
+   * @return Swift_Transport_SpoolTransport
    */
   public function setSpool(Swift_Spool $spool)
   {
     $this->_spool = $spool;
     return $this;
   }
-
+  
   /**
    * Get the spool object.
    * @return Swift_Spool
@@ -48,7 +49,7 @@ class Swift_Transport_SpoolTransport implements Swift_Transport
   {
     return $this->_spool;
   }
-
+  
   /**
    * Tests if this Transport mechanism has started.
    *
@@ -58,21 +59,21 @@ class Swift_Transport_SpoolTransport implements Swift_Transport
   {
     return true;
   }
-
+  
   /**
    * Starts this Transport mechanism.
    */
   public function start()
   {
   }
-
+  
   /**
    * Stops this Transport mechanism.
    */
   public function stop()
   {
   }
-
+  
   /**
    * Sends the given message.
    *
@@ -91,18 +92,18 @@ class Swift_Transport_SpoolTransport implements Swift_Transport
         return 0;
       }
     }
-
+    
     $success = $this->_spool->queueMessage($message);
-
+    
     if ($evt)
     {
       $evt->setResult($success ? Swift_Events_SendEvent::RESULT_SUCCESS : Swift_Events_SendEvent::RESULT_FAILED);
       $this->_eventDispatcher->dispatchEvent($evt, 'sendPerformed');
     }
-
+    
     return 1;
   }
-
+  
   /**
    * Register a plugin.
    *

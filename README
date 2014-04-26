@@ -9,39 +9,6 @@ It has been thoroughly tested in various real-world projects, and is actually in
 It is compatible with most of the available databases engines, including MySQL, PostgreSQL, Oracle, and Microsoft SQL Server.
 It runs on *nix and Windows platforms.
 
-FORK CHANGES
-------------
-
-1. Changing Propel's table generation to use Engine instead of Type in the
-output SQL. Fixes an issue where MySQL tables cannot be created on modern MySQL
-instalations.
-
-2. Removed massive amounts of trailing whitespace.
-
-3. Fixed repeated uses of ob_start being passed a blank string (Causes a bug in
-PHP 5.4)
-
-4. Introduced a hook in the sfApplicationConfiguration which is called before
-the settings.yml is loaded. (see: `beforeSettingsConfiguration`)
-
-5. Introduced a global lock (data/global.lck) to disable all environments in
-a single call: `./symfony project:disable -g` or `./symfony project:enable -g`
-
-6. Propel's slave handling will pick a random slave, but will attempt different
-slaves until it finds a good one, or runs out. If APC is enabled, it will store
-the down slave in APC and not attempt to connect to it for 60 seconds.
-Additionally, it will store a list of failed slave connections in
-`$_SERVER['failed-slaves']`.
-
-7. Removed a pass-by-reference flag in UnixFileSystem which was unlike the
-parent method, which caused a STRICT error in PHP 5.4.
-
-8. Switched from using mysql_escape_string to mysql_real_escape_string in
-Propel's MySQL platform. Fixes a deprecation error.
-
-9. Fixes the logic in sfWidgetFormSelectCheckbox to support the case when the
-value is an array, but does not contain the key.
-
 LICENSE
 -------
 

@@ -104,7 +104,7 @@ class sfWebDebugLogger extends sfVarLogger
 
   /**
    * Listens for the context.load_factories event.
-   *
+   * 
    * @param sfEvent $event
    */
   public function listenForLoadFactories(sfEvent $event)

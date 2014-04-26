@@ -19,7 +19,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
-
+ 
 require_once 'phing/tasks/system/condition/Condition.php';
 
 /**
@@ -59,7 +59,7 @@ class ContainsCondition implements Condition {
         $this->caseSensitive = (boolean) $b;
     }
 
-    /**
+    /** 
      * Check whether string contains substring.
      * @throws BuildException
      */
@@ -69,7 +69,7 @@ class ContainsCondition implements Condition {
                                      . "in contains");
         }
 
-        return $this->caseSensitive
+        return $this->caseSensitive 
             ? strpos($this->string, $this->subString) !== false
             : strpos(strtolower($this->string), strtolower($this->subString)) !== false;
     }

@@ -44,3 +44,4 @@ interface FileSelector {
     public function isSelected(PhingFile $basedir, $filename, PhingFile $file);
 
 }
+

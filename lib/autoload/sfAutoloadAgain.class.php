@@ -10,11 +10,11 @@
 
 /**
  * Autoload again for dev environments.
- *
+ * 
  * @package    symfony
  * @subpackage autoload
  * @author     Kris Wallsmith <kris.wallsmith@symfony-project.com>
- * @version    SVN: $Id: sfAutoloadAgain.class.php 22248 2009-09-22 17:15:16Z fabien $
+ * @version    SVN: $Id: sfAutoloadAgain.class.php 33561 2012-10-18 11:42:28Z fabien $
  */
 class sfAutoloadAgain
 {
@@ -27,7 +27,7 @@ class sfAutoloadAgain
 
   /**
    * Returns the singleton autoloader.
-   *
+   * 
    * @return sfAutoloadAgain
    */
   static public function getInstance()
@@ -49,9 +49,9 @@ class sfAutoloadAgain
 
   /**
    * Reloads the autoloader.
-   *
+   * 
    * @param  string $class
-   *
+   * 
    * @return boolean
    */
   public function autoload($class)
@@ -69,7 +69,7 @@ class sfAutoloadAgain
     {
       foreach ($autoloads as $position => $autoload)
       {
-        if ($this === $autoload[0])
+        if (is_array($autoload) && $this === $autoload[0])
         {
           break;
         }
@@ -101,7 +101,7 @@ class sfAutoloadAgain
 
   /**
    * Returns true if the autoloader is registered.
-   *
+   * 
    * @return boolean
    */
   public function isRegistered()

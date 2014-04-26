@@ -21,7 +21,7 @@
  * @subpackage form
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @author     Jonathan H. Wage <jonwage@gmail.com>
- * @version    SVN: $Id: sfFormFilterDoctrine.class.php 28992 2010-04-06 11:30:44Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfFormFilterDoctrine.class.php 33150 2011-10-24 07:57:16Z fabien $
  */
 abstract class sfFormFilterDoctrine extends sfFormFilter
 {
@@ -64,7 +64,7 @@ abstract class sfFormFilterDoctrine extends sfFormFilter
 
   /**
    * Sets the query object to use.
-   *
+   * 
    * @param Doctrine_Query $query
    */
   public function setQuery($query)
@@ -290,11 +290,11 @@ abstract class sfFormFilterDoctrine extends sfFormFilter
 
   /**
    * Returns the name of the related model.
-   *
+   * 
    * @param string $alias A relation alias
-   *
+   * 
    * @return string
-   *
+   * 
    * @throws InvalidArgumentException If no relation with the supplied alias exists on the current model
    */
   protected function getRelatedModelName($alias)
@@ -303,7 +303,7 @@ abstract class sfFormFilterDoctrine extends sfFormFilter
 
     if (!$table->hasRelation($alias))
     {
-      throw new InvalidArgumentException(sprintf('The "%s" model has to "%s" relation.', $this->getModelName(), $alias));
+      throw new InvalidArgumentException(sprintf('The "%s" model has no "%s" relation.', $this->getModelName(), $alias));
     }
 
     $relation = $table->getRelation($alias);

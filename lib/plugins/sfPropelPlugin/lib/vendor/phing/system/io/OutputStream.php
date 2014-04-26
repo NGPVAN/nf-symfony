@@ -1,7 +1,7 @@
 <?php
 /*
- *  $Id: FileWriter.php 123 2006-09-14 20:19:08Z mrook $
- *
+ *  $Id: FileWriter.php 123 2006-09-14 20:19:08Z mrook $  
+ * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -21,11 +21,11 @@
 
 /**
  * Wrapper class for PHP stream that supports write operations.
- *
+ * 
  * @package   phing.system.io
  */
 class OutputStream {
-
+	
 	/**
 	 * @var resource The configured PHP stream.
 	 */
@@ -41,7 +41,7 @@ class OutputStream {
     	}
     	$this->stream = $stream;
     }
-
+	
     /**
      * Closes attached stream, flushing output first.
      * @throws IOException if cannot close stream (note that attempting to close an already closed stream will not raise an IOException)
@@ -58,10 +58,10 @@ class OutputStream {
         }
 		$this->stream = null;
 	}
-
+    
 	/**
      * Flushes stream.
-     *
+     * 
      * @throws IOException if unable to flush data (e.g. stream is not open).
      */
     public function flush() {
@@ -69,13 +69,13 @@ class OutputStream {
     		throw new IOException("Could not flush stream: " . $php_errormsg);
     	}
 	}
-
+	
     /**
      * Writes data to stream.
      *
      * @param string $buf Binary/character data to write.
      * @param int $off (Optional) offset.
-     * @param int $len (Optional) number of bytes/chars to write.
+     * @param int $len (Optional) number of bytes/chars to write. 
      * @return void
      * @throws IOException - if there is an error writing to stream
      */
@@ -89,14 +89,14 @@ class OutputStream {
         } else {
         	$to_write = substr($buf, $off, $len);
         }
-
+        
         $result = @fwrite($this->stream, $to_write);
 
         if ( $result === false ) {
             throw new IOException("Error writing to stream.");
         }
     }
-
+    
     /**
      * Returns a string representation of the attached PHP stream.
      * @return string
@@ -105,3 +105,4 @@ class OutputStream {
         return (string) $this->stream;
     }
 }
+

@@ -32,12 +32,12 @@ require_once 'phing/tasks/ext/phpunit/phpunit3/PHPUnit3ResultFormatter.php';
 class PlainPHPUnit3ResultFormatter extends PHPUnit3ResultFormatter
 {
 	private $inner = "";
-
+	
 	function getExtension()
 	{
 		return ".txt";
 	}
-
+	
 	function getPreferredOutfile()
 	{
 		return "testresults";
@@ -46,10 +46,10 @@ class PlainPHPUnit3ResultFormatter extends PHPUnit3ResultFormatter
 	function startTestSuite(PHPUnit_Framework_TestSuite $suite)
 	{
 		parent::startTestSuite($suite);
-
+		
 		$this->inner = "";
 	}
-
+	
 	function endTestSuite(PHPUnit_Framework_TestSuite $suite)
 	{
 		$sb = "Testsuite: " . $suite->getName() . "\n";
@@ -61,7 +61,7 @@ class PlainPHPUnit3ResultFormatter extends PHPUnit3ResultFormatter
 		$sb.= ", Time elapsed: " . sprintf('%0.5f', $this->getElapsedTime()) . " s\n";
 
 		parent::endTestSuite($suite);
-
+		
 		if ($this->out != NULL)
 		{
 			$this->out->write($sb);
@@ -72,7 +72,7 @@ class PlainPHPUnit3ResultFormatter extends PHPUnit3ResultFormatter
 	function addError(PHPUnit_Framework_Test $test, Exception $e, $time)
 	{
 		parent::addError($test, $e, $time);
-
+		
 		$this->formatError("ERROR", $test, $e);
 	}
 
@@ -85,7 +85,7 @@ class PlainPHPUnit3ResultFormatter extends PHPUnit3ResultFormatter
 	function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time)
 	{
 		parent::addIncompleteTest($test, $e, $time);
-
+		
 		$this->formatError("INCOMPLETE", $test);
 	}
 
@@ -101,22 +101,23 @@ class PlainPHPUnit3ResultFormatter extends PHPUnit3ResultFormatter
 		{
 			$this->endTest($test, time());
 		}
-
+		
 		$this->inner.= $test->getName() . " " . $type . "\n";
-
+		
 		if ($e !== null) {
 			$this->inner.= $e->getMessage() . "\n";
 			$this->inner.= PHPUnit_Util_Filter::getFilteredStackTrace($e, false) . "\n";
 		}
 	}
-
+	
 	function endTestRun()
 	{
 		parent::endTestRun();
-
+		
 		if ($this->out != NULL)
 		{
 			$this->out->close();
 		}
 	}
 }
+

@@ -16,7 +16,7 @@
  * @package    symfony
  * @subpackage generator
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfPropelFormGenerator.class.php 29661 2010-05-28 16:56:42Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfPropelFormGenerator.class.php 33137 2011-10-18 13:05:25Z fabien $
  */
 class sfPropelFormGenerator extends sfGenerator
 {
@@ -60,8 +60,6 @@ class sfPropelFormGenerator extends sfGenerator
     {
       $this->params['form_dir_name'] = 'form';
     }
-
-    $this->dbMap = Propel::getDatabaseMap($this->params['connection']);
 
     $this->loadBuilders();
 
@@ -515,7 +513,7 @@ class sfPropelFormGenerator extends sfGenerator
     foreach ($classes as $class)
     {
       $omClass = basename($class, 'TableMap.php');
-      if (class_exists($omClass) && is_subclass_of($omClass, 'BaseObject'))
+      if (class_exists($omClass) && is_subclass_of($omClass, 'BaseObject') && constant($omClass.'Peer::DATABASE_NAME') == $this->params['connection'])
       {
         $tableMapClass = basename($class, '.php');
         $this->dbMap->addTableFromMapClass($tableMapClass);

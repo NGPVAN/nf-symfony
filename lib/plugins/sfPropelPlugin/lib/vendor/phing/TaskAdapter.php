@@ -31,16 +31,16 @@ require_once 'phing/Task.php';
  *  @package   phing
  */
 class TaskAdapter extends Task {
-
+    
     /** target object */
     private $proxy;
-
+    
     /**
      * Main entry point.
      * @return void
      */
     function main() {
-
+    
         if (method_exists($this->proxy, "setProject")) {
             try {  // try to set project
                 $this->proxy->setProject($this->project);
@@ -51,7 +51,7 @@ class TaskAdapter extends Task {
         } else {
             throw new Exception("Error setting project in class " . get_class($this->proxy));
         }
-
+               
         if (method_exists($this->proxy, "main")) {
             try { //try to call main
                 $this->proxy->main($this->project);

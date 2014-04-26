@@ -8,10 +8,6 @@
  * file that was distributed with this source code.
  */
 
-//@require 'Swift/Mime/Headers/UnstructuredHeader.php';
-//@require 'Swift/Mime/HeaderEncoder.php';
-//@require 'Swift/Mime/ParameterizedHeader.php';
-//@require 'Swift/Encoder.php';
 
 /**
  * An abstract base MIME Header.
@@ -23,6 +19,12 @@ class Swift_Mime_Headers_ParameterizedHeader
   extends Swift_Mime_Headers_UnstructuredHeader
   implements Swift_Mime_ParameterizedHeader
 {
+  
+  /**
+   * RFC 2231's definition of a token.
+   * @var string
+   */
+  const TOKEN_REGEX = '(?:[\x21\x23-\x27\x2A\x2B\x2D\x2E\x30-\x39\x41-\x5A\x5E-\x7E]+)';
 
   /**
    * The Encoder used to encode the parameters.
@@ -30,37 +32,28 @@ class Swift_Mime_Headers_ParameterizedHeader
    * @access private
    */
   private $_paramEncoder;
-
+  
   /**
    * The parameters as an associative array.
    * @var string[]
    * @access private
    */
   private $_params = array();
-
-  /**
-   * RFC 2231's definition of a token.
-   * @var string
-   * @access private
-   */
-  private $_tokenRe;
-
+  
   /**
    * Creates a new ParameterizedHeader with $name.
    * @param string $name
    * @param Swift_Mime_HeaderEncoder $encoder
    * @param Swift_Encoder $paramEncoder, optional
-   */
+   * @param Swift_Mime_Grammar $grammar
+   */ 
   public function __construct($name, Swift_Mime_HeaderEncoder $encoder,
-    Swift_Encoder $paramEncoder = null)
+    Swift_Encoder $paramEncoder = null, Swift_Mime_Grammar $grammar)
   {
-    $this->setFieldName($name);
-    $this->setEncoder($encoder);
+    parent::__construct($name, $encoder, $grammar);
     $this->_paramEncoder = $paramEncoder;
-    $this->initializeGrammar();
-    $this->_tokenRe = '(?:[\x21\x23-\x27\x2A\x2B\x2D\x2E\x30-\x39\x41-\x5A\x5E-\x7E]+)';
   }
-
+  
   /**
    * Get the type of Header that this instance represents.
    * @return int
@@ -71,7 +64,7 @@ class Swift_Mime_Headers_ParameterizedHeader
   {
     return self::TYPE_PARAMETERIZED;
   }
-
+  
   /**
    * Set the character set used in this Header.
    * @param string $charset
@@ -84,7 +77,7 @@ class Swift_Mime_Headers_ParameterizedHeader
       $this->_paramEncoder->charsetChanged($charset);
     }
   }
-
+  
   /**
    * Set the value of $parameter.
    * @param string $parameter
@@ -94,7 +87,7 @@ class Swift_Mime_Headers_ParameterizedHeader
   {
     $this->setParameters(array_merge($this->getParameters(), array($parameter => $value)));
   }
-
+  
   /**
    * Get the value of $parameter.
    * @return string
@@ -106,7 +99,7 @@ class Swift_Mime_Headers_ParameterizedHeader
       ? $params[$parameter]
       : null;
   }
-
+  
   /**
    * Set an associative array of parameter names mapped to values.
    * @param string[]
@@ -116,7 +109,7 @@ class Swift_Mime_Headers_ParameterizedHeader
     $this->clearCachedValueIf($this->_params != $parameters);
     $this->_params = $parameters;
   }
-
+  
   /**
    * Returns an associative array of parameter names mapped to values.
    * @return string[]
@@ -125,7 +118,7 @@ class Swift_Mime_Headers_ParameterizedHeader
   {
     return $this->_params;
   }
-
+  
   /**
    * Get the value of this header prepared for rendering.
    * @return string
@@ -143,20 +136,21 @@ class Swift_Mime_Headers_ParameterizedHeader
     }
     return $body;
   }
-
+  
   // -- Protected methods
-
+  
   /**
    * Generate a list of all tokens in the final header.
    * This doesn't need to be overridden in theory, but it is for implementation
    * reasons to prevent potential breakage of attributes.
-   * @return string[]
+   * @param string $string The string to tokenize
+   * @return array An array of tokens as strings
    * @access protected
    */
   protected function toTokens($string = null)
   {
     $tokens = parent::toTokens(parent::getFieldBody());
-
+    
     //Try creating any parameters
     foreach ($this->_params as $name => $value)
     {
@@ -169,12 +163,12 @@ class Swift_Mime_Headers_ParameterizedHeader
           ));
       }
     }
-
+    
     return $tokens;
   }
-
+  
   // -- Private methods
-
+  
   /**
    * Render a RFC 2047 compliant header parameter from the $name and $value.
    * @param string $name
@@ -185,18 +179,18 @@ class Swift_Mime_Headers_ParameterizedHeader
   private function _createParameter($name, $value)
   {
     $origValue = $value;
-
+    
     $encoded = false;
     //Allow room for parameter name, indices, "=" and DQUOTEs
     $maxValueLength = $this->getMaxLineLength() - strlen($name . '=*N"";') - 1;
     $firstLineOffset = 0;
-
+    
     //If it's not already a valid parameter value...
-    if (!preg_match('/^' . $this->_tokenRe . '$/D', $value))
+    if (!preg_match('/^' . self::TOKEN_REGEX . '$/D', $value))
     {
       //TODO: text, or something else??
       //... and it's not ascii
-      if (!preg_match('/^' . $this->getGrammar('text') . '*$/D', $value))
+      if (!preg_match('/^' . $this->getGrammar()->getDefinition('text') . '*$/D', $value))
       {
         $encoded = true;
         //Allow space for the indices, charset and language
@@ -206,14 +200,14 @@ class Swift_Mime_Headers_ParameterizedHeader
           );
       }
     }
-
+    
     //Encode if we need to
     if ($encoded || strlen($value) > $maxValueLength)
     {
       if (isset($this->_paramEncoder))
       {
         $value = $this->_paramEncoder->encodeString(
-          $origValue, $firstLineOffset, $maxValueLength
+          $origValue, $firstLineOffset, $maxValueLength, $this->getCharset()
           );
       }
       else //We have to go against RFC 2183/2231 in some areas for interoperability
@@ -222,9 +216,9 @@ class Swift_Mime_Headers_ParameterizedHeader
         $encoded = false;
       }
     }
-
+    
     $valueLines = isset($this->_paramEncoder) ? explode("\r\n", $value) : array($value);
-
+    
     //Need to add indices
     if (count($valueLines) > 1)
     {
@@ -232,7 +226,7 @@ class Swift_Mime_Headers_ParameterizedHeader
       foreach ($valueLines as $i => $line)
       {
         $paramLines[] = $name . '*' . $i .
-          $this->_getEndOfParameterValue($line, $encoded, $i == 0);
+          $this->_getEndOfParameterValue($line, true, $i == 0);
       }
       return implode(";\r\n ", $paramLines);
     }
@@ -243,7 +237,7 @@ class Swift_Mime_Headers_ParameterizedHeader
         );
     }
   }
-
+  
   /**
    * Returns the parameter value from the "=" and beyond.
    * @param string $value to append
@@ -254,7 +248,7 @@ class Swift_Mime_Headers_ParameterizedHeader
    */
   private function _getEndOfParameterValue($value, $encoded = false, $firstLine = false)
   {
-    if (!preg_match('/^' . $this->_tokenRe . '$/D', $value))
+    if (!preg_match('/^' . self::TOKEN_REGEX . '$/D', $value))
     {
       $value = '"' . $value . '"';
     }
@@ -270,5 +264,5 @@ class Swift_Mime_Headers_ParameterizedHeader
     }
     return $prepend . $value;
   }
-
+  
 }

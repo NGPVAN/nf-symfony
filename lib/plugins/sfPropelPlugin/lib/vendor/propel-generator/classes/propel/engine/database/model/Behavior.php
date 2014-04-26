@@ -34,17 +34,17 @@ class Behavior extends XMLElement {
   protected $database;
   protected $name;
   protected $parameters = array();
-
+  
   public function setName($name)
   {
     $this->name = $name;
-  }
-
+  }  
+  
   public function getName()
   {
     return $this->name;
   }
-
+  
   public function setTable(Table $table)
   {
     $this->table = $table;
@@ -64,7 +64,7 @@ class Behavior extends XMLElement {
   {
     return $this->database;
   }
-
+  
   /**
    * Add a parameter
    * Expects an associative array looking like array('name' => 'foo', 'value' => bar)
@@ -76,7 +76,7 @@ class Behavior extends XMLElement {
     $attribute = array_change_key_case($attribute, CASE_LOWER);
     $this->parameters[$attribute['name']] = $attribute['value'];
   }
-
+  
   /**
    * Overrides the behavior parameters
    * Expects an associative array looking like array('foo' => 'bar')
@@ -87,10 +87,10 @@ class Behavior extends XMLElement {
   {
     $this->parameters = $parameters;
   }
-
+  
   /**
    * Get the associative array of parameters
-   * @return array
+   * @return array 
    */
   public function getParameters()
   {
@@ -115,7 +115,7 @@ class Behavior extends XMLElement {
       $table->addBehavior($b);
     }
   }
-
+  
   /**
    * This method is automatically called on table behaviors when the database model is finished
    * Override it to add columns to the current table
@@ -123,11 +123,11 @@ class Behavior extends XMLElement {
   public function modifyTable()
   {
   }
-
+  
   /**
    * Retrieve a column object using a name stored in the behavior parameters
    * Useful for table behaviors
-   *
+   * 
    * @param  string    $param Name of the parameter storing the column name
    * @return ColumnMap        The column of the table supporting the behavior
    */
@@ -135,7 +135,7 @@ class Behavior extends XMLElement {
   {
   	return $this->getTable()->getColumn($this->getParameter($param));
   }
-
+  
   /**
    * Sets up the Behavior object based on the attributes that were passed to loadFromXML().
    * @see        parent::loadFromXML()
@@ -144,7 +144,7 @@ class Behavior extends XMLElement {
   {
     $this->name = $this->getAttribute("name");
   }
-
+    
   /**
    * @see        parent::appendXml(DOMNode)
    */
@@ -161,12 +161,12 @@ class Behavior extends XMLElement {
       $parameterNode->setAttribute('value', $value);
     }
   }
-
+  
   public function getTableModifier()
   {
     return $this;
-  }
-
+  }  
+  
   public function getObjectBuilderModifier()
   {
     return $this;
@@ -176,7 +176,7 @@ class Behavior extends XMLElement {
   {
     return $this;
   }
-
+  
   public function getTableMapBuilderModifier()
   {
     return $this;

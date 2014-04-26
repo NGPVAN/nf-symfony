@@ -17,7 +17,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information please see
- * <http://phing.info>.
+ * <http://phing.info>. 
  */
 
 require_once 'phing/Task.php';
@@ -36,14 +36,14 @@ class PackageAsPathTask extends Task {
 
     /** The value to store the conversion in. */
     protected $name;
-
+    
     /**
      * Executes the package to patch converstion and stores it
      * in the user property <code>value</code>.
      */
     public function main()
     {
-        $this->project->setUserProperty($this->name, strtr($this->pckg, '.', '/'));
+        $this->project->setUserProperty($this->name, strtr($this->pckg, '.', '/'));        
     }
 
     /**
@@ -61,5 +61,5 @@ class PackageAsPathTask extends Task {
     {
         $this->name = $name;
     }
-
+    
 }

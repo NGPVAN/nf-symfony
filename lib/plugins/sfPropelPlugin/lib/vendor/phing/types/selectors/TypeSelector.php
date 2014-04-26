@@ -24,7 +24,7 @@ require_once 'phing/types/selectors/BaseExtendSelector.php';
 
 /**
  * Selector that selects a certain kind of file: directory or regular file.
- *
+ * 
  * @author    Hans Lellelid <hans@xmpl.org> (Phing)
  * @author    Jeff Turner <jefft@apache.org> (Ant)
  * @version   $Revision: 1.3 $
@@ -36,10 +36,10 @@ class TypeSelector extends BaseExtendSelector {
 
     /** Key to used for parameterized custom selector */
     const TYPE_KEY = "type";
-
+    
     /** Valid types */
     private static $types = array('file', 'dir');
-
+    
     /**
      * @return string A string describing this object
      */
@@ -52,7 +52,7 @@ class TypeSelector extends BaseExtendSelector {
      * Set the type of file to require.
      * @param string $type The type of file - 'file' or 'dir'
      */
-    public function setType($type) {
+    public function setType($type) {       
         $this->type = $type;
     }
 

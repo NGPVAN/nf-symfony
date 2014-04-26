@@ -27,32 +27,32 @@ include_once 'phing/TaskContainer.php';
  *
  *  @author    Andreas Aderhold <andi@binarycloud.com>
  *  @copyright � 2001,2002 THYRELL. All rights reserved
- *  @version   $Revision: 1.10 $ $Date: 2007-03-14 09:52:03 -0400 (Wed, 14 Mar 2007) $
+ *  @version   $Revision: 1.10 $ $Date: 2007-03-14 14:52:03 +0100 (Wed, 14 Mar 2007) $
  *  @access    public
  *  @see       TaskContainer
  *  @package   phing
  */
 
 class Target implements TaskContainer {
-
+    
     /** name of target */
     private $name;
-
+    
     /** dependencies */
     private $dependencies = array();
-
+    
     /** holds objects of children of this target */
     private $children = array();
-
+    
     /** the if cond. from xml */
     private $ifCondition = "";
-
+    
     /** the unless cond. from xml */
     private $unlessCondition = "";
-
+    
     /** description of this target */
     private $description;
-
+    
     /** reference to project */
     private $project;
 
@@ -88,7 +88,7 @@ class Target implements TaskContainer {
             $trimmed = trim($deps[$i]);
             if ($trimmed === "") {
                 throw new BuildException("Syntax Error: Depend attribute for target ".$this->getName()." is malformed.");
-            }
+            } 
             $this->addDependency($trimmed);
         }
     }
@@ -267,7 +267,7 @@ class Target implements TaskContainer {
             $this->project->fireTargetFinished($this, $exc);
             throw $exc;
         }
-    }
+    }    
 
     /**
      *  Tests if the property set in ifConfiditon exists.
@@ -303,7 +303,7 @@ class Target implements TaskContainer {
         if ($this->unlessCondition === "") {
             return true;
         }
-
+        
         $properties = explode(",", $this->unlessCondition);
 
         $result = true;

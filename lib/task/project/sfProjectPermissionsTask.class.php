@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage task
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfProjectPermissionsTask.class.php 22820 2009-10-06 12:09:34Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfProjectPermissionsTask.class.php 23922 2009-11-14 14:58:38Z fabien $
  */
 class sfProjectPermissionsTask extends sfBaseTask
 {
@@ -27,7 +27,6 @@ class sfProjectPermissionsTask extends sfBaseTask
    */
   protected function configure()
   {
-    $this->aliases = array('permissions', 'fix-perms');
     $this->namespace = 'project';
     $this->name = 'permissions';
     $this->briefDescription = 'Fixes symfony directory permissions';
@@ -80,11 +79,11 @@ EOF;
 
   /**
    * Chmod and capture any failures.
-   *
+   * 
    * @param string  $file
    * @param integer $mode
    * @param integer $umask
-   *
+   * 
    * @see sfFilesystem
    */
   protected function chmod($file, $mode, $umask = 0000)
@@ -110,7 +109,7 @@ EOF;
 
   /**
    * Captures those chmod commands that fail.
-   *
+   * 
    * @see http://www.php.net/set_error_handler
    */
   public function handleError($no, $string, $file, $line, $context)

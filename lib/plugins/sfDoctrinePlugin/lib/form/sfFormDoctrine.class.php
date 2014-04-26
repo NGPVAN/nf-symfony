@@ -18,7 +18,7 @@
  * @subpackage form
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @author     Jonathan H. Wage <jonwage@gmail.com>
- * @version    SVN: $Id: sfFormDoctrine.class.php 29643 2010-05-27 15:52:21Z Jonathan.Wage $
+ * @version    SVN: $Id: sfFormDoctrine.class.php 32740 2011-07-09 09:24:03Z fabien $
  */
 abstract class sfFormDoctrine extends sfFormObject
 {
@@ -187,7 +187,7 @@ abstract class sfFormDoctrine extends sfFormObject
         if ($this->validatorSchema[$field] instanceof sfValidatorFile)
         {
           $values[$field] = $this->processUploadedFile($field, null, $valuesToProcess);
-        }
+        }          
       }
     }
 
@@ -402,11 +402,11 @@ abstract class sfFormDoctrine extends sfFormObject
 
   /**
    * Returns the name of the related model.
-   *
+   * 
    * @param string $alias A relation alias
-   *
+   * 
    * @return string
-   *
+   * 
    * @throws InvalidArgumentException If no relation with the supplied alias exists on the current model
    */
   protected function getRelatedModelName($alias)
@@ -415,7 +415,7 @@ abstract class sfFormDoctrine extends sfFormObject
 
     if (!$table->hasRelation($alias))
     {
-      throw new InvalidArgumentException(sprintf('The "%s" model has to "%s" relation.', $this->getModelName(), $alias));
+      throw new InvalidArgumentException(sprintf('The "%s" model has no "%s" relation.', $this->getModelName(), $alias));
     }
 
     $relation = $table->getRelation($alias);

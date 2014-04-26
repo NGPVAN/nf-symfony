@@ -81,7 +81,7 @@ class CoverageSetupTask extends Task
 		$this->classpath = new Path();
 		return $this->classpath;
 	}
-
+	
 	/**
 	 * Iterate over all filesets and return the filename of all files.
 	 *
@@ -101,14 +101,14 @@ class CoverageSetupTask extends Task
 			foreach ($includedFiles as $file)
 			{
 				$fs = new PhingFile(realpath($ds->getBaseDir()), $file);
-
+					
 				$files[] = array('key' => strtolower($fs->getAbsolutePath()), 'fullname' => $fs->getAbsolutePath());
 			}
 		}
 
 		return $files;
 	}
-
+	
 	function init()
 	{
 		if (!extension_loaded('xdebug'))
@@ -129,7 +129,7 @@ class CoverageSetupTask extends Task
 		{
 			$fullname = $file['fullname'];
 			$filename = $file['key'];
-
+			
 			$props->setProperty($filename, serialize(array('fullname' => $fullname, 'coverage' => array())));
 		}
 
@@ -138,20 +138,21 @@ class CoverageSetupTask extends Task
 		$props->store($dbfile);
 
 		$this->project->setProperty('coverage.database', $dbfile->getAbsolutePath());
-
+	
 		foreach ($files as $file)
 		{
 			$fullname = $file['fullname'];
-
+			
 			xdebug_start_code_coverage(XDEBUG_CC_DEAD_CODE | XDEBUG_CC_UNUSED);
-
+			
 			Phing::__import($fullname, $this->classpath);
-
+			
 			$coverage = xdebug_get_code_coverage();
-
+			
 			xdebug_stop_code_coverage();
-
+			
 			CoverageMerger::merge($this->project, array($coverage));
 		}
 	}
 }
+

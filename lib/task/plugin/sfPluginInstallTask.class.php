@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -16,7 +16,7 @@ require_once(dirname(__FILE__).'/sfPluginBaseTask.class.php');
  * @package    symfony
  * @subpackage task
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfPluginInstallTask.class.php 21908 2009-09-11 12:06:21Z fabien $
+ * @version    SVN: $Id: sfPluginInstallTask.class.php 23922 2009-11-14 14:58:38Z fabien $
  */
 class sfPluginInstallTask extends sfPluginBaseTask
 {
@@ -37,7 +37,6 @@ class sfPluginInstallTask extends sfPluginBaseTask
       new sfCommandOption('force-license', null, sfCommandOption::PARAMETER_NONE, 'Whether to force installation even if the license is not MIT like'),
     ));
 
-    $this->aliases = array('plugin-install');
     $this->namespace = 'plugin';
     $this->name = 'install';
 

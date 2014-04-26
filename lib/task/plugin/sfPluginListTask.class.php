@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -16,7 +16,7 @@ require_once(dirname(__FILE__).'/sfPluginBaseTask.class.php');
  * @package    symfony
  * @subpackage task
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfPluginListTask.class.php 7655 2008-02-28 09:52:40Z fabien $
+ * @version    SVN: $Id: sfPluginListTask.class.php 23922 2009-11-14 14:58:38Z fabien $
  */
 class sfPluginListTask extends sfPluginBaseTask
 {
@@ -25,7 +25,6 @@ class sfPluginListTask extends sfPluginBaseTask
    */
   protected function configure()
   {
-    $this->aliases = array('plugin-list');
     $this->namespace = 'plugin';
     $this->name = 'list';
 

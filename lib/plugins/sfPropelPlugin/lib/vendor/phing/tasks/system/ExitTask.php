@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
-
+ 
 require_once 'phing/Task.php';
 
 /**
@@ -30,7 +30,7 @@ require_once 'phing/Task.php';
  * @version   $Revision: 1.7 $
  * @package   phing.tasks.system
  */
-class ExitTask extends Task {
+class ExitTask extends Task { 
 
     private $message;
     private $ifCondition;
@@ -76,7 +76,7 @@ class ExitTask extends Task {
      */
     public function main()  {
         if ($this->testIfCondition() && $this->testUnlessCondition()) {
-            if ($this->message !== null) {
+            if ($this->message !== null) { 
                 throw new BuildException($this->message);
             } else {
                 throw new BuildException("No message");
@@ -101,10 +101,10 @@ class ExitTask extends Task {
         if ($this->ifCondition === null || $this->ifCondition === "") {
             return true;
         }
-
+        
         return $this->project->getProperty($this->ifCondition) !== null;
     }
-
+    
     /**
      * @return boolean
      */

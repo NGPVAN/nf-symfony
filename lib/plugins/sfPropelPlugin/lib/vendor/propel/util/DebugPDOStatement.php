@@ -34,16 +34,16 @@ class DebugPDOStatement extends PDOStatement
 
 	/**
 	 * The PDO connection from which this instance was created.
-	 *
+	 * 
 	 * @var        DebugPDO
 	 */
 	protected $pdo;
-
+	
 	/**
 	 * Hashmap for resolving the PDO::PARAM_* class constants to their human-readable names.
-	 *
+	 * 
 	 * This is only used in logging the binding of variables.
-	 *
+	 * 
 	 * @see        self::bindValue()
 	 * @var        array
 	 */
@@ -63,7 +63,7 @@ class DebugPDOStatement extends PDOStatement
 	/**
 	 * Construct a new statement class with reference to main DebugPDO object from
 	 * which this instance was created.
-	 *
+	 * 
 	 * @param      DebugPDO $pdo Reference to the parent PDO instance.
 	 */
 	protected function __construct(DebugPDO $pdo)
@@ -74,36 +74,36 @@ class DebugPDOStatement extends PDOStatement
 	public function getExecutedQueryString()
 	{
 		$sql = $this->queryString;
-
+		
 		$matches = array();
 		if (preg_match_all('/(:p[0-9]+\b)/', $sql, $matches)) {
 			$size = count($matches[1]);
-			for ($i = $size-1; $i >= 0; $i--) {
+			for ($i = $size-1; $i >= 0; $i--) { 
 				$pos = $matches[1][$i];
 				$sql = str_replace($pos, $this->boundValues[$pos], $sql);
 			}
 		}
-
+		
 		return $sql;
 	}
 
 	/**
 	 * Executes a prepared statement.  Returns a boolean value indicating success.
-	 *
+	 * 
 	 * Overridden for query counting and logging.
-	 *
+	 * 
 	 * @return     bool
 	 */
 	public function execute($input_parameters = null)
 	{
 		$debug	= $this->pdo->getDebugSnapshot();
 		$return	= parent::execute($input_parameters);
-
+		
 		$sql = $this->getExecutedQueryString();
 		$this->pdo->log($sql, null, __METHOD__, $debug);
-		$this->pdo->setLastExecutedQuery($sql);
+		$this->pdo->setLastExecutedQuery($sql); 
 		$this->pdo->incrementQueryCount();
-
+		
 		return $return;
 	}
 
@@ -125,10 +125,10 @@ class DebugPDOStatement extends PDOStatement
 		$msg		= "Binding $valuestr at position $pos w/ PDO type $typestr";
 
     $this->boundValues[$pos] = $valuestr;
-
+		
 		$this->pdo->log($msg, null, __METHOD__, $debug);
-
+		
 		return $return;
 	}
-
+	
 }

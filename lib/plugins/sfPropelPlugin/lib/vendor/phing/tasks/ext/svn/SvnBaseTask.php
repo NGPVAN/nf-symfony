@@ -18,14 +18,14 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
-
+ 
 include_once 'phing/Task.php';
 
 /**
  * Base class for Subversion tasks
  *
  * @author Michiel Rook <michiel.rook@gmail.com>
- * @author Andrew Eddie <andrew.eddie@jamboworks.com>
+ * @author Andrew Eddie <andrew.eddie@jamboworks.com> 
  * @version $Id: SvnBaseTask.php 329 2007-12-22 17:12:59Z mrook $
  * @package phing.tasks.ext.svn
  * @see VersionControl_SVN
@@ -34,17 +34,17 @@ include_once 'phing/Task.php';
 abstract class SvnBaseTask extends Task
 {
 	private $workingCopy = "";
-
+	
 	private $repositoryUrl = "";
-
+	
 	private $svnPath = "/usr/bin/svn";
-
+	
 	private $svn = NULL;
-
+	
 	private $mode = "";
-
+	
 	private $svnArgs = array();
-
+	
 	private $svnSwitches = array();
 
 	private $toDir = "";
@@ -197,7 +197,7 @@ abstract class SvnBaseTask extends Task
 	{
 		return isset( $this->svnSwitches['no-auth-cache'] ) ? $this->svnSwitches['no-auth-cache'] : '';
 	}
-
+	
 	/**
 	 * Sets the non-recursive switch
 	 */
@@ -205,7 +205,7 @@ abstract class SvnBaseTask extends Task
 	{
 		$this->svnSwitches['non-recursive'] = is_bool($value) ? !$value : TRUE;
 	}
-
+	
 	/**
 	 * Returns the non-recursive switch
 	 */
@@ -221,7 +221,7 @@ abstract class SvnBaseTask extends Task
 	{
 		$this->svnSwitches['ignore-externals'] = $value;
 	}
-
+	
 	/**
 	 * Returns the ignore-externals switch
 	 */
@@ -229,7 +229,7 @@ abstract class SvnBaseTask extends Task
 	{
 		return isset( $this->svnSwitches['ignore-externals'] ) ? $this->svnSwitches['ignore-externals'] : '';
 	}
-
+	
 	/**
 	 * Creates a VersionControl_SVN class based on $mode
 	 *
@@ -239,11 +239,11 @@ abstract class SvnBaseTask extends Task
 	protected function setup($mode)
 	{
 		$this->mode = $mode;
-
+		
 		// Set up runtime options. Will be passed to all
 		// subclasses.
 		$options = array('fetchmode' => VERSIONCONTROL_SVN_FETCHMODE_ASSOC, 'svn_path' => $this->getSvnPath());
-
+		
 		// Pass array of subcommands we need to factory
 		$this->svn = VersionControl_SVN::factory($mode, $options);
 
@@ -283,7 +283,7 @@ abstract class SvnBaseTask extends Task
 			}
 		}
 	}
-
+	
 	/**
 	 * Executes the constructed VersionControl_SVN instance
 	 *
@@ -294,13 +294,13 @@ abstract class SvnBaseTask extends Task
 	protected function run($args = array(), $switches = array())
 	{
 		$svnstack = PEAR_ErrorStack::singleton('VersionControl_SVN');
-
+		
 		$tempArgs = $this->svnArgs;
-
+		
 		$tempArgs = array_merge($tempArgs, $args);
 
 		$tempSwitches = $this->svnSwitches;
-
+		
 		$tempSwitches = array_merge($tempSwitches, $switches);
 
 		if ($output = $this->svn->run($tempArgs, $tempSwitches))
@@ -318,3 +318,4 @@ abstract class SvnBaseTask extends Task
 		}
 	}
 }
+

@@ -33,7 +33,6 @@ class sfDoctrineDeleteModelFilesTask extends sfDoctrineBaseTask
       new sfCommandOption('extension', null, sfCommandOption::PARAMETER_REQUIRED | sfCommandOption::IS_ARRAY, 'Filename extension to remove'),
     ));
 
-    $this->aliases = array();
     $this->namespace = 'doctrine';
     $this->name = 'delete-model-files';
     $this->briefDescription = 'Delete all the related auto generated files for a given model name.';
@@ -101,10 +100,10 @@ EOF;
 
   /**
    * Converts an array of values to a regular expression pattern fragment.
-   *
+   * 
    * @param array  $values    An array of values for the pattern
    * @param string $delimiter The regular expression delimiter
-   *
+   * 
    * @return string A regular expression fragment
    */
   protected function valuesToRegex($values, $delimiter = '/')

@@ -124,7 +124,7 @@ class AvailableTask extends Task {
 		}
 		return $file->exists();
 	}
-
+	
 	private function _checkResource($resource) {
 		if (null != ($resourcePath = Phing::getResourcePath($resource))) {
 			return $this->_checkFile1(new PhingFile($resourcePath));

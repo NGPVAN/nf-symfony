@@ -51,7 +51,7 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
             if ($pos !== false) {
                 $name = substr($term[0], 0, $pos);
 
-                $term[0] = $this->query->parseFunctionExpression($term[0]);
+                $term[0] = $this->query->parseFunctionExpression($term[0], array($this, 'parse'));
             } else {
                 if (substr($term[0], 0, 1) !== "'" && substr($term[0], -1) !== "'") {
 
@@ -60,7 +60,7 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
                             $e = explode('.', $term[0]);
 
                             $field = array_pop($e);
-
+                            
                             // Check if field name still has comma
                             if (($pos = strpos($field, ',')) !== false) {
                                 $field = substr($field, 0, $pos);
@@ -102,6 +102,9 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
 
                                 // build sql expression
                                 $term[0] = $conn->quoteIdentifier($tableAlias) . '.' . $conn->quoteIdentifier($field);
+                                
+                                // driver specific modifications
+                                $term[0] = method_exists($conn, 'modifyOrderByColumn') ? $conn->modifyOrderByColumn($table, $field, $term[0]) : $term[0];
                             } else {
                                 // build sql expression
                                 $field = $this->query->getRoot()->getColumnName($field);
@@ -116,7 +119,7 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
                             $componentAlias = $this->query->getRootAlias();
 
                             $found = false;
-
+                            
                             // Check if field name still has comma
                             if (($pos = strpos($term[0], ',')) !== false) {
                                 $term[0] = substr($term[0], 0, $pos);
@@ -136,7 +139,7 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
                                     $def = $table->getDefinitionOf($term[0]);
 
                                     // get the actual column name from field name
-                                    $term[0] = $table->getColumnName($term[0]);
+                                    $field = $table->getColumnName($term[0]);
 
 
                                     if (isset($def['owner'])) {
@@ -149,11 +152,14 @@ class Doctrine_Query_Orderby extends Doctrine_Query_Part
                                     if ($this->query->getType() === Doctrine_Query::SELECT) {
                                         // build sql expression
                                         $term[0] = $conn->quoteIdentifier($tableAlias)
-                                                 . '.' . $conn->quoteIdentifier($term[0]);
+                                                 . '.' . $conn->quoteIdentifier($field);
                                     } else {
                                         // build sql expression
-                                        $term[0] = $conn->quoteIdentifier($term[0]);
+                                        $term[0] = $conn->quoteIdentifier($field);
                                     }
+                                    
+                                    // driver specific modifications
+                                    $term[0] = method_exists($conn, 'modifyOrderByColumn') ? $conn->modifyOrderByColumn($table, $field, $term[0]) : $term[0];
                                 } else {
                                     $found = false;
                                 }

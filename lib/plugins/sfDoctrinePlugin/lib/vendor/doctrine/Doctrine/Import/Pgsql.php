@@ -1,6 +1,6 @@
 <?php
 /*
- *  $Id: Pgsql.php 7641 2010-06-08 14:50:30Z jwage $
+ *  $Id: Pgsql.php 7689 2010-08-25 23:50:42Z jwage $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -26,7 +26,7 @@
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Paul Cooper <pgc@ucecom.com>
  * @author      Lukas Smith <smith@pooteeweet.org> (PEAR MDB2 library)
- * @version     $Revision: 7641 $
+ * @version     $Revision: 7689 $
  * @link        www.doctrine-project.org
  * @since       1.0
  */
@@ -98,7 +98,6 @@ class Doctrine_Import_Pgsql extends Doctrine_Import
                                                      column_name as field,
                                                      udt_name as type,
                                                      data_type as complete_type,
-                                                     t.typtype AS typtype,
                                                      is_nullable as isnotnull,
                                                      column_default as default,
                                                      (
@@ -108,7 +107,6 @@ class Doctrine_Import_Pgsql extends Doctrine_Import
                                                          AND a.attnum > 0 AND a.attrelid = c.oid AND a.atttypid = t.oid
                                                          AND c.oid = pg_index.indrelid AND a.attnum = ANY (pg_index.indkey)
                                                          AND pg_index.indisprimary = 't'
-                                                         AND format_type(a.atttypid, a.atttypmod) NOT LIKE 'information_schema%%'
                                                      ) as pri,
                                                      character_maximum_length as length
                                                    FROM information_schema.COLUMNS
@@ -176,7 +174,7 @@ class Doctrine_Import_Pgsql extends Doctrine_Import
                 $length = preg_replace('~.*\(([0-9]*)\).*~', '$1', $val['complete_type']);
                 $val['length'] = $length;
             }
-
+            
             $decl = $this->conn->dataDict->getPortableDeclaration($val);
 
             $description = array(
@@ -192,10 +190,10 @@ class Doctrine_Import_Pgsql extends Doctrine_Import
                 'primary'   => ($val['pri'] == 't'),
             );
 
-            // If postgres enum type
+            // If postgres enum type            
             if ($val['typtype'] == 'e'){
                 $description['default'] = isset($decl['default']) ? $decl['default'] : null;
-                $t_result = $this->conn->fetchAssoc(sprintf('select enum_range(null::%s) as range ', $decl['enum_name']));
+                $t_result = $this->conn->fetchAssoc(sprintf('select enum_range(null::%s) as range ', $decl['enum_name']));                
                 if (isset($t_result[0])){
                     $range =  $t_result[0]['range'];
                     $range = str_replace('{','',$range);
@@ -205,11 +203,11 @@ class Doctrine_Import_Pgsql extends Doctrine_Import
                 }
             }
 
-            $matches = array();
+            $matches = array(); 
 
-            if (preg_match("/^nextval\('(.*)'(::.*)?\)$/", $description['default'], $matches)) {
-                $description['sequence'] = $this->conn->formatter->fixSequenceName($matches[1]);
-                $description['default'] = null;
+            if (preg_match("/^nextval\('(.*)'(::.*)?\)$/", $description['default'], $matches)) { 
+                $description['sequence'] = $this->conn->formatter->fixSequenceName($matches[1]); 
+                $description['default'] = null; 
             } else if (preg_match("/^'(.*)'::character varying$/", $description['default'], $matches)) {
                 $description['default'] = $matches[1];
             } else if (preg_match("/^(.*)::character varying$/", $description['default'], $matches)) {
@@ -224,7 +222,7 @@ class Doctrine_Import_Pgsql extends Doctrine_Import
 
             $columns[$val['field']] = $description;
         }
-
+        
         return $columns;
     }
 

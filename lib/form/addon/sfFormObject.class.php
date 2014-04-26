@@ -10,11 +10,11 @@
 
 /**
  * Base class for forms that deal with a single object.
- *
+ * 
  * @package    symfony
  * @subpackage form
  * @author     Kris Wallsmith <kris.wallsmith@symfony-project.com>
- * @version    SVN: $Id: sfFormObject.class.php 22917 2009-10-10 13:44:53Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfFormObject.class.php 33250 2011-12-12 16:02:15Z fabien $
  */
 abstract class sfFormObject extends BaseForm
 {
@@ -24,7 +24,7 @@ abstract class sfFormObject extends BaseForm
 
   /**
    * Returns the current model name.
-   *
+   * 
    * @return string
    */
   abstract public function getModelName();
@@ -50,7 +50,7 @@ abstract class sfFormObject extends BaseForm
    * Processes cleaned up values.
    *
    * @param  array $values An array of values
-   *
+   * 
    * @return array An array of cleaned up values
    */
   abstract public function processValues($values);
@@ -108,7 +108,7 @@ abstract class sfFormObject extends BaseForm
    * @return mixed The current saved object
    *
    * @see doSave()
-   *
+   * 
    * @throws sfValidatorError If the form is not valid
    */
   public function save($con = null)
@@ -241,8 +241,8 @@ abstract class sfFormObject extends BaseForm
     {
       if ($form instanceof sfFormObject)
       {
-        $form->saveEmbeddedForms($con);
         $form->getObject()->save($con);
+        $form->saveEmbeddedForms($con);
       }
       else
       {

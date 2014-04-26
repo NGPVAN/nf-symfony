@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -39,7 +39,6 @@ class sfLogRotateTask extends sfBaseTask
       new sfCommandOption('period', null, sfCommandOption::PARAMETER_REQUIRED, 'The period in days', self::DEF_PERIOD),
     ));
 
-    $this->aliases = array('log-rotate');
     $this->namespace = 'log';
     $this->name = 'rotate';
     $this->briefDescription = 'Rotates an application\'s log files';
@@ -69,7 +68,7 @@ EOF;
    *
    * @param  string $app       Application name
    * @param  string $env       Enviroment name
-   * @param  string $period    Period
+   * @param  string $period    Period 
    * @param  string $history   History
    * @param  bool   $override  Override
    *

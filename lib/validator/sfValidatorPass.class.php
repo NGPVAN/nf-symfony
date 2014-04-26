@@ -9,7 +9,7 @@
  */
 
 /**
- * sfValidatorPass is an identity validator. It simply returns the value unmodified.
+ * sfValidatorPass is an identity validator. It simply returns the value unmodified. 
  *
  * @package    symfony
  * @subpackage validator

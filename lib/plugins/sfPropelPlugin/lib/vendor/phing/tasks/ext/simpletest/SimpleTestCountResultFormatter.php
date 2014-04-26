@@ -34,7 +34,7 @@ class SimpleTestCountResultFormatter extends SimpleTestResultFormatter
 	const SUCCESS = 0;
 	const FAILURES = 1;
 	const ERRORS = 2;
-
+	
 	function getRetCode()
 	{
 		if ($this->getExceptionCount() != 0)
@@ -45,7 +45,7 @@ class SimpleTestCountResultFormatter extends SimpleTestResultFormatter
 		{
 			return self::FAILURES;
 		}
-
+		
 		return self::SUCCESS;
-	}
+	}	
 }

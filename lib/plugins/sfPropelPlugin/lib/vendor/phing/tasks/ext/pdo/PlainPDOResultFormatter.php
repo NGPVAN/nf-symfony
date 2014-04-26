@@ -23,7 +23,7 @@ require_once 'phing/system/io/PhingFile.php';
 require_once 'phing/tasks/ext/pdo/PDOResultFormatter.php';
 
 /**
- * Plain text formatter for PDO results.
+ * Plain text formatter for PDO results. 
  *
  * @author Hans Lellelid <hans@xmpl.org>
  * @package phing.tasks.ext.pdo
@@ -53,7 +53,7 @@ class PlainPDOResultFormatter extends PDOResultFormatter
 	/**
 	 * Row delimiter.
 	 * Defaults to PHP_EOL.
-	 * @var string
+	 * @var string 
 	 */
 	private $rowdelimiter = PHP_EOL;
 
@@ -116,7 +116,7 @@ class PlainPDOResultFormatter extends PDOResultFormatter
 			}
 			$line .= $columnValue;
 		}
-
+		
 		$this->out->write($line);
 		$this->out->write($this->rowdelimiter);
 
@@ -126,5 +126,5 @@ class PlainPDOResultFormatter extends PDOResultFormatter
 	{
 		return new PhingFile('results.txt');
 	}
-
+	
 }

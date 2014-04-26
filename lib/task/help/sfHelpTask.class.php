@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage task
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfHelpTask.class.php 21908 2009-09-11 12:06:21Z fabien $
+ * @version    SVN: $Id: sfHelpTask.class.php 23922 2009-11-14 14:58:38Z fabien $
  */
 class sfHelpTask extends sfCommandApplicationTask
 {
@@ -30,8 +30,6 @@ class sfHelpTask extends sfCommandApplicationTask
     $this->addOptions(array(
       new sfCommandOption('xml', null, sfCommandOption::PARAMETER_NONE, 'To output help as XML'),
     ));
-
-    $this->aliases = array('h');
 
     $this->briefDescription = 'Displays help for a task';
 

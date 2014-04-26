@@ -107,7 +107,7 @@ class SizeSelector extends BaseExtendSelector {
     public function setUnits($units) {
         $i = array_search($units, self::$byteUnits, true);
         if ($i === false) $i = -1; // make it java-like
-
+        
         $this->multiplier = 0;
         if (($i > -1) && ($i < 4)) {
             $this->multiplier = 1000;
@@ -165,13 +165,13 @@ class SizeSelector extends BaseExtendSelector {
                                 . $parameters[$i]->getValue());
                            }
                         break;
-                    case self::UNITS_KEY:
+                    case self::UNITS_KEY:                                                
                         $this->setUnits($parameters[$i]->getValue());
                         break;
                     case self::WHEN_KEY:
                         $this->setWhen($parameters[$i]->getValue());
                         break;
-                    default:
+                    default:    
                         $this->setError("Invalid parameter " . $paramname);
                 }
             }
@@ -223,5 +223,6 @@ class SizeSelector extends BaseExtendSelector {
             return ($file->length() === $this->sizelimit);
         }
     }
-
+    
 }
+

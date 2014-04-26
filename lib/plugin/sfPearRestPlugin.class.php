@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage plugin
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfPearRestPlugin.class.php 31397 2010-11-15 16:10:28Z fabien $
+ * @version    SVN: $Id: sfPearRestPlugin.class.php 31396 2010-11-15 16:08:26Z fabien $
  */
 class sfPearRestPlugin extends sfPearRest11
 {
@@ -86,7 +86,7 @@ class sfPearRestPlugin extends sfPearRest11
 
     if (PEAR::isError($info))
     {
-      throw new sfPluginRestException(sprintf('Unable to get plugin licence information for plugin "%s": %s', $plugin, $info->getMessage()));
+      throw new sfPluginRestException(sprintf('Unable to get plugin licence information for plugin "%s": %s', $plugin, $info->getMessage())); 
     }
 
     if (null === $info)

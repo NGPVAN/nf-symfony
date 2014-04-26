@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
-
+ 
 /**
  *  Utility class for generating necessary server-specific SQL commands
  *
@@ -31,3 +31,4 @@ abstract class DbmsSyntax
 {
 	public abstract function generateTimestamp();
 }
+

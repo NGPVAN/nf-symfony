@@ -323,7 +323,7 @@ class Criteria implements IteratorAggregate {
 	}
 
 	/**
-	 * Does this Criteria object contain the specified key and does it have a value set for the key
+	 * Does this Criteria object contain the specified key and does it have a value set for the key 
 	 *
 	 * @param      string $column [table.]column
 	 * @return     boolean True if this Criteria object contain the specified key and a value for that key
@@ -646,14 +646,14 @@ class Criteria implements IteratorAggregate {
       }
     }
 		$join->setJoinType($operator);
-
+		
 		return $this->addJoinObject($join);
 	}
 
 	/**
 	 * Add a join with multiple conditions
 	 * see http://propel.phpdb.org/trac/ticket/167, http://propel.phpdb.org/trac/ticket/606
-	 *
+	 * 
 	 * Example usage:
 	 * $c->addMultipleJoin(array(
 	 *     array(LeftPeer::LEFT_COLUMN, RightPeer::RIGHT_COLUMN),  // if no third argument, defaults to Criteria::EQUAL
@@ -661,24 +661,24 @@ class Criteria implements IteratorAggregate {
 	 *   ),
 	 *   Criteria::LEFT_JOIN
  	 * );
-	 *
+	 * 
 	 * @see        addJoin()
 	 * @param      array $conditions An array of conditions, each condition being an array (left, right, operator)
 	 * @param      string $joinType  A String with the join operator. Defaults to an implicit join.
 	 *
 	 * @return     Criteria A modified Criteria object.
 	 */
-	public function addMultipleJoin($conditions, $joinType = null)
+	public function addMultipleJoin($conditions, $joinType = null) 
   {
 		$join = new Join();
 		foreach ($conditions as $condition) {
 		  $join->addCondition($condition[0], $condition[1], isset($condition[2]) ? $condition[2] : Criteria::EQUAL);
 		}
 		$join->setJoinType($joinType);
-
+		
 		return $this->addJoinObject($join);
 	}
-
+	
 	/**
 	 * Add a join object to the Criteria
 	 *
@@ -831,10 +831,10 @@ class Criteria implements IteratorAggregate {
 		$this->selectColumns[] = $name;
 		return $this;
 	}
-
+	
 	/**
 	 * Whether this Criteria has any select columns.
-	 *
+	 * 
 	 * This will include columns added with addAsColumn() method.
 	 *
 	 * @return     boolean
@@ -845,7 +845,7 @@ class Criteria implements IteratorAggregate {
 	{
 		return (!empty($this->selectColumns) || !empty($this->asColumns));
 	}
-
+	
 	/**
 	 * Get select columns.
 	 *
@@ -1324,7 +1324,7 @@ class Criterion  {
 			$this->table = null;
 			$this->column = $column;
 		} else {
-			$this->table = substr($column, 0, $dotPos);
+			$this->table = substr($column, 0, $dotPos); 
 			$this->column = substr($column, $dotPos+1, strlen($column));
 		}
 		$this->comparison = ($comparison === null ? Criteria::EQUAL : $comparison);
@@ -1534,7 +1534,7 @@ class Criterion  {
 
 			// OPTION 1:  table.column IN (?, ?) or table.column NOT IN (?, ?)
 			if ($this->comparison === Criteria::IN || $this->comparison === Criteria::NOT_IN) {
-
+				
 				$_bindParams = array(); // the param names used in query building
 				$_idxstart = count($params);
 				$valuesLength = 0;
@@ -1568,9 +1568,9 @@ class Criterion  {
 						$field = $db->ignoreCase($field);
 					}
 				}
-
+				
 				$params[] = array('table' => $realtable, 'column' => $this->column, 'value' => $this->value);
-
+				
 				$sb .= $field . $this->comparison;
 
 				// If selection is case insensitive use SQL UPPER() function
@@ -1580,7 +1580,7 @@ class Criterion  {
 				} else {
 					$sb .= ':p'.count($params);
 				}
-
+				
 			// OPTION 3:  table.column = ? or table.column >= ? etc. (traditional expressions, the default)
 			} else {
 
@@ -1592,9 +1592,9 @@ class Criterion  {
 					if ($this->value === Criteria::CURRENT_DATE || $this->value === Criteria::CURRENT_TIME || $this->value === Criteria::CURRENT_TIMESTAMP) {
 						$sb .= $field . $this->comparison . $this->value;
 					} else {
-
+						
 						$params[] = array('table' => $realtable, 'column' => $this->column, 'value' => $this->value);
-
+						
 						// default case, it is a normal col = value expression; value
 						// will be replaced w/ '?' and will be inserted later using PDO bindValue()
 						if ($this->ignoreStringCase) {
@@ -1602,7 +1602,7 @@ class Criterion  {
 						} else {
 							$sb .= $field . $this->comparison . ':p'.count($params);
 						}
-
+						
 					}
 				} else {
 

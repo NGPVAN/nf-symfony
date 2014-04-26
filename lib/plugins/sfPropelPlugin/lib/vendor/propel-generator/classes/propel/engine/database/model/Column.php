@@ -193,7 +193,7 @@ class Column extends XMLElement {
       $this->phpNamingMethod = $this->getAttribute("phpNamingMethod", $this->parentTable->getDatabase()->getDefaultPhpNamingMethod());
 
       $this->isPrimaryString = $this->booleanValue($this->getAttribute("primaryString"));
-
+      
       $this->isPrimaryKey = $this->booleanValue($this->getAttribute("primaryKey"));
 
       $this->isNodeKey = $this->booleanValue($this->getAttribute("nodeKey"));
@@ -308,10 +308,10 @@ class Column extends XMLElement {
 
   /**
    * Set name to use in PHP sources.
-   *
+   * 
    * It will generate a phpName from it's name if no
    * $phpName is passed.
-   *
+   * 
    * @param   String $phpName PhpName to be set
    */
   public function setPhpName($phpName = null)
@@ -556,7 +556,7 @@ class Column extends XMLElement {
   }
 
   /**
-   * Set whether the column is the primary string,
+   * Set whether the column is the primary string, 
    * i.e. whether its value is the default string representation of the table
    * @param      boolean $v
    */
@@ -997,7 +997,7 @@ class Column extends XMLElement {
     }
     return $dflt;
   }
-
+  
   /**
    * Set a string that will give this column a default value.
    */
@@ -1177,7 +1177,7 @@ class Column extends XMLElement {
     $sb .= $this->getAutoIncrementString();
     return trim($sb);
   }
-
+  
   public static function generatePhpName($name, $phpNamingMethod = PhpNameGenerator::CONV_METHOD_CLEAN, $namePrefix = null) {
     return NameFactory::generateName(NameFactory::PHP_GENERATOR, array($name, $phpNamingMethod, $namePrefix));
   }

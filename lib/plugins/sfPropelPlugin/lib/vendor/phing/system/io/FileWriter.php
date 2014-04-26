@@ -1,7 +1,7 @@
 <?php
 /*
- *  $Id: FileWriter.php 227 2007-08-28 02:17:00Z hans $
- *
+ *  $Id: FileWriter.php 227 2007-08-28 02:17:00Z hans $  
+ * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -28,7 +28,7 @@ require_once 'phing/system/io/FileOutputStream.php';
  * @package   phing.system.io
  */
 class FileWriter extends OutputStreamWriter {
-
+    
     /**
      * Construct a new FileWriter.
      * @param mixed $file PhingFile or string pathname.
@@ -39,3 +39,4 @@ class FileWriter extends OutputStreamWriter {
     	parent::__construct($out);
     }
 }
+

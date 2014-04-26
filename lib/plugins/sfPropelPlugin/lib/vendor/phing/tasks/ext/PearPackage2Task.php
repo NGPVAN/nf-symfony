@@ -100,7 +100,7 @@ class PearPackage2Task extends PearPackageTask {
     {
         $this->pkg->setPackage($this->package);
         $this->pkg->setDate(strftime('%Y-%m-%d'));
-        $this->pkg->setTime(strftime('%H:%M:%S'));
+        $this->pkg->setTime(strftime('%H:%M:%S')); 
 
         $newopts = array();
         foreach ($this->options as $opt) {
@@ -223,11 +223,11 @@ class PearPackage2Task extends PearPackageTask {
                 case 'replacements':
                     $replacements = $map->getValue();
 
-                    foreach($replacements as $replacement) {
+                    foreach($replacements as $replacement) { 
                         $this->pkg->addReplacement(
-                            $replacement['path'],
-							$replacement['type'],
-							$replacement['from'],
+                            $replacement['path'], 
+							$replacement['type'], 
+							$replacement['from'], 
 							$replacement['to']
 						);
 					}

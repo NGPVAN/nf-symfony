@@ -26,7 +26,7 @@ require_once 'phing/tasks/ext/ioncube/IoncubeComment.php';
  * Invokes the ionCube Encoder (PHP4 or PHP5)
  *
  * @author Michiel Rook <michiel.rook@gmail.com>
- * @author Andrew Eddie <andrew.eddie@jamboworks.com>
+ * @author Andrew Eddie <andrew.eddie@jamboworks.com> 
  * @version $Id: IoncubeEncoderTask.php 325 2007-12-20 15:44:58Z hans $
  * @package phing.tasks.ext.ioncube
  * @since 2.2.0
@@ -34,15 +34,15 @@ require_once 'phing/tasks/ext/ioncube/IoncubeComment.php';
 class IoncubeEncoderTask extends Task
 {
 	private $ionSwitches = array();
-
+	
 	private $ionOptions = array();
-
+	
 	private $ionOptionsXS = array();
 
 	private $comments = array();
-
+	
 	private $encoderName = 'ioncube_encoder';
-
+	
 	private $fromDir = '';
 
 	private $ioncubePath = '/usr/local/ioncube';
@@ -117,7 +117,7 @@ class IoncubeEncoderTask extends Task
 	{
 		$this->ionOptionsXS['encode'] = $value;
 	}
-
+	
 	/**
 	 * Returns the encode setting
 	 */
@@ -133,7 +133,7 @@ class IoncubeEncoderTask extends Task
 	{
 		$this->ionOptionsXS['encrypt'] = $value;
 	}
-
+	
 	/**
 	 * Returns regexps of additional files to encrypt (separated by space)
 	 */
@@ -149,7 +149,7 @@ class IoncubeEncoderTask extends Task
 	{
 		$this->ionOptions['expire-in'] = $value;
 	}
-
+	
 	/**
 	 * Returns the expireIn setting
 	 */
@@ -159,13 +159,13 @@ class IoncubeEncoderTask extends Task
 	}
 
 	/**
-	 * Sets a YYYY-MM-DD date to expire the files
+	 * Sets a YYYY-MM-DD date to expire the files 
 	 */
 	function setExpireon($value)
 	{
 		$this->ionOptions['expire-on'] = $value;
 	}
-
+	
 	/**
 	 * Returns the expireOn setting
 	 */
@@ -262,7 +262,7 @@ class IoncubeEncoderTask extends Task
 	{
 		$this->ionSwitches['no-doc-comment'] = $value;
 	}
-
+	
 	/**
 	 * Returns the no-doc-comments option
 	 */
@@ -270,7 +270,7 @@ class IoncubeEncoderTask extends Task
 	{
 		return $this->ionSwitches['no-doc-comment'];
 	}
-
+	
 	/**
 	 * Sets the obfuscate option
 	 */
@@ -278,7 +278,7 @@ class IoncubeEncoderTask extends Task
 	{
 		$this->ionOptionsXS['obfuscate'] = $value;
 	}
-
+	
 	/**
 	 * Returns the optimize option
 	 */
@@ -294,7 +294,7 @@ class IoncubeEncoderTask extends Task
 	{
 		$this->ionOptions['obfuscation-key'] = $value;
 	}
-
+	
 	/**
 	 * Returns the optimize option
 	 */
@@ -310,7 +310,7 @@ class IoncubeEncoderTask extends Task
 	{
 		$this->ionOptions['optimize'] = $value;
 	}
-
+	
 	/**
 	 * Returns the optimize option
 	 */
@@ -350,7 +350,7 @@ class IoncubeEncoderTask extends Task
 	{
 		return $this->phpVersion;
 	}
-
+	
 	/**
 	 * Sets the target directory
 	 */
@@ -374,7 +374,7 @@ class IoncubeEncoderTask extends Task
 	{
 		$this->ionSwitches['without-runtime-loader-support'] = $value;
 	}
-
+	
 	/**
 	 * Returns the without-runtime-loader-support option
 	 */
@@ -382,7 +382,7 @@ class IoncubeEncoderTask extends Task
 	{
 		return $this->ionSwitches['without-runtime-loader-support'];
 	}
-
+	
 	/**
 	 * Sets the option to use when encoding target directory already exists (defaults to none)
 	 */
@@ -398,7 +398,7 @@ class IoncubeEncoderTask extends Task
 	{
 		return $this->targetOption;
 	}
-
+	
 	/**
 	 * The main entry point
 	 *
@@ -407,17 +407,17 @@ class IoncubeEncoderTask extends Task
 	function main()
 	{
 		$arguments = $this->constructArguments();
-
+		
 		$encoder = new PhingFile($this->ioncubePath, $this->encoderName . ($this->phpVersion == 5 ? '5' : ''));
-
+		
 		$this->log("Running ionCube Encoder...");
-
+		
 		exec($encoder->__toString() . ' ' . $arguments . " 2>&1", $output, $return);
-
+		
         if ($return != 0)
         {
 			throw new BuildException("Could not execute ionCube Encoder: " . implode(' ', $output));
-        }
+        }       
 	}
 
 	/**
@@ -426,7 +426,7 @@ class IoncubeEncoderTask extends Task
 	private function constructArguments()
 	{
 		$arguments = '';
-
+		
 		foreach ($this->ionSwitches as $name => $value)
 		{
 			if ($value)
@@ -452,7 +452,7 @@ class IoncubeEncoderTask extends Task
 		{
 			$arguments.= "--add-comment '" . $comment->getValue() . "' ";
 		}
-
+		
 		if (!empty($this->targetOption))
 		{
 			switch ($this->targetOption)
@@ -464,14 +464,14 @@ class IoncubeEncoderTask extends Task
 				{
 					$arguments.= "--" . $this->targetOption . "-target ";
 				} break;
-
+				
 				default:
 				{
 					throw new BuildException("Unknown target option '" . $this->targetOption . "'");
 				} break;
 			}
 		}
-
+		
 		if ($this->fromDir != '')
 		{
 			$arguments .= $this->fromDir . ' ';
@@ -481,7 +481,7 @@ class IoncubeEncoderTask extends Task
 		{
 			$arguments .= "-o " . $this->toDir . ' ';
 		}
-
+		
 		return $arguments;
 	}
 }

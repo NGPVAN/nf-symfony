@@ -18,14 +18,14 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
-
+ 
 include_once 'phing/Task.php';
 
 /**
- *  Send a message by mail()
+ *  Send a message by mail() 
  *
- *  <mail to="user@example.org" subject="build complete">The build process is a success...</mail>
- *
+ *  <mail to="user@example.org" subject="build complete">The build process is a success...</mail> 
+ * 
  *  @author   Francois Harvey at SecuriWeb (http://www.securiweb.net)
  *  @version  $Revision: 1.1 $
  *  @package  phing.tasks.ext
@@ -33,13 +33,13 @@ include_once 'phing/Task.php';
 class MailTask extends Task {
 
     protected $recipient;
-
+      
     protected $subject;
-
+    
     protected $msg;
 
     function main() {
-        $this->log('Sending mail to ' . $this->recipient );
+        $this->log('Sending mail to ' . $this->recipient );    
         mail($this->recipient, $this->subject, $this->msg);
     }
 
@@ -52,10 +52,10 @@ class MailTask extends Task {
     function setMessage($msg) {
         $this->msg = (string) $msg;
     }
-
+    
     /** setter for subject **/
     function setSubject($subject) {
-        $this->subject = (string) $subject;
+        $this->subject = (string) $subject;    
     }
 
     /** setter for recipient **/
@@ -67,10 +67,11 @@ class MailTask extends Task {
     function setTo($recipient) {
         $this->recipient = (string) $recipient;
     }
-
+        
     /** Supporting the <mail>Message</mail> syntax. */
     function addText($msg)
     {
         $this->msg = (string) $msg;
     }
 }
+
