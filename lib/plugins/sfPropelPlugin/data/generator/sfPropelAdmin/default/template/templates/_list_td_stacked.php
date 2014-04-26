@@ -10,7 +10,7 @@
   <?php else: ?>
   [?php echo <?php echo $this->getColumnListTag($column) ?> ?]
   <?php endif; ?>
-   -
+   - 
 <?php endforeach; ?>
 <?php endif; ?>
 </td>

@@ -307,7 +307,7 @@ class sfRequestCompat10
    * @param  sfRequest $request A request object
    * @param string $name A file name
    * @param string $key Value to search in the file
-   *
+   * 
    * @return string File value
    */
   static public function getFileValue($request, $name, $key)

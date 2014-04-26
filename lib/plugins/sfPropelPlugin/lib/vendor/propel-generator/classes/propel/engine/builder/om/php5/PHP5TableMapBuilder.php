@@ -293,16 +293,16 @@ class ".$this->getClassname()." extends TableMap {
 	  {
   		$script .= "
 	/**
-	 *
+	 * 
 	 * Gets the list of behaviors registered for this table
-	 *
+	 * 
 	 * @return array Associative array (name => parameters) of behaviors
 	 */
 	public function getBehaviors()
 	{
 		return array(";
       foreach ($behaviors as $behavior)
-      {
+      {        
         $script .= "
 			'{$behavior->getName()}' => array(";
         foreach ($behavior->getParameters() as $key => $value)

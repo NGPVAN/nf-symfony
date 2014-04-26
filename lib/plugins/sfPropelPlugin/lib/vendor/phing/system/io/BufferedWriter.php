@@ -16,9 +16,9 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information please see
- * <http://phing.info>.
+ * <http://phing.info>. 
  */
-
+ 
 include_once 'phing/system/io/Writer.php';
 
 /**
@@ -26,15 +26,15 @@ include_once 'phing/system/io/Writer.php';
  *
  * @author    Hans Lellelid <hans@xmpl.org>
  * @version   $Revision: 1.10 $
- * @package   phing.system.io
+ * @package   phing.system.io 
  */
 class BufferedWriter extends Writer {
-
+    
     /**
      * The size of the buffer in kb.
      */
     private $bufferSize    = 0;
-
+    
     /**
      * @var Writer The Writer we are buffering output to.
      */
@@ -48,24 +48,24 @@ class BufferedWriter extends Writer {
     public function write($buf, $off = null, $len = null) {
         return $this->out->write($buf, $off, $len);
     }
-
+    
     public function newLine() {
         $this->write(PHP_EOL);
     }
-
+    
     public function getResource() {
         return $this->out->getResource();
     }
-
+    
     public function flush() {
     	$this->out->flush();
     }
-
+	
     /**
      * Close attached stream.
      */
     public function close() {
         return $this->out->close();
     }
-
+    
 }

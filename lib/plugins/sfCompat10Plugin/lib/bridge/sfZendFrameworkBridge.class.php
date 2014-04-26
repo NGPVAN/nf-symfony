@@ -48,7 +48,7 @@ class sfZendFrameworkBridge
 
     return true;
   }
-
+  
   /**
    * Detect and return the path to current Zend loader class.
    *

@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
-
+ 
 require_once 'phing/types/selectors/BaseSelectorContainer.php';
 
 /**
@@ -53,10 +53,10 @@ class NoneSelector extends BaseSelectorContainer {
      * @return whether the file should be selected or not
      */
     public function isSelected(PhingFile $basedir, $filename, PhingFile $file) {
-
+        
         $this->validate();
-
-        $selectors = $this->selectorElements();
+        
+        $selectors = $this->selectorElements();        
 
         for($i=0,$size=count($selectors); $i < $size; $i++) {
             $result = $selectors[$i]->isSelected($basedir, $filename, $file);
@@ -68,3 +68,4 @@ class NoneSelector extends BaseSelectorContainer {
     }
 
 }
+

@@ -43,9 +43,9 @@ class PHPUnitTestRunner
 	private $suite = NULL;
 	private $retCode = 0;
 	private $formatters = array();
-
+	
 	private $codecoverage = false;
-
+	
 	private $project = NULL;
 
 	private $groups = array();
@@ -59,7 +59,7 @@ class PHPUnitTestRunner
 		$this->excludeGroups = $excludeGroups;
 		$this->retCode = self::SUCCESS;
 	}
-
+	
 	function setCodecoverage($codecoverage)
 	{
 		$this->codecoverage = $codecoverage;
@@ -73,10 +73,10 @@ class PHPUnitTestRunner
 	function run()
 	{
 		$res = NULL;
-
+		
 		if (PHPUnitUtil::$installedVersion == 3)
 		{
-			require_once 'PHPUnit/Framework/TestSuite.php';
+			require_once 'PHPUnit/Framework/TestSuite.php';			
 			$res = new PHPUnit_Framework_TestResult();
 		}
 		else
@@ -96,11 +96,11 @@ class PHPUnitTestRunner
 		}
 
 		$this->suite->run($res, false, $this->groups, $this->excludeGroups);
-
+		
 		if ($this->codecoverage)
 		{
 			$coverageInformation = $res->getCodeCoverageInformation();
-
+			
 			if (PHPUnitUtil::$installedVersion == 3)
 			{
 				foreach ($coverageInformation as $coverage_info)
@@ -113,7 +113,7 @@ class PHPUnitTestRunner
 				CoverageMerger::merge($this->project, $coverageInformation);
 			}
 		}
-
+		
 		if ($res->errorCount() != 0)
 		{
 			$this->retCode = self::ERRORS;
@@ -137,3 +137,4 @@ class PHPUnitTestRunner
 		return $this->retCode;
 	}
 }
+

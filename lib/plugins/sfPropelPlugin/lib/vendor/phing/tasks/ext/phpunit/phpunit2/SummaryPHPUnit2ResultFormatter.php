@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
-
+ 
 require_once 'PHPUnit2/Framework/Test.php';
 
 require_once 'phing/tasks/ext/phpunit/phpunit2/PHPUnit2ResultFormatter.php';
@@ -30,26 +30,26 @@ require_once 'phing/tasks/ext/phpunit/phpunit2/PHPUnit2ResultFormatter.php';
  * @version $Id: SummaryPHPUnit2ResultFormatter.php 325 2007-12-20 15:44:58Z hans $
  * @package phing.tasks.ext.phpunit.phpunit2
  * @since 2.1.0
- */
+ */	
 class SummaryPHPUnit2ResultFormatter extends PHPUnit2ResultFormatter
 {
 	function endTestSuite(PHPUnit2_Framework_TestSuite $suite)
 	{
 		parent::endTestSuite($suite);
-
+		
 		$sb = "Tests run: " . $this->getRunCount();
 		$sb.= ", Failures: " . $this->getFailureCount();
 		$sb.= ", Errors: " . $this->getErrorCount();
 		$sb.= ", Time elapsed: " . $this->getElapsedTime();
 		$sb.= " sec\n";
-
+		
 		if ($this->out != NULL)
 		{
 			$this->out->write($sb);
 			$this->out->close();
 		}
 	}
-
+	
 	function getExtension()
 	{
 		return NULL;

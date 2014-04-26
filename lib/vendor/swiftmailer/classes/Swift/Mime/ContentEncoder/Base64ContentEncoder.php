@@ -23,7 +23,7 @@ class Swift_Mime_ContentEncoder_Base64ContentEncoder
   extends Swift_Encoder_Base64Encoder
   implements Swift_Mime_ContentEncoder
 {
-
+  
   /**
    * Encode stream $in to stream $out.
    * @param Swift_OutputByteStream $in
@@ -39,15 +39,15 @@ class Swift_Mime_ContentEncoder_Base64ContentEncoder
     {
       $maxLineLength = 76;
     }
-
+    
     $remainder = 0;
-
+    
     while (false !== $bytes = $os->read(8190))
     {
       $encoded = base64_encode($bytes);
       $encodedTransformed = '';
       $thisMaxLineLength = $maxLineLength - $remainder - $firstLineOffset;
-
+      
       while ($thisMaxLineLength < strlen($encoded))
       {
         $encodedTransformed .= substr($encoded, 0, $thisMaxLineLength) . "\r\n";
@@ -56,18 +56,18 @@ class Swift_Mime_ContentEncoder_Base64ContentEncoder
         $thisMaxLineLength = $maxLineLength;
         $remainder = 0;
       }
-
+      
       if (0 < $remainingLength = strlen($encoded))
       {
         $remainder += $remainingLength;
         $encodedTransformed .= $encoded;
         $encoded = null;
       }
-
+      
       $is->write($encodedTransformed);
     }
   }
-
+  
   /**
    * Get the name of this encoding scheme.
    * Returns the string 'base64'.
@@ -77,5 +77,5 @@ class Swift_Mime_ContentEncoder_Base64ContentEncoder
   {
     return 'base64';
   }
-
+  
 }

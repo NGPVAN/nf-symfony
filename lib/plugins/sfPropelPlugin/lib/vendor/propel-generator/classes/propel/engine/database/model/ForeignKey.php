@@ -387,7 +387,7 @@ class ForeignKey extends XMLElement {
 	{
 		return (bool) $this->getInverseFK();
 	}
-
+	
 	public function getInverseFK()
 	{
 		$foreignTable = $this->getForeignTable();

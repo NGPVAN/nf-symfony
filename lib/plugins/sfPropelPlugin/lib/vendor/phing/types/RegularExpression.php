@@ -31,7 +31,7 @@ include_once 'phing/util/regexp/Regexp.php';
  * regular expression type you are using.
  *
  * @author    <a href="mailto:yl@seasonfive.com">Yannick Lecaillez</a>
- * @version   $Revision: 1.6 $ $Date: 2007-12-20 10:44:58 -0500 (Thu, 20 Dec 2007) $
+ * @version   $Revision: 1.6 $ $Date: 2007-12-20 16:44:58 +0100 (jeu 20 déc 2007) $
  * @access    public
  * @see       phing.util.regex.RegexMatcher
  * @package   phing.types
@@ -40,7 +40,7 @@ class RegularExpression extends DataType {
 
     private $regexp   = null;
     private $ignoreCase = false;
-
+    
     function __construct() {
         $this->regexp  = new Regexp();
     }
@@ -52,7 +52,7 @@ class RegularExpression extends DataType {
     function setReplace($replace) {
         $this->regexp->setReplace($replace);
     }
-
+    
     function getPattern($p) {
         if ( $this->isReference() ) {
             $ref = $this->getRef($p);
@@ -69,15 +69,15 @@ class RegularExpression extends DataType {
 
         return $this->regexp->getReplace();
     }
-
+    
     function setIgnoreCase($bit) {
         $this->regexp->setIgnoreCase($bit);
     }
-
+    
     function getIgnoreCase() {
         return $this->regexp->getIgnoreCase();
     }
-
+    
     function getRegexp(Project $p) {
         if ( $this->isReference() ) {
             $ref = $this->getRef($p);
@@ -90,7 +90,7 @@ class RegularExpression extends DataType {
         if ( !$this->checked ) {
             $stk = array();
             array_push($stk, $this);
-            $this->dieOnCircularReference($stk, $p);
+            $this->dieOnCircularReference($stk, $p);            
         }
 
         $o = $this->ref->getReferencedObject($p);
@@ -101,3 +101,5 @@ class RegularExpression extends DataType {
         }
     }
 }
+
+

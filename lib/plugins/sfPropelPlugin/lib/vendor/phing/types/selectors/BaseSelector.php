@@ -77,6 +77,8 @@ abstract class BaseSelector extends DataType implements FileSelector {
         if ($this->getError() !== null) {
             throw new BuildException($this->errmsg);
         }
-    }
+    }   
 
 }
+
+

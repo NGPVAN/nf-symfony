@@ -1,6 +1,6 @@
 <?php decorate_with(dirname(__FILE__).'/defaultLayout.php') ?>
 
-<div class="sfTMessageContainer sfTLock">
+<div class="sfTMessageContainer sfTLock"> 
   <?php echo image_tag('/sf/sf_default/images/icons/lock48.png', array('alt' => 'login required', 'class' => 'sfTMessageIcon', 'size' => '48x48')) ?>
   <div class="sfTMessageWrap">
     <h1>Login Required</h1>

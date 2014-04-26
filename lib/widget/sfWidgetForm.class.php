@@ -330,7 +330,7 @@ abstract class sfWidgetForm extends sfWidget
    * @param  array $parameters  The values to replace the placeholders
    *
    * @return array              The translated texts
-   *
+   * 
    * @see sfWidgetFormSchemaFormatter::translate()
    */
   protected function translateAll(array $texts, array $parameters = array())

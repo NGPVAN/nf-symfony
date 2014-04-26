@@ -60,7 +60,7 @@ class Database extends XMLElement {
 
   /**
    * List of behaviors registered for this table
-   *
+   * 
    * @var array
    */
   protected $behaviors = array();
@@ -380,7 +380,7 @@ class Database extends XMLElement {
   {
     return $this->getAppData()->getPlatform()->getGeneratorConfig();
   }
-
+  
   /**
    * Adds a new Behavior to the database
    * @return Behavior A behavior instance
@@ -399,7 +399,7 @@ class Database extends XMLElement {
       return $this->addBehavior($behavior);
     }
   }
-
+  
   /**
    * Get the database behaviors
    * @return Array of Behavior objects
@@ -408,7 +408,7 @@ class Database extends XMLElement {
   {
     return $this->behaviors;
   }
-
+  
   /**
    * Get one database behavior by name
    * @param string $name the behavior name
@@ -425,14 +425,14 @@ class Database extends XMLElement {
 	  $config = $this->getGeneratorConfig();
     if($config && ($defaultBehaviors = $config->getBuildProperty('behaviorDefault')))
     {
-      // add generic behaviors from build.properties
+      // add generic behaviors from build.properties 
       $defaultBehaviors = explode(',', $defaultBehaviors);
       foreach ($defaultBehaviors as $behavior)
       {
         $this->addBehavior(array('name' => trim($behavior)));
       }
     }
-
+    
     // execute behavior database modifiers
     foreach ($this->getBehaviors() as $behavior)
     {

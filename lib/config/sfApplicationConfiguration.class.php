@@ -118,7 +118,6 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
     }
 
     // load base settings
-    $this->beforeSettingsConfiguration();
     include($configCache->checkConfig('config/settings.yml'));
     if ($file = $configCache->checkConfig('config/app.yml', true))
     {
@@ -147,14 +146,13 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
     ini_set('display_errors', $this->isDebug() ? 'on' : 'off');
     error_reporting(sfConfig::get('sf_error_reporting'));
 
-
     // initialize plugin configuration objects
     $this->initializePlugins();
 
     // compress output
     if (!self::$coreLoaded)
     {
-      ob_start(sfConfig::get('sf_compressed') ? 'ob_gzhandler' : null);
+      ob_start(sfConfig::get('sf_compressed') ? 'ob_gzhandler' : '');
     }
 
     self::$coreLoaded = true;
@@ -180,10 +178,10 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
 
   /**
    * Adds enabled plugins to autoload config.
-   *
+   * 
    * @param   sfEvent $event
    * @param   array   $config
-   *
+   * 
    * @return  array
    */
   public function filterAutoloadConfig(sfEvent $event, array $config)
@@ -219,8 +217,6 @@ abstract class sfApplicationConfiguration extends ProjectConfiguration
   public function checkLock()
   {
     if (
-      $this->hasLockFile(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.'global.lck')
-      ||
       $this->hasLockFile(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.$this->getApplication().'_'.$this->getEnvironment().'-cli.lck', 5)
       ||
       $this->hasLockFile(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.$this->getApplication().'_'.$this->getEnvironment().'.lck')

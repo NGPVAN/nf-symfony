@@ -24,7 +24,7 @@ require_once dirname(__FILE__).'/../../../../helper/JavascriptBaseHelper.php';
  */
 
 /*
- * Provides a set of helpers to call remote methods using what has been labelled
+ * Provides a set of helpers to call remote methods using what has been labelled 
  * AJAX[http://www.adaptivepath.com/publications/essays/archives/000385.php].
  * This means that you can call actions in your controllers without reloading the page,
  * but still update certain parts of it using injections into the DOM.
@@ -269,7 +269,7 @@ require_once dirname(__FILE__).'/../../../../helper/JavascriptBaseHelper.php';
   {
     $options = _parse_attributes($options);
     $options_html = _parse_attributes($options_html);
-
+ 
     if (!isset($options['with']))
     {
       $options['with'] = 'Form.serialize(this.form)';
@@ -280,7 +280,7 @@ require_once dirname(__FILE__).'/../../../../helper/JavascriptBaseHelper.php';
     $options_html['name'] = $name;
     $options_html['src'] = image_path($source);
 
-    if (!isset($options_html['alt']))
+    if (!isset($options_html['alt'])) 
     {
       $path_pos = strrpos($source, '/');
       $dot_pos = strrpos($source, '.');
@@ -288,7 +288,7 @@ require_once dirname(__FILE__).'/../../../../helper/JavascriptBaseHelper.php';
       $nb_str = ($dot_pos ? $dot_pos : strlen($source)) - $begin;
       $options_html['alt'] = ucfirst(substr($source, $begin, $nb_str));
     }
-
+ 
     return tag('input', $options_html, false);
   }
 
@@ -553,7 +553,7 @@ require_once dirname(__FILE__).'/../../../../helper/JavascriptBaseHelper.php';
   /**
    * Makes the elements with the DOM ID specified by '$element_id' sortable
    * by drag-and-drop and if an 'url' is specified make an AJAX call whenever
-   * the sort order has changed. By default, the action called gets the
+   * the sort order has changed. By default, the action called gets the 
    * serialized sortable element as parameters.
    *
    * Example:
@@ -895,7 +895,7 @@ require_once dirname(__FILE__).'/../../../../helper/JavascriptBaseHelper.php';
     {
       $js_options['afterUpdateElement'] = $options['after_update_element'];
     }
-    if (isset($options['param_name']))
+    if (isset($options['param_name'])) 
     {
       $js_options['paramName'] = "'".$options['param_name']."'";
     }

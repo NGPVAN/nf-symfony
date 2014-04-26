@@ -10,7 +10,7 @@
 
 /**
  * Autoload again for dev environments.
- *
+ * 
  * @package    symfony
  * @subpackage autoload
  * @author     Kris Wallsmith <kris.wallsmith@symfony-project.com>
@@ -27,7 +27,7 @@ class sfAutoloadAgain
 
   /**
    * Returns the singleton autoloader.
-   *
+   * 
    * @return sfAutoloadAgain
    */
   static public function getInstance()
@@ -49,9 +49,9 @@ class sfAutoloadAgain
 
   /**
    * Reloads the autoloader.
-   *
+   * 
    * @param  string $class
-   *
+   * 
    * @return boolean
    */
   public function autoload($class)
@@ -101,7 +101,7 @@ class sfAutoloadAgain
 
   /**
    * Returns true if the autoloader is registered.
-   *
+   * 
    * @return boolean
    */
   public function isRegistered()

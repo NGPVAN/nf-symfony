@@ -4,7 +4,7 @@
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
  * (c) 2004-2006 Sean Kerr <sean@code-box.org>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -73,7 +73,7 @@ class sfException extends Exception
   {
   	self::$lastException = null;
   }
-
+  
   /**
    * Prints the stack trace for this exception.
    */
@@ -100,7 +100,7 @@ class sfException extends Exception
         }
       }
 
-      ob_start(sfConfig::get('sf_compressed') ? 'ob_gzhandler' : null);
+      ob_start(sfConfig::get('sf_compressed') ? 'ob_gzhandler' : '');
 
       header('HTTP/1.0 500 Internal Server Error');
     }
@@ -394,7 +394,7 @@ class sfException extends Exception
       {
         $formattedValue = $value;
       }
-
+      
       $result[] = is_int($key) ? $formattedValue : sprintf("'%s' => %s", self::escape($key), $formattedValue);
     }
 
@@ -403,12 +403,12 @@ class sfException extends Exception
 
   /**
    * Formats a file path.
-   *
+   * 
    * @param  string  $file   An absolute file path
    * @param  integer $line   The line number
    * @param  string  $format The output format (txt or html)
    * @param  string  $text   Use this text for the link rather than the file path
-   *
+   * 
    * @return string
    */
   static protected function formatFile($file, $line, $format = 'html', $text = null)
@@ -440,7 +440,7 @@ class sfException extends Exception
     {
       return $value;
     }
-
+    
     return htmlspecialchars($value, ENT_QUOTES, sfConfig::get('sf_charset', 'UTF-8'));
   }
 }

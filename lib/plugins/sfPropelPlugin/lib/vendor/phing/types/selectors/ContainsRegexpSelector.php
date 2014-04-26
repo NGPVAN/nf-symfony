@@ -26,7 +26,7 @@ include_once 'phing/types/RegularExpression.php';
 /**
  * Selector that filters files based on whether they contain a
  * particular string using regexp.
- *
+ * 
  * @author    Hans Lellelid <hans@xmpl.org> (Phing)
  * @author    Bruce Atherton <bruce@callenish.com> (Ant)
  * @version   $Revision: 1.3 $
@@ -36,19 +36,19 @@ class ContainsRegexpSelector extends BaseExtendSelector {
 
     /** @var string The expression set from XML. */
     private $userProvidedExpression;
-
+    
     /** @var Regexp */
     private $myExpression;
-
+     
     private $casesensitive = true;
-
+    
     /** @var RegularExpression */
     private $myRegExp;
-
+    
     const EXPRESSION_KEY = "expression";
-
+    
     const CASE_KEY = "casesensitive";
-
+    
     public function toString() {
         $buf = "{containsregexpselector expression: ";
         $buf .= $this->userProvidedExpression;
@@ -100,7 +100,7 @@ class ContainsRegexpSelector extends BaseExtendSelector {
                         break;
                     default:
                         $this->setError("Invalid parameter " . $paramname);
-                }
+                }                
             } // for each param
         } // if params
     }
@@ -132,19 +132,19 @@ class ContainsRegexpSelector extends BaseExtendSelector {
         if ($file->isDirectory()) {
             return true;
         }
-
+        
         if ($this->myRegExp === null) {
             $this->myRegExp = new RegularExpression();
-            $this->myRegExp->setPattern($this->userProvidedExpression);
+            $this->myRegExp->setPattern($this->userProvidedExpression);            
             if (!$this->casesensitive) {
                 $this->myRegExp->setIgnoreCase(true);
             }
             $this->myExpression = $this->myRegExp->getRegexp($this->getProject());
         }
-
+                        
         $in = null;
         try {
-            $in = new BufferedReader(new FileReader($file));
+            $in = new BufferedReader(new FileReader($file));        
             $teststr = $in->readLine();
             while ($teststr !== null) {
                 if ($this->myExpression->matches($teststr)) {
@@ -157,7 +157,8 @@ class ContainsRegexpSelector extends BaseExtendSelector {
             if ($in) $in->close();
             throw new BuildException("Could not read file " . $filename);
         }
-        $in->close();
+        $in->close();                
     }
 
 }
+

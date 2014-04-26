@@ -1,6 +1,6 @@
 <?php decorate_with(dirname(__FILE__).'/defaultLayout.php') ?>
 
-<div class="sfTMessageContainer sfTAlert">
+<div class="sfTMessageContainer sfTAlert"> 
   <?php echo image_tag('/sf/sf_default/images/icons/cancel48.png', array('alt' => 'page not found', 'class' => 'sfTMessageIcon', 'size' => '48x48')) ?>
   <div class="sfTMessageWrap">
     <h1>Oops! Page Not Found</h1>

@@ -26,7 +26,7 @@ require_once 'phing/listener/DefaultLogger.php';
  *
  *  @author    Andreas Aderhold <andi@binarycloud.com>
  *  @copyright � 2001,2002 THYRELL. All rights reserved
- *  @version   $Revision: 1.4 $ $Date: 2007-08-27 22:17:00 -0400 (Mon, 27 Aug 2007) $
+ *  @version   $Revision: 1.4 $ $Date: 2007-08-28 04:17:00 +0200 (mar 28 aoû 2007) $
  *  @package   phing.listener
  */
 class NoBannerLogger extends DefaultLogger {
@@ -43,11 +43,11 @@ class NoBannerLogger extends DefaultLogger {
 	}
 
 	function messageLogged(BuildEvent $event) {
-
+		
 		if ($event->getPriority() > $this->msgOutputLevel || null === $event->getMessage() || trim($event->getMessage() === "")) {
 			return;
 		}
-
+		
 		if ($this->targetName !== null) {
 			$msg = PHP_EOL . $event->getProject()->getName() . ' > ' . $this->targetName . ':' . PHP_EOL;
 			$this->printMessage($msg, $this->out, $event->getPriority());

@@ -25,7 +25,7 @@ class sfWebRequest extends sfRequest
   const
     PORT_HTTP  = 80,
     PORT_HTTPS = 443;
-
+  
   protected
     $languages              = null,
     $charsets               = null,

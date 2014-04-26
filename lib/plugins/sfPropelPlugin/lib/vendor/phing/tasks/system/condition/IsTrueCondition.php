@@ -31,15 +31,15 @@ require_once 'phing/tasks/system/condition/Condition.php';
  */
 class IsTrueCondition extends ProjectComponent implements Condition {
 
-    /**
+    /**  
      * what we eval
-     */
+     */ 
     private $value;
 
     /**
      * Set the value to be tested.
      * @param boolean $value
-     */
+     */ 
     public function setValue($value) {
         $this->value = $value;
     }
@@ -47,7 +47,7 @@ class IsTrueCondition extends ProjectComponent implements Condition {
     /**
      * return the inverted value;
      * @throws BuildException if someone forgot to spec a value
-     */
+     */ 
     public function evaluate() {
         if ($this->value === null) {
             throw new BuildException("Nothing to test for falsehood");
@@ -56,3 +56,4 @@ class IsTrueCondition extends ProjectComponent implements Condition {
     }
 
 }
+

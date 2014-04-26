@@ -102,7 +102,7 @@ class PropelConvertConfTask extends AbstractPropelDataModelTask {
 		$xmlDom->load($this->xmlConfFile->getAbsolutePath());
 		$xml = simplexml_load_string($xmlDom->saveXML());
 		$phpconf = self::simpleXmlToArray($xml);
-
+		
 		/* For some reason the array generated from runtime-conf.xml has separate
 		 * 'log' section and 'propel' sections. To maintain backward compatibility
 		 * we need to put 'log' back into the 'propel' section.
@@ -116,13 +116,13 @@ class PropelConvertConfTask extends AbstractPropelDataModelTask {
 		if(isset($phpconf['propel'])) {
 			$phpconf = $phpconf['propel'];
 		}
-
+			
 		// add generator version
 		$phpconf['generator_version'] = $this->getGeneratorConfig()->getBuildProperty('version');
-
+		
 		// add classmap
 		$phpconf['classmap'] = $this->getClassMap();
-
+		
 		// Write resulting PHP data to output file:
 
 		$outfile = new PhingFile($this->outputDirectory, $this->outputFile);
@@ -219,7 +219,7 @@ class PropelConvertConfTask extends AbstractPropelDataModelTask {
 		}
 		return $value;
 	}
-
+	
 	/**
 	 * Lists data model classes and builds an associative array className => classPath
 	 * To be used for autoloading
@@ -287,7 +287,7 @@ class PropelConvertConfTask extends AbstractPropelDataModelTask {
 								$classMap[$className] = $classPath;
 							}
 						}
-
+						
 						// ------------------------
 						// Create tree Node classes
 						// ------------------------
@@ -306,7 +306,7 @@ class PropelConvertConfTask extends AbstractPropelDataModelTask {
 				$phpconfClassmap = array_merge($phpconfClassmap, $classMap);
 			}
 		}
-
+		
 		return $phpconfClassmap;
 	}
 }

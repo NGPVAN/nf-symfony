@@ -23,13 +23,13 @@ require_once 'phing/Task.php';
 
 /**
  * Register a datatype for use within a buildfile.
- *
+ * 
  * This is for registering your own datatypes for use within a buildfile.
- *
- * If you find that you are using a particular class frequently, you may want to edit the
+ * 
+ * If you find that you are using a particular class frequently, you may want to edit the 
  * phing/types/defaults.properties file so that it is included by default.  You may also
  * want to submit it (if LGPL or compatible license) to be included in Phing distribution.
- *
+ * 
  * <pre>
  *   <typedef name="mytype" classname="path.to.MyHandlingClass"/>
  *   .
@@ -37,20 +37,20 @@ require_once 'phing/Task.php';
  *     <mytype param1="val1" param2="val2"/>
  *   </sometask>
  * </pre>
- *
+ * 
  * TODO:
  *    -- possibly refactor since this is almost the same as TaskDefTask
  *      (right now these are just too simple to really justify creating an abstract class)
- *
+ * 
  * @author    Hans Lellelid <hans@xmpl.org>
  * @version   $Revision: 1.7 $
  * @package   phing.tasks.system
  */
 class TypedefTask extends Task {
-
+    
     /** Tag name for datatype that will be used in XML */
     private $name;
-
+    
     /**
      * Classname of task to register.
      * This can be a dot-path -- relative to a location on PHP include_path.
@@ -58,19 +58,19 @@ class TypedefTask extends Task {
      * @var string
      */
     private $classname;
-
+    
     /**
      * Path to add to PHP include_path to aid in finding specified class.
      * @var Path
      */
     private $classpath;
-
+    
     /** Refid to already defined classpath */
     private $classpathId;
-
+    
     /**
      * Set the classpath to be used when searching for component being defined
-     *
+     * 
      * @param Path $classpath An Path object containing the classpath.
      */
     public function setClasspath(Path $classpath) {
@@ -83,7 +83,7 @@ class TypedefTask extends Task {
 
     /**
      * Create the classpath to be used when searching for component being defined
-     */
+     */ 
     public function createClasspath() {
         if ($this->classpath === null) {
             $this->classpath = new Path($this->project);
@@ -98,15 +98,15 @@ class TypedefTask extends Task {
         $this->classpathId = $r->getRefId();
         $this->createClasspath()->setRefid($r);
     }
-
+    
     /** Main entry point */
     public function main() {
         if ($this->name === null || $this->classname === null) {
             throw new BuildException("You must specify name and class attributes for <typedef>.");
-        }
+        }        
         $this->project->addDataTypeDefinition($this->name, $this->classname, $this->classpath);
     }
-
+    
     /**
      * Sets the name that will be used in XML buildfile.
      * @param string $name
@@ -114,7 +114,7 @@ class TypedefTask extends Task {
     public function setName($name)    {
         $this->name = $name;
     }
-
+    
     /**
      * Sets the class name / dotpath to use.
      * @param string $class

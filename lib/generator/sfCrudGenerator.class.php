@@ -321,7 +321,7 @@ abstract class sfCrudGenerator extends sfGenerator
   public function getColumnListTag($column, $params = array())
   {
     $type = $column->getType();
-
+    
     $columnGetter = $this->getColumnGetter($column, true);
 
     if ($type == PropelColumnTypes::TIMESTAMP)

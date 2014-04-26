@@ -15,7 +15,7 @@ require_once 'propel/engine/builder/om/php5/PHP5NestedSetPeerBuilder.php';
  * @subpackage propel
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @version    SVN: $Id: SfNestedSetPeerBuilder.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
- *
+ * 
  * @deprecated since symfony 1.3
  */
 class SfNestedSetPeerBuilder extends PHP5NestedSetPeerBuilder

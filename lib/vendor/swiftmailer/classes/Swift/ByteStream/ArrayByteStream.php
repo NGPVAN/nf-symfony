@@ -41,10 +41,10 @@ class Swift_ByteStream_ArrayByteStream
    * @access private
    */
   private $_offset = 0;
-
+  
   /** Bound streams */
   private $_mirrors = array();
-
+  
   /**
    * Create a new ArrayByteStream.
    * If $stack is given the stream will be populated with the bytes it contains.
@@ -107,20 +107,20 @@ class Swift_ByteStream_ArrayByteStream
       $this->_array[] = $value;
     }
     $this->_arraySize = count($this->_array);
-
+    
     foreach ($this->_mirrors as $stream)
     {
       $stream->write($bytes);
     }
   }
-
+  
   /**
    * Not used.
    */
   public function commit()
   {
   }
-
+  
   /**
    * Attach $is to this stream.
    * The stream acts as an observer, receiving all data that is written.
@@ -132,7 +132,7 @@ class Swift_ByteStream_ArrayByteStream
   {
     $this->_mirrors[] = $is;
   }
-
+  
   /**
    * Remove an already bound stream.
    * If $is is not bound, no errors will be raised.
@@ -180,7 +180,7 @@ class Swift_ByteStream_ArrayByteStream
     $this->_offset = 0;
     $this->_array = array();
     $this->_arraySize = 0;
-
+    
     foreach ($this->_mirrors as $stream)
     {
       $stream->flushBuffers();

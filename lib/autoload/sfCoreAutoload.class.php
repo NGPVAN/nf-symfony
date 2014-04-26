@@ -22,7 +22,7 @@ define('SYMFONY_VERSION', '1.3.10');
  * @package    symfony
  * @subpackage autoload
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfCoreAutoload.class.php 32332 2011-03-21 18:17:49Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfCoreAutoload.class.php 32331 2011-03-21 18:07:24Z Kris.Wallsmith $
  */
 class sfCoreAutoload
 {

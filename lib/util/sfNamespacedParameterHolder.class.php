@@ -4,7 +4,7 @@
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
  * (c) 2004-2006 Sean Kerr <sean@code-box.org>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -154,7 +154,7 @@ class sfNamespacedParameterHolder extends sfParameterHolder
    * Retrieve an array of parameters, within a namespace.
    *
    * This method is limited to a namespace.  Without any argument,
-   * it returns the parameters of the default namespace.  If a
+   * it returns the parameters of the default namespace.  If a 
    * namespace is passed as an argument, only the parameters of the
    * specified namespace are returned.
    *

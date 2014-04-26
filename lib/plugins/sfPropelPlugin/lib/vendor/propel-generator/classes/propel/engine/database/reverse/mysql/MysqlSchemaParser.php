@@ -207,17 +207,17 @@ class MysqlSchemaParser extends BaseSchemaParser {
 				$ftbl = $matches[3][$curKey];
 				$rawfcol = $matches[4][$curKey];
 				$fkey = $matches[5][$curKey];
-
+				
 				$lcols = array();
 				foreach(preg_split('/`, `/', $rawlcol) as $piece) {
 					$lcols[] = trim($piece, '` ');
 				}
-
+				
 				$fcols = array();
 				foreach(preg_split('/`, `/', $rawfcol) as $piece) {
 					$fcols[] = trim($piece, '` ');
 				}
-
+				
 				//typical for mysql is RESTRICT
 				$fkactions = array(
 					'ON DELETE'	=> ForeignKey::RESTRICT,
@@ -234,12 +234,12 @@ class MysqlSchemaParser extends BaseSchemaParser {
 						}
 					}
 				}
-
+				
 				$localColumns = array();
 				$foreignColumns = array();
-
+				
 				$foreignTable = $database->getTable($ftbl);
-
+				
 				foreach($fcols as $fcol) {
 					$foreignColumns[] = $foreignTable->getColumn($fcol);
 				}
@@ -255,11 +255,11 @@ class MysqlSchemaParser extends BaseSchemaParser {
 					$table->addForeignKey($fk);
 					$foreignKeys[$name] = $fk;
 				}
-
+				
 				for($i=0; $i < count($localColumns); $i++) {
 					$foreignKeys[$name]->addReference($localColumns[$i], $foreignColumns[$i]);
 				}
-
+				
 			}
 
 		}

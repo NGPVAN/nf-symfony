@@ -12,7 +12,7 @@
 require_once(dirname(__FILE__).'/sfDoctrineBaseTask.class.php');
 
 /**
- * Drops Databases, Creates Databases, Generates Doctrine model, SQL, initializes database, load data and run
+ * Drops Databases, Creates Databases, Generates Doctrine model, SQL, initializes database, load data and run 
  * all test suites
  *
  * @package    symfony
@@ -51,7 +51,7 @@ The [doctrine:build-all-reload|INFO] task is a shortcut for four other tasks:
   [./symfony doctrine:build-all-reload-test-all frontend|INFO]
 
 The task is equivalent to:
-
+  
   [./symfony doctrine:drop-db|INFO]
   [./symfony doctrine:build-db|INFO]
   [./symfony doctrine:build-model|INFO]
@@ -91,7 +91,7 @@ EOF;
     }
 
     $this->logSection('doctrine', 'running test suite');
-
+    
     $testAll = new sfTestAllTask($this->dispatcher, $this->formatter);
     $testAll->setCommandApplication($this->commandApplication);
     $testAll->setConfiguration($this->configuration);

@@ -36,7 +36,7 @@ class sfDoctrineBuildAllTask extends sfDoctrineBaseTask
       new sfCommandOption('skip-forms', 'F', sfCommandOption::PARAMETER_NONE, 'Skip generating forms'),
       new sfCommandOption('migrate', null, sfCommandOption::PARAMETER_NONE, 'Migrate instead of reset the database'),
     ));
-
+  
     $this->aliases = array('doctrine-build-all');
     $this->namespace = 'doctrine';
     $this->name = 'build-all';

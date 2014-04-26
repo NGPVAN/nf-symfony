@@ -22,9 +22,9 @@
 require_once 'phing/Task.php';
 
 /**
- * SCPs a File to a remote server
+ * SCPs a File to a remote server 
  *
- * @author Andrew Eddie <andrew.eddie@jamboworks.com>
+ * @author Andrew Eddie <andrew.eddie@jamboworks.com> 
  * @version $Id: ScpSendTask.php 325 2007-12-20 15:44:58Z hans $
  * @package phing.tasks.ext
  * @since 2.3.0
@@ -189,3 +189,4 @@ class ScpSendTask extends Task
 		}
 	}
 }
+

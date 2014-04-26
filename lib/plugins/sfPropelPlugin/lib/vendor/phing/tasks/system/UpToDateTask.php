@@ -71,7 +71,7 @@ class UpToDateTask extends Task implements Condition {
      */
     private function getValue() {
         return ($this->_value !== null) ? $this->_value : "true";
-    }
+    } 
 
     /**
      * The file which must be more up-to-date than (each of) the source file(s)
@@ -145,11 +145,11 @@ class UpToDateTask extends Task implements Condition {
         // if the target file is not there, then it can't be up-to-date
         if ($this->_targetFile !== null && !$this->_targetFile->exists()) {
             return false;
-        }
+        } 
 
         // if the source file isn't there, throw an exception
         if ($this->_sourceFile !== null && !$this->_sourceFile->exists()) {
-            throw new BuildException($this->_sourceFile->getAbsolutePath()
+            throw new BuildException($this->_sourceFile->getAbsolutePath() 
                                      . " not found.");
         }
 
@@ -169,8 +169,8 @@ class UpToDateTask extends Task implements Condition {
                 $sfs = new SourceFileScanner($this);
                 $upToDate = $upToDate &&
                     count($sfs->restrict($this->_sourceFile->getAbsolutePath(),
-                                  null, null,
-                                  $this->mapperElement->getImplementation())) === 0;
+                                  null, null, 
+                                  $this->mapperElement->getImplementation())) === 0;                   
             }
         }
         return $upToDate;
@@ -180,18 +180,18 @@ class UpToDateTask extends Task implements Condition {
     /**
      * Sets property to true if target file(s) have a more recent timestamp
      * than (each of) the corresponding source file(s).
-     * @throws BuildException
+     * @throws BuildException 
      */
     public function main() {
         if ($this->_property === null) {
-            throw new BuildException("property attribute is required.",
+            throw new BuildException("property attribute is required.", 
                                      $this->location);
         }
         $upToDate = $this->evaluate();
         if ($upToDate) {
             $this->project->setNewProperty($this->_property, $this->getValue());
             if ($this->mapperElement === null) {
-                $this->log("File \"" . $this->_targetFile->getAbsolutePath()
+                $this->log("File \"" . $this->_targetFile->getAbsolutePath() 
                     . "\" is up-to-date.", Project::MSG_VERBOSE);
             } else {
                 $this->log("All target files are up-to-date.",

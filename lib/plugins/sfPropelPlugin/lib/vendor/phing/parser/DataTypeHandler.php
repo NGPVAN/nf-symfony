@@ -31,7 +31,7 @@ include_once 'phing/RuntimeConfigurable.php';
  *
  * @author      Andreas Aderhold <andi@binarycloud.com>
  * @copyright © 2001,2002 THYRELL. All rights reserved
- * @version   $Revision: 1.8 $ $Date: 2006-09-14 16:19:08 -0400 (Thu, 14 Sep 2006) $
+ * @version   $Revision: 1.8 $ $Date: 2006-09-14 22:19:08 +0200 (jeu 14 sep 2006) $
  * @access    public
  * @package   phing.parser
  */
@@ -126,7 +126,7 @@ class DataTypeHandler extends AbstractHandler {
         $nef = new NestedElementHandler($this->parser, $this, $this->configurator, $this->element, $this->wrapper, $this->target);
         $nef->init($name, $attrs);
     }
-
+    
    /**
     * Overrides endElement for data types. Tells the type
     * handler that processing the element had been finished so
@@ -140,5 +140,5 @@ class DataTypeHandler extends AbstractHandler {
        $this->element->parsingComplete();
        parent::endElement($name);
    }
-
+         
 }

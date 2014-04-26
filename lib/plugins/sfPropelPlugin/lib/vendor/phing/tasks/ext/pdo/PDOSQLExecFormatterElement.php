@@ -25,7 +25,7 @@ require_once 'phing/tasks/ext/pdo/XMLPDOResultFormatter.php';
 
 /**
  * A class to represent the nested <formatter> element for PDO SQL results.
- *
+ * 
  * This class is inspired by the similarly-named class in the PHPUnit tasks.
  *
  * @author Hans Lellelid <hans@xmpl.org>
@@ -85,7 +85,7 @@ class PDOSQLExecFormatterElement
 	/**
 	 * Row delimiter.
 	 * Defaults to PHP_EOL.
-	 * @var string
+	 * @var string 
 	 */
 	private $rowdelimiter = PHP_EOL;
 
@@ -102,7 +102,7 @@ class PDOSQLExecFormatterElement
 	private $formatterParams = array();
 
 	/**
-	 * @var PDOSQLExecTask
+	 * @var PDOSQLExecTask 
 	 */
 	private $parentTask;
 
@@ -235,7 +235,7 @@ class PDOSQLExecFormatterElement
 			return new PhingFile($this->formatter->getPreferredOutfile());
 		}*/
 	}
-
+	
 	/**
      * whether output should be appended to or overwrite
      * an existing file.  Defaults to false.
@@ -244,7 +244,7 @@ class PDOSQLExecFormatterElement
     public function setAppend($append) {
     	$this->append = (boolean) $append;
     }
-
+    
     /**
      * Whether output should be appended to file.
      * @return boolean
@@ -252,16 +252,16 @@ class PDOSQLExecFormatterElement
     public function getAppend() {
     	return $this->append;
     }
-
+    
 	/**
-     * Print headers for result sets from the
+     * Print headers for result sets from the 
      * statements; optional, default true.
      * @param boolean $showheaders
      */
     public function setShowheaders($showheaders) {
     	$this->showheaders = (boolean) $showheaders;
     }
-
+    
 	/**
 	 * Sets the column delimiter.
 	 * @param string $v
@@ -269,7 +269,7 @@ class PDOSQLExecFormatterElement
 	public function setColdelim($v) {
 		$this->coldelimiter = $v;
 	}
-
+	
 	/**
 	 * Sets the row delimiter.
 	 * @param string $v
@@ -277,7 +277,7 @@ class PDOSQLExecFormatterElement
 	public function setRowdelim($v) {
 		$this->rowdelimiter = $v;
 	}
-
+	
 	/**
 	 * Set the DOM document encoding.
 	 * @param string $v
@@ -285,14 +285,14 @@ class PDOSQLExecFormatterElement
 	public function setEncoding($v) {
 		$this->encoding = $v;
 	}
-
+	
 	/**
 	 * @param boolean $v
 	 */
 	public function setFormatOutput($v) {
 		$this->formatOutput = (boolean) $v;
 	}
-
+    
 	/**
      * Gets a default output writer for this task.
      * @return Writer
@@ -301,7 +301,7 @@ class PDOSQLExecFormatterElement
     {
     	return new LogWriter($this->parentTask);
     }
-
+    
 	/**
 	 * Gets the formatter that has been configured based on this element.
 	 * @return PDOResultFormatter

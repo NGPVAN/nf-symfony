@@ -46,3 +46,4 @@ class SvnCheckoutTask extends SvnBaseTask
 		$this->run(array($this->getToDir()));
 	}
 }
+

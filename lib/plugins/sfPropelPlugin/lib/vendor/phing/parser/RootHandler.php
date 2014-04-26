@@ -62,7 +62,7 @@ class RootHandler extends AbstractHandler {
      * Kick off a custom action for a start element tag.
      *
      * The root element of our buildfile is the &lt;project&gt; element. The
-     * root filter handles this element if it occurs, creates ProjectHandler
+     * root filter handles this element if it occurs, creates ProjectHandler 
      * to handle any nested tags & attributes of the &lt;project&gt; tag,
      * and calls init.
      *

@@ -18,7 +18,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
-
+  
 require_once 'phing/Task.php';
 
   /**
@@ -53,7 +53,7 @@ require_once 'phing/Task.php';
     public function setHaltOnFailure($aValue) {
       $this->haltOnFailure = $aValue;
     }
-
+  
     /**
      * File to be performed syntax check on
      * @param PhingFile $file
@@ -61,7 +61,7 @@ require_once 'phing/Task.php';
     public function setFile(PhingFile $file) {
       $this->file = $file;
     }
-
+    
     /**
      * Nested creator, creates a FileSet for this task
      *
@@ -71,7 +71,7 @@ require_once 'phing/Task.php';
       $num = array_push($this->filesets, new FileSet());
       return $this->filesets[$num-1];
     }
-
+  
     /**
      * Execute lint check against PhingFile or a FileSet
      */
@@ -79,7 +79,7 @@ require_once 'phing/Task.php';
       if(!isset($this->file) and count($this->filesets) == 0) {
         throw new BuildException("Missing either a nested fileset or attribute 'file' set");
       }
-
+  
       if($this->file instanceof PhingFile) {
         $this->lint($this->file->getPath());
       } else { // process filesets
@@ -93,10 +93,10 @@ require_once 'phing/Task.php';
           }
         }
       }
-
+  
       if ($this->haltOnFailure && $this->hasErrors) throw new BuildException('Syntax error(s) in JS files:' .implode(', ',$this->badFiles));
     }
-
+  
     /**
      * Performs the actual syntax check
      *
@@ -107,7 +107,7 @@ require_once 'phing/Task.php';
     {
       exec('jsl', $output);
       if (!preg_match('/JavaScript\sLint/', implode('', $output))) throw new BuildException('Javascript Lint not found');
-
+    
       $command = 'jsl -output-format file:__FILE__;line:__LINE__;message:__ERROR__ -process ';
 
       if(file_exists($file))
@@ -121,7 +121,7 @@ require_once 'phing/Task.php';
 
           preg_match('/(\d+)\serror/', $summary, $matches);
           $errorCount = $matches[1];
-
+          
           preg_match('/(\d+)\swarning/', $summary, $matches);
           $warningCount = $matches[1];
 
@@ -160,7 +160,7 @@ require_once 'phing/Task.php';
               $this->log('- line ' . $warning['line'] . (isset($warning['column']) ? ' column ' . $warning['column'] : '') . ': ' . $warning['message'], Project::MSG_WARN);
             }
           }
-
+            
           if($errorCount > 0)
           {
             $this->log($file . ': ' . $errorCount . ' errors detected', Project::MSG_ERR);
@@ -180,3 +180,5 @@ require_once 'phing/Task.php';
       }
     }
   }
+
+

@@ -26,11 +26,11 @@ include_once 'phing/types/PatternSet.php';
 include_once 'phing/util/DirectoryScanner.php';
 
 /**
- * This is an abstract task that should be used by all those tasks that
+ * This is an abstract task that should be used by all those tasks that 
  * require to include or exclude files based on pattern matching.
  *
  * This is very closely based on the ANT class of the same name.
- *
+ * 
  * @author    Hans Lellelid <hans@xmpl.org> (Phing)
  * @author    Arnout J. Kuiper <ajkuiper@wxs.nl> (Ant)
  * @author    Stefano Mazzocchi  <stefano@apache.org> (Ant)
@@ -45,17 +45,17 @@ abstract class MatchingTask extends Task implements SelectorContainer {
 
     /** @var boolean */
     protected $useDefaultExcludes = true;
-
+    
     /** @var FileSet */
     protected $fileset;
-
+    
     /**
      * Create instance; set fileset to new FileSet.
      */
     public function __construct() {
         $this->fileset = new FileSet();
     }
-
+    
     /**
      * @see ProjectComponent::setProject()
      */
@@ -113,7 +113,7 @@ abstract class MatchingTask extends Task implements SelectorContainer {
      */
     public function setIncludes($includes) {
         $this->fileset->setIncludes($includes);
-    }
+    }    
 
     /**
      * Sets the set of exclude patterns. Patterns may be separated by a comma
@@ -125,7 +125,7 @@ abstract class MatchingTask extends Task implements SelectorContainer {
         $this->fileset->setExcludes($excludes);
     }
 
-
+    
     /**
      * Sets whether default exclusions should be used or not.
      *

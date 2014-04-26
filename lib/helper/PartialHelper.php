@@ -84,7 +84,7 @@ function has_component_slot($name)
   {
     return false;
   }
-
+  
   // check to see if component slot is empty (null)
   if ($viewInstance->getComponentSlot($name))
   {

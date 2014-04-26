@@ -16,7 +16,7 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information please see
- * <http://phing.info>.
+ * <http://phing.info>. 
  */
 
 /**
@@ -33,13 +33,13 @@ class BuildException extends Exception {
 	 * @var Location
 	 */
     protected $location;
-
+            
     /**
 	 * The nested "cause" exception.
 	 * @var Exception
 	 */
     protected $cause;
-
+    
     /**
      * Construct a BuildException.
      * Supported signatures:
@@ -50,12 +50,12 @@ class BuildException extends Exception {
      *         throw new BuildException($msg, $loc);
      *         throw new BuildException($msg, $causeExc, $loc);
      */
-    function __construct($p1, $p2 = null, $p3 = null) {
-
+    function __construct($p1, $p2 = null, $p3 = null) {        
+        
         $cause = null;
         $loc = null;
         $msg = "";
-
+        
         if ($p3 !== null) {
             $cause = $p2;
             $loc = $p3;
@@ -77,19 +77,19 @@ class BuildException extends Exception {
         } else {
             $msg = $p1;
         }
-
+        
         parent::__construct($msg);
-
+        
         if ($cause !== null) {
             $this->cause = $cause;
             $this->message .= " [wrapped: " . $cause->getMessage() ."]";
         }
-
+        
         if ($loc !== null) {
             $this->setLocation($loc);
-        }
+        }                
     }
-
+    
     /**
      * Gets the cause exception.
      *
@@ -98,7 +98,7 @@ class BuildException extends Exception {
     public function getCause() {
         return $this->cause;
     }
-
+    
     /**
      * Gets the location of error in XML file.
      *
@@ -113,7 +113,7 @@ class BuildException extends Exception {
      *
      * @param Locaiton $loc
      */
-    public function setLocation(Location $loc) {
+    public function setLocation(Location $loc) {        
         $this->location = $loc;
         $this->message = $loc->toString() . ': ' . $this->message;
     }

@@ -19,7 +19,7 @@
  * and is licensed under the LGPL. For more information please see
  * <http://propel.phpdb.org>.
  */
-
+ 
 /**
  * Changes the coding standard of Propel generated Model classes
  *  - Opening brackets always use newline, e.g.
@@ -58,12 +58,12 @@ class AlternativeCodingStandardsBehavior extends Behavior
   	'tab_size'                => 2,
   	'strip_comments'          => 'false'
   );
-
+  
 	public function objectFilter(&$script)
 	{
 		return $this->filter($script);
 	}
-
+	
 	public function extensionObjectFilter(&$script)
 	{
 		return $this->filter($script);
@@ -78,7 +78,7 @@ class AlternativeCodingStandardsBehavior extends Behavior
 	{
 		return $this->filter($script);
 	}
-
+	
 	public function tableMapFilter(&$script)
 	{
 		return $this->filter($script);
@@ -86,7 +86,7 @@ class AlternativeCodingStandardsBehavior extends Behavior
 
 	/**
 	 * Transform the coding standards of a PHP sourcecode string
-	 *
+	 * 
 	 * @param string $script A script string to be filtered, passed as reference
 	 */
 	protected function filter(&$script)
@@ -105,14 +105,14 @@ $1{";
 		if ($this->getParameter('use_whitespace') == 'true') {
 			$filter['#\t#'] = str_repeat(' ', $this->getParameter('tab_size'));
 		}
-
+		
 		$script = preg_replace(array_keys($filter), array_values($filter), $script);
-
+		
 		if ($this->getParameter('strip_comments') == 'true') {
 			$script = self::stripComments($script);
 		}
 	}
-
+	
 	/**
 	 * Remove inline and codeblock comments from a PHP code string
 	 * @param  string $code The input code
@@ -129,7 +129,7 @@ $1{";
 		  }
 		  $output .= $token;
 		}
-
+		
 		return $output;
 	}
 }

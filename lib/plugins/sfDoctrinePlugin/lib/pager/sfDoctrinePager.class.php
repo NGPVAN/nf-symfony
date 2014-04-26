@@ -71,7 +71,7 @@ class sfDoctrinePager extends sfPager implements Serializable
       $this->$name = $values;
     }
 
-    $this->tableMethodCalled = false;
+    $this->tableMethodCalled = false; 
   }
 
   /**

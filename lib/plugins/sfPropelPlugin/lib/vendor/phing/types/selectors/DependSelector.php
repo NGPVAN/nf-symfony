@@ -21,7 +21,7 @@
  */
 
 require_once 'phing/types/selectors/BaseSelector.php';
-
+ 
 /**
  * Selector that filters files based on whether they are newer than
  * a matching file in another directory tree. It can contain a mapper
@@ -53,7 +53,7 @@ class DependSelector extends BaseSelector {
             $buf .= "NOT YET SET";
         } else {
             $buf .= $this->targetdir->getName();
-        }
+        }        
         $buf .= " granularity: ";
         $buf .= $this->granularity;
         if ($this->map !== null) {
@@ -128,10 +128,10 @@ class DependSelector extends BaseSelector {
     public function isSelected(PhingFile $basedir, $filename, PhingFile $file) {
 
         $this->validate();
-
+        
         // Determine file whose out-of-dateness is to be checked
         $destfiles = $this->map->main($filename);
-
+        
         // If filename does not match the To attribute of the mapper
         // then filter it out of the files we are considering
         if ($destfiles === null) {
@@ -148,3 +148,4 @@ class DependSelector extends BaseSelector {
     }
 
 }
+

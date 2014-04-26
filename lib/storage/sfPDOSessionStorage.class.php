@@ -51,7 +51,7 @@ class sfPDOSessionStorage extends sfDatabaseSessionStorage
     {
       throw new sfDatabaseException(sprintf('PDOException was thrown when trying to manipulate session data. Message: %s', $e->getMessage()));
     }
-
+    
     return true;
   }
 

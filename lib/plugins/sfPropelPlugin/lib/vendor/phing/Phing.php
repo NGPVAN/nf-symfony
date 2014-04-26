@@ -313,7 +313,7 @@ class Phing {
 
 		// 3) Finally, cycle through to parse remaining args
 		//
-		$keys = array_keys($args); // Use keys and iterate to max(keys) since there may be some gaps
+		$keys = array_keys($args); // Use keys and iterate to max(keys) since there may be some gaps		
 		$max = $keys ? max($keys) : -1;
 		for($i=0; $i <= $max; $i++) {
 
@@ -1253,7 +1253,7 @@ class Phing {
 
 		// should return memory limit in MB
 		$mem_limit = (int) ini_get('memory_limit');
-		if ($mem_limit < 32 && $mem_limit != -1) {
+		if ($mem_limit < 32) {
 			// We do *not* need to save the original value here, since we don't plan to restore
 			// this after shutdown (we don't trust the effectiveness of PHP's garbage collection).
 			ini_set('memory_limit', '32M'); // nore: this may need to be higher for many projects

@@ -96,7 +96,7 @@ class CoverageReportTransformer
 		else
 		{
 			$path = Phing::getResourcePath("phing/etc/$xslname");
-
+			
 			if ($path === NULL)
 			{
 				$path = Phing::getResourcePath("etc/$xslname");
@@ -106,7 +106,7 @@ class CoverageReportTransformer
 					throw new BuildException("Could not find $xslname in resource path");
 				}
 			}
-
+			
 			$file = new PhingFile($path);
 		}
 

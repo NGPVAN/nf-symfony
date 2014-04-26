@@ -37,7 +37,7 @@ class sfDoctrineReloadDataTask extends sfDoctrineBaseTask
       new sfCommandOption('append', null, sfCommandOption::PARAMETER_NONE, 'Don\'t delete current data in the database'),
     ));
 
-    $this->aliases = array('doctrine-reload-data');
+    $this->aliases = array('doctrine-reload-data');    
     $this->namespace = 'doctrine';
     $this->name = 'reload-data';
 
@@ -48,13 +48,13 @@ The [doctrine:reload-data|INFO] task drops the database, recreates it and loads
 fixtures:
 
   [php symfony doctrine:reload-data|INFO]
-
+  
 The task is equivalent to:
 
   [./symfony doctrine:drop-db|INFO]
   [./symfony doctrine:build-db|INFO]
   [./symfony doctrine:insert-sql|INFO]
-  [./symfony doctrine:data-load|INFO]
+  [./symfony doctrine:data-load|INFO]  
 EOF;
   }
 

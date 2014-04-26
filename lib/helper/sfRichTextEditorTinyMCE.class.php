@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -46,10 +46,10 @@ class sfRichTextEditorTinyMCE extends sfRichTextEditor
     $id = _get_option($options, 'id', get_id_from_name($this->name, null));
 
     // use tinymce's gzipped js?
-    $tinymce_file = '/tiny_mce.js';
+    $tinymce_file = _get_option($options, 'tinymce_gzip') ? '/tiny_mce_gzip.php' : '/tiny_mce.js';
 
     // tinymce installed?
-    $js_path = '/js/tiny_mce/'.$tinymce_file;
+    $js_path = sfConfig::get('sf_rich_text_js_dir') ? '/'.sfConfig::get('sf_rich_text_js_dir').$tinymce_file : '/sf/tinymce/js'.$tinymce_file;
     if (!is_readable(sfConfig::get('sf_web_dir').$js_path))
     {
       throw new sfConfigurationException('You must install TinyMCE to use this helper (see rich_text_js_dir settings).');

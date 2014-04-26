@@ -749,10 +749,10 @@ class sfToolkit
 
   /**
    * Adds a path to the PHP include_path setting.
-   *
+   * 
    * @param   mixed  $path     Single string path or an array of paths
    * @param   string $position Either 'front' or 'back'
-   *
+   * 
    * @return  string The old include path
    */
   static public function addIncludePath($path, $position = 'front')

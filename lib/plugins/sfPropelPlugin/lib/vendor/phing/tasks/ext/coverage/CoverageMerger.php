@@ -70,7 +70,7 @@ class CoverageMerger
 				{
 					$coverageMerged[$linenr_right] = current($left) + current($right);
 				}
-
+				
 				next($left);
 				next($right);
 			}
@@ -97,26 +97,26 @@ class CoverageMerger
 
 		$props = new Properties();
 		$props->load($database);
-
+		
 		$coverageTotal = $codeCoverageInformation;
-
+		
 		foreach ($coverageTotal as $coverage)
 		{
 			foreach ($coverage as $filename => $coverageFile)
 			{
 				$filename = strtolower($filename);
-
+				
 				if ($props->getProperty($filename) != null)
 				{
 					$file = unserialize($props->getProperty($filename));
 					$left = $file['coverage'];
 					$right = $coverageFile;
 					if (!is_array($right)) {
-						$right = array_shift(PHPUnit_Util_CodeCoverage::bitStringToCodeCoverage(array($right), 1));
+						$right = array_shift(PHPUnit_Util_CodeCoverage::bitStringToCodeCoverage(array($right), 1)); 
 					}
-
+						
 					$coverageMerged = CoverageMerger::mergeCodeCoverage($left, $right);
-
+					
 					foreach ($coverageMerged as $key => $value)
 					{
 						if ($value == -2)
@@ -124,9 +124,9 @@ class CoverageMerger
 							unset($coverageMerged[$key]);
 						}
 					}
-
+					
 					$file['coverage'] = $coverageMerged;
-
+					
 					$props->setProperty($filename, serialize($file));
 				}
 			}

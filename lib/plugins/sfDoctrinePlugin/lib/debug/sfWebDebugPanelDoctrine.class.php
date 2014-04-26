@@ -68,7 +68,7 @@ class sfWebDebugPanelDoctrine extends sfWebDebugPanel
 
   /**
    * Returns an array of Doctrine query events.
-   *
+   * 
    * @return array
    */
   protected function getDoctrineEvents()

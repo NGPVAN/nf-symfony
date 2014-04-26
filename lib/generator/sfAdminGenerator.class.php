@@ -601,7 +601,7 @@ EOF;
     $params      = $user_params ? array_merge($params, $user_params) : $params;
 
     $type = $column->getType();
-
+    
     $columnGetter = $this->getColumnGetter($column, true);
 
     if ($column->isComponent())

@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -23,10 +23,8 @@ class sfProjectDisableTask extends sfBaseTask
    */
   protected function configure()
   {
-    $this->addOption('global', 'g', sfCommandOption::PARAMETER_NONE, 'Globally lock the project.');
-
     $this->addArguments(array(
-      new sfCommandArgument('env', sfCommandArgument::OPTIONAL, 'The environment name'),
+      new sfCommandArgument('env', sfCommandArgument::REQUIRED, 'The environment name'),
       new sfCommandArgument('app', sfCommandArgument::OPTIONAL | sfCommandArgument::IS_ARRAY, 'The application name'),
     ));
 
@@ -52,18 +50,6 @@ EOF;
    */
   protected function execute($arguments = array(), $options = array())
   {
-
-    if ($options['global']) {
-      $lockFile = sfConfig::get('sf_data_dir').'/global.lck';
-      $this->getFilesystem()->touch($lockFile);
-      $this->logSection('enable', 'Project has been DISABLED');
-      exit(0);
-    }
-
-    if (!$options['global'] && !$arguments['env']) {
-        throw new Exception('Must pass either global or an environment.');
-    }
-
     if (1 == count($arguments['app']) && !file_exists(sfConfig::get('sf_apps_dir').'/'.$arguments['app'][0]))
     {
       // support previous task signature

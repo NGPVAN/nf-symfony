@@ -1,11 +1,11 @@
 <?php
 /**
- * PHPMailer language file.
+ * PHPMailer language file.  
  * Catalan Version
  * By Ivan: web AT microstudi DOT com
  */
 
-$PHPMAILER_LANG = array();
+$PHPMAILER_LANG = array(); 
 
 $PHPMAILER_LANG["provide_address"] = 'S\'ha de proveir almenys una adreça d\'email com a destinatari.';
 $PHPMAILER_LANG["mailer_not_supported"] = ' mailer no està suportat';

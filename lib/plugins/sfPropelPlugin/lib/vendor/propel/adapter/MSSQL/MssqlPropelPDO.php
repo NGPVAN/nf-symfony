@@ -24,7 +24,7 @@ class MssqlPropelPDO extends PropelPDO
 		$this->incrementNestedTransactionCount();
 		return $return;
 	}
-
+	
 	/**
 	 * Commit a transaction.
 	 *
@@ -59,12 +59,12 @@ class MssqlPropelPDO extends PropelPDO
 		$return = true;
 		$opcount = $this->getNestedTransactionCount();
 		if ($opcount > 0) {
-			if ($opcount === 1) {
-				$return = self::exec('ROLLBACK TRANSACTION');
+			if ($opcount === 1) { 
+				$return = self::exec('ROLLBACK TRANSACTION'); 
 			} else {
 				$this->isUncommitable = true;
 			}
-			$this->decrementNestedTransactionCount();
+			$this->decrementNestedTransactionCount(); 
 		}
 		return $return;
 	}
@@ -84,7 +84,7 @@ class MssqlPropelPDO extends PropelPDO
 			// If we're in a transaction, always roll it back
 			// regardless of nesting level.
 			$return = self::exec('ROLLBACK TRANSACTION');
-
+			
 			// reset nested transaction count to 0 so that we don't
 			// try to commit (or rollback) the transaction outside this scope.
 			$this->nestedTransactionCount = 0;
@@ -97,12 +97,12 @@ class MssqlPropelPDO extends PropelPDO
 		$result = self::query('SELECT SCOPE_IDENTITY()');
 		return (int)$result->fetchColumn();
 	}
-
+	
 	public function quoteIdentifier($text)
 	{
 		return '[' . $text . ']';
 	}
-
+	
 	public function useQuoteIdentifier()
 	{
 		return true;

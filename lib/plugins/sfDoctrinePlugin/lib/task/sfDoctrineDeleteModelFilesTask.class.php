@@ -101,10 +101,10 @@ EOF;
 
   /**
    * Converts an array of values to a regular expression pattern fragment.
-   *
+   * 
    * @param array  $values    An array of values for the pattern
    * @param string $delimiter The regular expression delimiter
-   *
+   * 
    * @return string A regular expression fragment
    */
   protected function valuesToRegex($values, $delimiter = '/')

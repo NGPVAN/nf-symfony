@@ -286,7 +286,7 @@ class Table extends XMLElement implements IDMethod {
 
   /**
    * List of behaviors registered for this table
-   *
+   * 
    * @var array
    */
   protected $behaviors = array();
@@ -360,7 +360,7 @@ class Table extends XMLElement implements IDMethod {
     {
       $behavior->getTableModifier()->modifyTable();
     }
-
+    
     // if idMethod is "native" and in fact there are no autoIncrement
     // columns in the table, then change it to "none"
     $anyAutoInc = false;
@@ -372,7 +372,7 @@ class Table extends XMLElement implements IDMethod {
     if ($this->getIdMethod() === IDMethod::NATIVE && !$anyAutoInc) {
       $this->setIdMethod(IDMethod::NO_ID_METHOD);
     }
-
+    
     // If there is no PK, then throw an error. Propel 1.3 requires primary keys.
     $pk = $this->getPrimaryKey();
     if (empty($pk)) {
@@ -765,7 +765,7 @@ class Table extends XMLElement implements IDMethod {
   {
     return $this->getDatabase()->getAppData()->getPlatform()->getGeneratorConfig();
   }
-
+  
   /**
    * Adds a new Behavior to the table
    * @return Behavior A behavior instance
@@ -784,7 +784,7 @@ class Table extends XMLElement implements IDMethod {
       return $this->addBehavior($behavior);
     }
   }
-
+  
   /**
    * Get the table behaviors
    * @return Array of Behavior objects
@@ -793,7 +793,7 @@ class Table extends XMLElement implements IDMethod {
   {
     return $this->behaviors;
   }
-
+  
   /**
    * Get one table behavior by name
    * @param string $name the behavior name

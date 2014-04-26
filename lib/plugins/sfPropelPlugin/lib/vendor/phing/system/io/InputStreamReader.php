@@ -16,27 +16,27 @@
  *
  * This software consists of voluntary contributions made by many individuals
  * and is licensed under the LGPL. For more information please see
- * <http://phing.info>.
+ * <http://phing.info>. 
  */
-
+ 
 include_once 'phing/system/io/PhingFile.php';
 include_once 'phing/system/io/Reader.php';
 
 /**
  * Writer class for OutputStream objects.
- *
+ * 
  * Unlike the Java counterpart, this class does not (yet) handle
  * character set transformations.  This will be an important function
  * of this class with move to supporting PHP6.
  *  * @package   phing.system.io
  */
 class InputStreamReader extends Reader {
-
+	
 	/**
 	 * @var InputStream
 	 */
 	protected $inStream;
-
+	
 	/**
      * Construct a new InputStreamReader.
      * @param InputStream $$inStream InputStream to read from
@@ -44,14 +44,14 @@ class InputStreamReader extends Reader {
     public function __construct(InputStream $inStream) {
         $this->inStream = $inStream;
     }
-
+	
     /**
      * Close the stream.
      */
     public function close() {
     	return $this->inStream->close();
     }
-
+	
     /**
      * Skip over $n bytes.
      * @param int $n
@@ -59,7 +59,7 @@ class InputStreamReader extends Reader {
     public function skip($n) {
     	return $this->inStream->skip($n);
     }
-
+    
     /**
      * Read data from file.
      * @param int $len Num chars to read.
@@ -68,7 +68,7 @@ class InputStreamReader extends Reader {
     public function read($len = null) {
     	return $this->inStream->read($len);
     }
-
+    
     /**
      * Marks the current position in this input stream.
      * @throws IOException - if the underlying stream doesn't support this method.
@@ -76,7 +76,7 @@ class InputStreamReader extends Reader {
     public function mark() {
         $this->inStream->mark();
     }
-
+    
     /**
      * Whether the attached stream supports mark/reset.
      * @return boolean
@@ -84,7 +84,7 @@ class InputStreamReader extends Reader {
     public function markSupported() {
     	return $this->inStream->markSupported();
     }
-
+    
     /**
      * Repositions this stream to the position at the time the mark method was last called on this input stream.
      * @throws IOException - if the underlying stream doesn't support this method.
@@ -100,7 +100,7 @@ class InputStreamReader extends Reader {
     public function eof() {
         return $this->inStream->eof();
     }
-
+     
     /**
      * Reads a entire file and stores the data in the variable
      * passed by reference.
@@ -115,7 +115,7 @@ class InputStreamReader extends Reader {
     public function readInto(&$rBuffer) {
 		return $this->inStream->readInto($rBuffer);
     }
-
+    
     /**
      * Returns string representation of attached stream.
      * @return string

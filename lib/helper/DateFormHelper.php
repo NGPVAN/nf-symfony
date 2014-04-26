@@ -68,12 +68,12 @@ function select_day_tag($name, $value = null, $options = array(), $html_options 
 /**
  * Returns a <select> tag populated with all the months of the year (1 - 12).
  *
- * By default, the <i>$value</i> parameter is set to today's month. To override this, simply pass an integer
+ * By default, the <i>$value</i> parameter is set to today's month. To override this, simply pass an integer 
  * (1 - 12) to the <i>$value</i> parameter. You can also set the <i>$value</i> parameter to null which will disable
  * the <i>$value</i>, however this will only be useful if you pass 'include_blank' or 'include_custom' to the <i>$options</i>
- * parameter. Also, the each month's display title is set to return its respective full month name, which can be easily
+ * parameter. Also, the each month's display title is set to return its respective full month name, which can be easily 
  * overridden by passing the 'use_short_names' or 'use_month_numbers' options to the <i>$options</i> parameter.
- * For convenience, Symfony also offers the select_date_tag helper function which combines the
+ * For convenience, Symfony also offers the select_date_tag helper function which combines the 
  * select_year_tag, select_month_tag, and select_day_tag functions into a single helper.
  *
  * <b>Options:</b>
@@ -81,7 +81,7 @@ function select_day_tag($name, $value = null, $options = array(), $html_options 
  * - include_custom    - Includes an <option> tag with a custom display title at the beginning of the string with an empty value
  * - use_month_numbers - If set to true, will show the month's numerical value (1 - 12) instead of the months full name.
  * - use_short_month   - If set to true, will show the month's short name (i.e. Jan, Feb, Mar) instead of its full name.
- *
+ *  
  * <b>Examples:</b>
  * <code>
  *  echo select_month_tag('month', 5, array('use_short_month' => true));
@@ -113,7 +113,7 @@ function select_month_tag($name, $value = null, $options = array(), $html_option
 
   if (_get_option($options, 'use_month_numbers'))
   {
-    for ($k = 1; $k < 13; $k++)
+    for ($k = 1; $k < 13; $k++) 
     {
       $select_options[$k] = str_pad($k, 2, '0', STR_PAD_LEFT);
     }
@@ -133,7 +133,7 @@ function select_month_tag($name, $value = null, $options = array(), $html_option
     }
 
     $add_month_numbers = _get_option($options, 'add_month_numbers');
-    foreach ($month_names as $k => $v)
+    foreach ($month_names as $k => $v) 
     {
       $select_options[$k + 1] = $add_month_numbers ? ($k + 1).' - '.$v : $v;
     }
@@ -151,7 +151,7 @@ function select_month_tag($name, $value = null, $options = array(), $html_option
  * parameter. Also, the default selectable range of years is set to show five years back and five years forward from today's year.
  * For instance, if today's year is 2006, the default 'year_start' option will be set to 2001 and the 'year_end' option will be set
  * to 2011.  These start and end dates can easily be overwritten by setting the 'year_start' and 'year_end' options in the <i>$options</i>
- * parameter. For convenience, Symfony also offers the select_date_tag helper function which combines the
+ * parameter. For convenience, Symfony also offers the select_date_tag helper function which combines the 
  * select_year_tag, select_month_tag, and select_day_tag functions into a single helper.
  *
  * <b>Options:</b>
@@ -159,7 +159,7 @@ function select_month_tag($name, $value = null, $options = array(), $html_option
  * - include_custom - Includes an <option> tag with a custom display title at the beginning of the string with an empty value
  * - year_start     - If set, the range of years will begin at this four-digit date (i.e. 1979)
  * - year_end       - If set, the range of years will end at this four-digit date (i.e. 2025)
- *
+ *  
  * <b>Examples:</b>
  * <code>
  *  echo select_year_tag('year');
@@ -175,7 +175,7 @@ function select_month_tag($name, $value = null, $options = array(), $html_option
  * @param int    $value        selected value within the range of years.
  * @param array  $options      special options for the select tag
  * @param array  $html_options additional HTML compliant <select> tag parameters
- *
+ * 
  * @return string <select> tag populated with a range of years.
  * @see select_date_tag, select datetime_tag
  */
@@ -185,7 +185,7 @@ function select_year_tag($name, $value = null, $options = array(), $html_options
   {
     $value = date('Y');
   }
-
+    
   $options = _parse_attributes($options);
 
   $select_options = array();
@@ -218,12 +218,12 @@ function select_year_tag($name, $value = null, $options = array(), $html_options
  * Returns three <select> tags populated with a range of months, days, and years.
  *
  * By default, the <i>$value</i> parameter is set to today's month, day and year. To override this, simply pass a valid date
- * or a correctly formatted date array (see example) to the <i>$value</i> parameter. You can also set the <i>$value</i>
- * parameter to null which will disable the <i>$value</i>, however this will only be useful if you pass 'include_blank' or
- * 'include_custom' to the <i>$options</i> parameter. Also, the default selectable range of years is set to show five years
- * back and five years forward from today's year. For instance, if today's year is 2006, the default 'year_start' option will
- * be set to 2001 and the 'year_end' option will be set to 2011.  These start and end dates can easily be overwritten by
- * setting the 'year_start' and 'year_end' options in the <i>$options</i> parameter.
+ * or a correctly formatted date array (see example) to the <i>$value</i> parameter. You can also set the <i>$value</i> 
+ * parameter to null which will disable the <i>$value</i>, however this will only be useful if you pass 'include_blank' or 
+ * 'include_custom' to the <i>$options</i> parameter. Also, the default selectable range of years is set to show five years 
+ * back and five years forward from today's year. For instance, if today's year is 2006, the default 'year_start' option will 
+ * be set to 2001 and the 'year_end' option will be set to 2011.  These start and end dates can easily be overwritten by 
+ * setting the 'year_start' and 'year_end' options in the <i>$options</i> parameter. 
  *
  * <b>Note:</b> The <i>$name</i> parameter will automatically converted to array names. For example, a <i>$name</i> of "date" becomes:
  * <samp>
@@ -231,7 +231,7 @@ function select_year_tag($name, $value = null, $options = array(), $html_options
  *  <select name="date[day]">...</select>
  *  <select name="date[year]">...</select>
  * </samp>
- *
+ *  
  * <b>Options:</b>
  * - include_blank     - Includes a blank <option> tag at the beginning of the string with an empty value.
  * - include_custom    - Includes an <option> tag with a custom display title at the beginning of the string with an empty value.
@@ -243,7 +243,7 @@ function select_year_tag($name, $value = null, $options = array(), $html_options
  * - year_start        - If set, the range of years will begin at this four-digit date (i.e. 1979)
  * - year_end          - If set, the range of years will end at this four-digit date (i.e. 2025)
  * - date_seperator    - Includes a string of defined text between each generated select tag
- *
+ *  
  * <b>Examples:</b>
  * <code>
  *  echo select_date_tag('date');
@@ -352,19 +352,19 @@ function select_date_tag($name, $value = null, $options = array(), $html_options
 /**
  * Returns a <select> tag populated with 60 seconds (0 - 59).
  *
- * By default, the <i>$value</i> parameter is set to the current second (right now). To override this, simply pass an integer
+ * By default, the <i>$value</i> parameter is set to the current second (right now). To override this, simply pass an integer 
  * (0 - 59) to the <i>$value</i> parameter. You can also set the <i>$value</i> parameter to null which will disable
  * the <i>$value</i>, however this will only be useful if you pass 'include_blank' or 'include_custom' to the <i>$options</i>
- * parameter. In many cases, you have no need for all 60 seconds in a minute.  the 'second_step' option in the
- * <i>$options</i> parameter gives you the ability to define intervals to display.  So for instance you could define 15 as your
- * 'minute_step' interval and the select tag would return the values 0, 15, 30, and 45. For convenience, Symfony also offers the
+ * parameter. In many cases, you have no need for all 60 seconds in a minute.  the 'second_step' option in the 
+ * <i>$options</i> parameter gives you the ability to define intervals to display.  So for instance you could define 15 as your 
+ * 'minute_step' interval and the select tag would return the values 0, 15, 30, and 45. For convenience, Symfony also offers the 
  * select_time_tag select_datetime_tag helper functions which combine other date and time helpers to easily build date and time select boxes.
  *
  * <b>Options:</b>
  * - include_blank  - Includes a blank <option> tag at the beginning of the string with an empty value.
  * - include_custom - Includes an <option> tag with a custom display title at the beginning of the string with an empty value.
  * - second_step    - If set, the seconds will be incremented in blocks of X, where X = 'second_step'
- *
+ * 
  * <b>Examples:</b>
  * <code>
  *  echo select_second_tag('second');
@@ -405,19 +405,19 @@ function select_second_tag($name, $value = null, $options = array(), $html_optio
 /**
  * Returns a <select> tag populated with 60 minutes (0 - 59).
  *
- * By default, the <i>$value</i> parameter is set to the current minute. To override this, simply pass an integer
+ * By default, the <i>$value</i> parameter is set to the current minute. To override this, simply pass an integer 
  * (0 - 59) to the <i>$value</i> parameter. You can also set the <i>$value</i> parameter to null which will disable
  * the <i>$value</i>, however this will only be useful if you pass 'include_blank' or 'include_custom' to the <i>$options</i>
- * parameter. In many cases, you have no need for all 60 minutes in an hour.  the 'minute_step' option in the
- * <i>$options</i> parameter gives you the ability to define intervals to display.  So for instance you could define 15 as your
- * 'minute_step' interval and the select tag would return the values 0, 15, 30, and 45. For convenience, Symfony also offers the
+ * parameter. In many cases, you have no need for all 60 minutes in an hour.  the 'minute_step' option in the 
+ * <i>$options</i> parameter gives you the ability to define intervals to display.  So for instance you could define 15 as your 
+ * 'minute_step' interval and the select tag would return the values 0, 15, 30, and 45. For convenience, Symfony also offers the 
  * select_time_tag select_datetime_tag helper functions which combine other date and time helpers to easily build date and time select boxes.
  *
  * <b>Options:</b>
  * - include_blank  - Includes a blank <option> tag at the beginning of the string with an empty value.
  * - include_custom - Includes an <option> tag with a custom display title at the beginning of the string with an empty value.
  * - minute_step    - If set, the minutes will be incremented in blocks of X, where X = 'minute_step'
- *
+ * 
  * <b>Examples:</b>
  * <code>
  *  echo select_minute_tag('minute');
@@ -458,7 +458,7 @@ function select_minute_tag($name, $value = null, $options = array(), $html_optio
 /**
  * Returns a <select> tag populated with 24 hours (0 - 23), or optionally 12 hours (1 - 12).
  *
- * By default, the <i>$value</i> parameter is set to the current hour. To override this, simply pass an integer
+ * By default, the <i>$value</i> parameter is set to the current hour. To override this, simply pass an integer 
  * (0 - 23 or 1 - 12 if '12hour_time' = true) to the <i>$value</i> parameter. You can also set the <i>$value</i> parameter to null which will disable
  * the <i>$value</i>, however this will only be useful if you pass 'include_blank' or 'include_custom' to the <i>$options</i>
  * parameter. For convenience, Symfony also offers the select_time_tag select_datetime_tag helper functions
@@ -468,7 +468,7 @@ function select_minute_tag($name, $value = null, $options = array(), $html_optio
  * - include_blank  - Includes a blank <option> tag at the beginning of the string with an empty value.
  * - include_custom - Includes an <option> tag with a custom display title at the beginning of the string with an empty value.
  * - 12hour_time    - If set to true, will return integers 1 through 12 instead of the default 0 through 23 as well as an AM/PM select box.
- *
+ * 
  * <b>Examples:</b>
  * <code>
  *  echo select_hour_tag('hour');
@@ -513,17 +513,17 @@ function select_hour_tag($name, $value = null, $options = array(), $html_options
 /**
  * Returns a <select> tag populated with AM and PM options for use with 12-Hour time.
  *
- * By default, the <i>$value</i> parameter is set to the correct AM/PM setting based on the current time.
- * To override this, simply pass either AM or PM to the <i>$value</i> parameter. You can also set the
- * <i>$value</i> parameter to null which will disable the <i>$value</i>, however this will only be
- * useful if you pass 'include_blank' or 'include_custom' to the <i>$options</i> parameter. For
+ * By default, the <i>$value</i> parameter is set to the correct AM/PM setting based on the current time. 
+ * To override this, simply pass either AM or PM to the <i>$value</i> parameter. You can also set the 
+ * <i>$value</i> parameter to null which will disable the <i>$value</i>, however this will only be 
+ * useful if you pass 'include_blank' or 'include_custom' to the <i>$options</i> parameter. For 
  * convenience, Symfony also offers the select_time_tag select_datetime_tag helper functions
  * which combine other date and time helpers to easily build date and time select boxes.
  *
  * <b>Options:</b>
  * - include_blank  - Includes a blank <option> tag at the beginning of the string with an empty value.
  * - include_custom - Includes an <option> tag with a custom display title at the beginning of the string with an empty value.
- *
+ * 
  * <b>Examples:</b>
  * <code>
  *  echo select_ampm_tag('ampm');
@@ -536,7 +536,7 @@ function select_hour_tag($name, $value = null, $options = array(), $html_options
  * @param string $name         field name
  * @param string $value        selected value (AM or PM)
  * @param array  $options      special options for the select tag
- * @param array  $html_options additional HTML compliant <select> tag parameters
+ * @param array  $html_options additional HTML compliant <select> tag parameters 
  * @return string <select> tag populated with AM and PM options for use with 12-Hour time.
  * @see select_time_tag, select datetime_tag
  */
@@ -561,17 +561,17 @@ function select_ampm_tag($name, $value = null, $options = array(), $html_options
  * Returns three <select> tags populated with hours, minutes, and optionally seconds.
  *
  * By default, the <i>$value</i> parameter is set to the current hour and minute. To override this, simply pass a valid time
- * or a correctly formatted time array (see example) to the <i>$value</i> parameter. You can also set the <i>$value</i>
- * parameter to null which will disable the <i>$value</i>, however this will only be useful if you pass 'include_blank' or
- * 'include_custom' to the <i>$options</i> parameter. To include seconds to the result, use set the 'include_second' option in the
- * <i>$options</i> parameter to true. <b>Note:</b> The <i>$name</i> parameter will automatically converted to array names.
+ * or a correctly formatted time array (see example) to the <i>$value</i> parameter. You can also set the <i>$value</i> 
+ * parameter to null which will disable the <i>$value</i>, however this will only be useful if you pass 'include_blank' or 
+ * 'include_custom' to the <i>$options</i> parameter. To include seconds to the result, use set the 'include_second' option in the 
+ * <i>$options</i> parameter to true. <b>Note:</b> The <i>$name</i> parameter will automatically converted to array names. 
  * For example, a <i>$name</i> of "time" becomes:
  * <samp>
  *  <select name="time[hour]">...</select>
  *  <select name="time[minute]">...</select>
  *  <select name="time[second]">...</select>
  * </samp>
- *
+ *  
  * <b>Options:</b>
  * - include_blank  - Includes a blank <option> tag at the beginning of the string with an empty value.
  * - include_custom - Includes an <option> tag with a custom display title at the beginning of the string with an empty value.
@@ -580,8 +580,8 @@ function select_ampm_tag($name, $value = null, $options = array(), $html_options
  * - minute_step    - If set, the minutes will be incremented in blocks of X, where X = 'minute_step'
  * - 12hour_time    - If set to true, will return integers 1 through 12 instead of the default 0 through 23 as well as an AM/PM select box.
  * - time_seperator - Includes a string of defined text between each generated select tag
- * - ampm_seperator - Includes a string of defined text between the minute/second select box and the AM/PM select box
- *
+ * - ampm_seperator - Includes a string of defined text between the minute/second select box and the AM/PM select box 
+ *  
  * <b>Examples:</b>
  * <code>
  *  echo select_time_tag('time');
@@ -617,19 +617,19 @@ function select_time_tag($name, $value = null, $options = array(), $html_options
   if ($include_custom = _get_option($options, 'include_custom'))
   {
     $include_custom_hour = (is_array($include_custom))
-        ? ((isset($include_custom['hour'])) ? array('include_custom'=>$include_custom['hour']) : array())
+        ? ((isset($include_custom['hour'])) ? array('include_custom'=>$include_custom['hour']) : array()) 
         : array('include_custom'=>$include_custom);
 
     $include_custom_minute = (is_array($include_custom))
-        ? ((isset($include_custom['minute'])) ? array('include_custom'=>$include_custom['minute']) : array())
+        ? ((isset($include_custom['minute'])) ? array('include_custom'=>$include_custom['minute']) : array()) 
         : array('include_custom'=>$include_custom);
 
     $include_custom_second = (is_array($include_custom))
-        ? ((isset($include_custom['second'])) ? array('include_custom'=>$include_custom['second']) : array())
+        ? ((isset($include_custom['second'])) ? array('include_custom'=>$include_custom['second']) : array()) 
         : array('include_custom'=>$include_custom);
 
     $include_custom_ampm = (is_array($include_custom))
-        ? ((isset($include_custom['ampm'])) ? array('include_custom'=>$include_custom['ampm']) : array())
+        ? ((isset($include_custom['ampm'])) ? array('include_custom'=>$include_custom['ampm']) : array()) 
         : array('include_custom'=>$include_custom);
   }
   else
@@ -669,12 +669,12 @@ function select_time_tag($name, $value = null, $options = array(), $html_options
  * Returns a variable number of <select> tags populated with date and time related select boxes.
  *
  * The select_datetime_tag is the culmination of both the select_date_tag and the select_time_tag.
- * By default, the <i>$value</i> parameter is set to the current date and time. To override this, simply pass a valid
- * date, time, datetime string or correctly formatted array (see example) to the <i>$value</i> parameter.
- * You can also set the <i>$value</i> parameter to null which will disable the <i>$value</i>, however this
- * will only be useful if you pass 'include_blank' or 'include_custom' to the <i>$options</i> parameter.
- * To include seconds to the result, use set the 'include_second' option in the <i>$options</i> parameter to true.
- * <b>Note:</b> The <i>$name</i> parameter will automatically converted to array names.
+ * By default, the <i>$value</i> parameter is set to the current date and time. To override this, simply pass a valid 
+ * date, time, datetime string or correctly formatted array (see example) to the <i>$value</i> parameter. 
+ * You can also set the <i>$value</i> parameter to null which will disable the <i>$value</i>, however this 
+ * will only be useful if you pass 'include_blank' or 'include_custom' to the <i>$options</i> parameter. 
+ * To include seconds to the result, use set the 'include_second' option in the <i>$options</i> parameter to true. 
+ * <b>Note:</b> The <i>$name</i> parameter will automatically converted to array names. 
  * For example, a <i>$name</i> of "datetime" becomes:
  * <samp>
  *  <select name="datetime[month]">...</select>
@@ -684,7 +684,7 @@ function select_time_tag($name, $value = null, $options = array(), $html_options
  *  <select name="datetime[minute]">...</select>
  *  <select name="datetime[second]">...</select>
  * </samp>
- *
+ *  
  * <b>Options:</b>
  * - include_blank     - Includes a blank <option> tag at the beginning of the string with an empty value.
  * - include_custom    - Includes an <option> tag with a custom display title at the beginning of the string with an empty value.
@@ -693,7 +693,7 @@ function select_time_tag($name, $value = null, $options = array(), $html_options
  * - discard_day       - If set to true, will only return select tags for month and year.
  * - discard_year      - If set to true, will only return select tags for month and day.
  * - use_month_numbers - If set to true, will show the month's numerical value (1 - 12) instead of the months full name.
- * - use_short_month   - If set to true, will show the month's short name (i.e. Jan, Feb, Mar) instead of its full name.
+ * - use_short_month   - If set to true, will show the month's short name (i.e. Jan, Feb, Mar) instead of its full name. 
  * - year_start        - If set, the range of years will begin at this four-digit date (i.e. 1979)
  * - year_end          - If set, the range of years will end at this four-digit date (i.e. 2025)
  * - second_step       - If set, the seconds will be incremented in blocks of X, where X = 'second_step'
@@ -701,8 +701,8 @@ function select_time_tag($name, $value = null, $options = array(), $html_options
  * - 12hour_time       - If set to true, will return integers 1 through 12 instead of the default 0 through 23.
  * - date_seperator    - Includes a string of defined text between each generated select tag
  * - time_seperator    - Includes a string of defined text between each generated select tag
- * - ampm_seperator    - Includes a string of defined text between the minute/second select box and the AM/PM select box
- *
+ * - ampm_seperator    - Includes a string of defined text between the minute/second select box and the AM/PM select box 
+ *  
  * <b>Examples:</b>
  * <code>
  *  echo select_datetime_tag('datetime');
@@ -743,14 +743,14 @@ function select_datetime_tag($name, $value = null, $options = array(), $html_opt
  * can be easily changed by passing one or several <i>$options</i>.  Numbers can be either positive or negative, integers or decimals,
  * and can be incremented by any number, decimal or integer.  If you require the range of numbers to be listed in descending order, pass
  * the 'reverse' option to easily display the list of numbers in the opposite direction.
- *
+ * 
  * <b>Options:</b>
  * - include_blank  - Includes a blank <option> tag at the beginning of the string with an empty value.
  * - include_custom - Includes an <option> tag with a custom display title at the beginning of the string with an empty value.
  * - multiple       - If set to true, the select tag will allow multiple numbers to be selected at once.
  * - start          - The first number in the list. If not specified, the default value is 1.
  * - end            - The last number in the list. If not specified, the default value is 10.
- * - increment      - The number by which to increase each number in the list by until the number is greater than or equal to the 'end' option.
+ * - increment      - The number by which to increase each number in the list by until the number is greater than or equal to the 'end' option. 
  *                    If not specified, the default value is 1.
  * - reverse        - Reverses the order of numbers so they are display in descending order
  *
@@ -797,21 +797,21 @@ function select_number_tag($name, $value, $options = array(), $html_options = ar
 /**
  * Returns a <select> tag populated with all the timezones in the world.
  *
- * The select_timezone_tag builds off the traditional select_tag function, and is conveniently populated with
- * all the timezones in the world (sorted alphabetically). Each option in the list has a unique timezone identifier
+ * The select_timezone_tag builds off the traditional select_tag function, and is conveniently populated with 
+ * all the timezones in the world (sorted alphabetically). Each option in the list has a unique timezone identifier 
  * for its value and the timezone's locale as its display title.  The timezone data is retrieved via the sfCultureInfo
  * class, which stores a wide variety of i18n and i10n settings for various countries and cultures throughout the world.
  * Here's an example of an <option> tag generated by the select_timezone_tag:
  *
  * <b>Options:</b>
- * - display -
+ * - display - 
  *     identifer         - Display the PHP timezone identifier (e.g. America/Denver)
  *     timezone          - Display the full timezone name (e.g. Mountain Standard Time)
  *     timezone_abbr     - Display the timezone abbreviation (e.g. MST)
  *     timzone_dst       - Display the full timezone name with daylight savings time (e.g. Mountain Daylight Time)
  *     timezone_dst_abbr - Display the timezone abbreviation with daylight savings time (e.g. MDT)
  *     city              - Display the city/region that relates to the timezone (e.g. Denver)
- *
+ * 
  * <samp>
  *  <option value="America/Denver">America/Denver</option>
  * </samp>
@@ -821,7 +821,7 @@ function select_number_tag($name, $value, $options = array(), $html_options = ar
  *  echo select_timezone_tag('timezone', 'America/Denver');
  * </code>
  *
- * @param string $name     field name
+ * @param string $name     field name 
  * @param string $selected selected field value (timezone identifier)
  * @param array  $options  additional HTML compliant <select> tag parameters
  *
@@ -861,7 +861,7 @@ function select_timezone_tag($name, $selected = null, $options = array())
 
   // Remove duplicate values
   $timezones = array_unique($timezones);
-
+  
   $c->sortArray($timezones);
 
   $option_tags = options_for_select($timezones, $selected);

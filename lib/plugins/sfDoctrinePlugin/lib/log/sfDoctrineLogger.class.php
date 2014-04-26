@@ -17,13 +17,13 @@
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @author     Jonathan H. Wage <jonwage@gmail.com>
  * @version    SVN: $Id: sfDoctrineLogger.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
- *
+ * 
  * @deprecated In favor of {@link sfDoctrineConnectionProfiler}. Will be removed in symfony 1.4.
  */
 class sfDoctrineLogger extends Doctrine_EventListener
 {
   protected $connection = null,
-            $encoding = 'UTF8',
+            $encoding = 'UTF8', 
             $timer = null;
 
   public function __construct()
@@ -138,12 +138,12 @@ class sfDoctrineLogger extends Doctrine_EventListener
         {
           $len = strlen($param);
           $kb = '[' . number_format($len / 1024, 2) . 'Kb]';
-          $params[$key] = $kb;
+          $params[$key] = $kb; 
         }
       }
       $message .= ' - ('.implode(', ', $params) . ' )';
     }
-
+    
     $message = sprintf('{sfDoctrineLogger} [%.2f ms] %s', $time * 1000, $message);
     if (sfContext::hasInstance())
     {

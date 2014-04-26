@@ -34,23 +34,23 @@ require_once 'phing/system/io/Writer.php';
 abstract class PHPUnit2ResultFormatter implements PHPUnit2_Framework_TestListener
 {
 	protected $out = NULL;
-
+	
 	protected $project = NULL;
-
+	
 	private $timer = NULL;
 
 	private $runCount = 0;
-
+	
 	private $failureCount = 0;
-
-	private $errorCount = 0;
-
+	
+	private $errorCount = 0;	
+	
 	/**
 	 * Sets the writer the formatter is supposed to write its results to.
    	 */
 	function setOutput(Writer $out)
 	{
-		$this->out = $out;
+		$this->out = $out;	
 	}
 
 	/**
@@ -72,30 +72,30 @@ abstract class PHPUnit2ResultFormatter implements PHPUnit2_Framework_TestListene
 	{
 		$this->project = $project;
 	}
-
+	
 	function getPreferredOutfile()
 	{
 		return "";
 	}
-
+	
 	function startTestRun()
 	{
 	}
-
+	
 	function endTestRun()
 	{
 	}
-
+	
 	function startTestSuite(PHPUnit2_Framework_TestSuite $suite)
 	{
 		$this->runCount = 0;
 		$this->failureCount = 0;
 		$this->errorCount = 0;
-
+		
 		$this->timer = new Timer();
 		$this->timer->start();
 	}
-
+	
 	function endTestSuite(PHPUnit2_Framework_TestSuite $suite)
 	{
 		$this->timer->stop();
@@ -127,22 +127,22 @@ abstract class PHPUnit2ResultFormatter implements PHPUnit2_Framework_TestListene
 	function addSkippedTest(PHPUnit2_Framework_Test $test, Exception $e)
 	{
 	}
-
+	
 	function getRunCount()
 	{
 		return $this->runCount;
 	}
-
+	
 	function getFailureCount()
 	{
 		return $this->failureCount;
 	}
-
+	
 	function getErrorCount()
 	{
 		return $this->errorCount;
 	}
-
+	
 	function getElapsedTime()
 	{
 		if ($this->timer)
